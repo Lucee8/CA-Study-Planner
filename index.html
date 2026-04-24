@@ -19,17 +19,6 @@
   --radius:10px;--radius-lg:14px;--radius-xl:18px;
   --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
 }
-
-/* QUOTE CARD */
-.quote-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;margin-bottom:1rem;display:flex;gap:14px;align-items:flex-start;}
-.quote-accent{width:3px;min-height:40px;background:var(--green);border-radius:99px;flex-shrink:0;margin-top:2px;}
-.quote-text{font-size:13px;color:var(--text);line-height:1.65;font-style:italic;flex:1;}
-.quote-author{font-size:11px;color:var(--text3);margin-top:6px;font-style:normal;font-weight:500;}
-.quote-label{font-size:10px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
-
-  .quote-refresh-btn{font-size:10px;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);transition:color 0.15s,border-color 0.15s;}
-.quote-refresh-btn:hover{color:var(--green);border-color:var(--green-light);}
-  
 .dark{
   --bg:#141412;--bg2:#1e1e1a;--bg3:#252520;--bg4:#2e2e28;
   --text:#f0ede4;--text2:#a8a89e;--text3:#6a6a62;
@@ -202,84 +191,91 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-  /* MOCK TEST */
-.mock-setup{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1rem;}
-.mock-setup h2{font-size:16px;font-weight:600;margin-bottom:4px;}
-.mock-setup p{font-size:12px;color:var(--text3);margin-bottom:1.25rem;}
-.subject-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem;}
-.subject-card{border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:12px 14px;cursor:pointer;transition:border-color 0.15s,background 0.15s;background:var(--bg3);}
-.subject-card:hover{border-color:var(--green);background:var(--green-bg);}
+/* ── MOCK TEST ── */
+.mock-setup{display:block;}
+.mock-section-title{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+.subject-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem;}
+.subject-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:12px 14px;cursor:pointer;transition:border-color 0.15s,background 0.15s;}
+.subject-card:hover{border-color:var(--green-light);background:var(--green-bg);}
 .subject-card.selected{border-color:var(--green);background:var(--green-bg);}
-.subject-card .sc-name{font-size:13px;font-weight:500;color:var(--text);}
-.subject-card .sc-sub{font-size:10px;color:var(--text3);margin-top:2px;}
-.mock-row{display:flex;gap:8px;align-items:center;margin-bottom:1rem;flex-wrap:wrap;}
-.mock-row label{font-size:12px;color:var(--text2);min-width:110px;}
-.mock-row select{font-size:12px;padding:6px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-family:var(--font);}
-.mode-btns{display:flex;gap:8px;margin-bottom:1.25rem;}
-.mode-btn{flex:1;padding:9px;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--bg3);color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all 0.15s;text-align:center;}
-.mode-btn:hover{border-color:var(--green);color:var(--green);}
+.subject-card-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.subject-card-tag{font-size:10px;color:var(--text3);}
+.mode-row{display:flex;gap:8px;margin-bottom:1.25rem;}
+.mode-btn{flex:1;padding:9px 12px;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--bg2);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);text-align:center;transition:all 0.15s;}
+.mode-btn:hover{border-color:var(--green-light);background:var(--green-bg);}
 .mode-btn.selected{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.mode-sub{font-size:10px;color:var(--text3);font-weight:400;display:block;margin-top:2px;}
+.q-config-row{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
+.q-config-row label{font-size:13px;color:var(--text2);}
+.q-config-row select{font-size:13px;padding:6px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-family:var(--font);}
 .start-test-btn{width:100%;padding:12px;border-radius:var(--radius-lg);border:none;background:var(--green);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);transition:opacity 0.15s;}
-.start-test-btn:hover{opacity:0.88;}
 .start-test-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.start-test-btn:not(:disabled):hover{opacity:0.88;}
 
-/* QUESTION CARD */
-.q-screen{display:none;}
-.q-screen.active{display:block;}
+/* Question screen */
+.mock-q-screen{display:none;}
+.mock-q-screen.active{display:block;}
 .q-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
-.q-meta{font-size:11px;color:var(--text3);}
-.q-progress-wrap{flex:1;margin:0 12px;}
-.q-prog-track{height:4px;background:var(--bg4);border-radius:99px;overflow:hidden;}
-.q-prog-fill{height:100%;background:var(--green);border-radius:99px;transition:width 0.4s ease;}
-.q-timer{font-size:12px;font-weight:500;font-family:var(--mono);color:var(--text2);min-width:44px;text-align:right;}
-.q-timer.urgent{color:var(--red);}
-.diff-badge{font-size:10px;padding:2px 8px;border-radius:99px;font-weight:500;margin-bottom:0.75rem;display:inline-block;}
-.diff-easy{background:var(--green-bg);color:var(--green);}
-.diff-medium{background:var(--amber-bg);color:var(--amber);}
-.diff-hard{background:var(--red-bg);color:var(--red);}
-.q-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;margin-bottom:0.75rem;}
-.q-number{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;}
-.q-text{font-size:14px;font-weight:500;color:var(--text);line-height:1.65;margin-bottom:1.25rem;}
-.q-loading{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text3);padding:1rem 0;}
-.q-dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);animation:dotpulse 1.2s ease-in-out infinite;}
-.q-dots span:nth-child(2){animation-delay:0.2s;}
-.q-dots span:nth-child(3){animation-delay:0.4s;}
-@keyframes dotpulse{0%,80%,100%{opacity:0.2;}40%{opacity:1;}}
-.options-list{display:flex;flex-direction:column;gap:8px;}
-.opt-btn{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--radius-lg);border:1.5px solid var(--border);background:var(--bg3);cursor:pointer;text-align:left;font-family:var(--font);transition:all 0.15s;width:100%;}
-.opt-btn:hover:not(:disabled){border-color:var(--green);background:var(--green-bg);}
-.opt-btn:disabled{cursor:default;}
-.opt-btn.correct{border-color:var(--green);background:var(--green-bg);}
-.opt-btn.wrong{border-color:var(--red);background:var(--red-bg);}
-.opt-btn.reveal{border-color:var(--green);background:var(--green-bg);opacity:0.6;}
-.opt-key{font-size:11px;font-weight:600;min-width:18px;color:var(--text3);margin-top:1px;}
-.opt-btn.correct .opt-key,.opt-btn.reveal .opt-key{color:var(--green);}
-.opt-btn.wrong .opt-key{color:var(--red);}
-.opt-text{font-size:13px;color:var(--text);line-height:1.5;}
-.explanation-box{background:var(--green-bg);border:1px solid var(--green-light);border-radius:var(--radius-lg);padding:12px 14px;margin-top:0.75rem;font-size:12px;color:var(--text);line-height:1.6;display:none;}
-.explanation-box.show{display:block;}
-.explanation-box strong{color:var(--green);font-size:11px;text-transform:uppercase;letter-spacing:0.4px;display:block;margin-bottom:4px;}
-.q-actions{display:flex;gap:8px;margin-top:0.75rem;}
+.q-meta{font-size:12px;color:var(--text3);font-family:var(--mono);}
+.q-timer{font-size:13px;font-weight:500;font-family:var(--mono);color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:99px;display:none;}
+.q-timer.urgent{color:var(--red);background:var(--red-bg);}
+.q-prog-track{height:4px;background:var(--bg4);border-radius:99px;overflow:hidden;margin-bottom:1rem;}
+.q-prog-fill{height:100%;background:var(--green);border-radius:99px;transition:width 0.4s;}
+.q-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem;margin-bottom:1rem;}
+.q-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;}
+.q-number{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;}
+.diff-badge{font-size:10px;padding:2px 8px;border-radius:99px;font-weight:600;}
+.diff-badge.diff-easy{background:var(--green-bg);color:var(--green);}
+.diff-badge.diff-medium{background:var(--amber-bg);color:var(--amber);}
+.diff-badge.diff-hard{background:var(--red-bg);color:var(--red);}
+.q-loading{display:flex;align-items:center;gap:10px;padding:1rem 0;color:var(--text3);font-size:13px;}
+.q-text{font-size:14px;color:var(--text);line-height:1.6;display:none;}
+.q-options{display:none;flex-direction:column;gap:7px;margin-top:1rem;}
+.opt-btn{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;cursor:pointer;font-family:var(--font);text-align:left;transition:border-color 0.15s,background 0.15s;line-height:1.5;}
+.opt-btn:hover:not(:disabled){border-color:var(--green-light);background:var(--green-bg);}
+.opt-btn.correct{border-color:var(--green)!important;background:var(--green-bg)!important;color:var(--green);}
+.opt-btn.wrong{border-color:var(--red)!important;background:var(--red-bg)!important;color:var(--red);}
+.opt-btn.reveal{border-color:var(--green)!important;background:var(--green-bg)!important;color:var(--green);opacity:0.7;}
+.opt-key{font-weight:600;min-width:18px;font-family:var(--mono);font-size:12px;margin-top:1px;}
+.q-explanation{background:var(--bg3);border-left:3px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:10px 12px;margin-top:1rem;font-size:12px;color:var(--text2);line-height:1.6;display:none;}
+.q-explanation.show{display:block;}
+.q-actions{display:none;gap:8px;margin-top:1rem;justify-content:flex-end;}
+.skip-btn{font-size:12px;padding:7px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);}
+.next-btn{font-size:12px;padding:7px 16px;border-radius:var(--radius);border:none;background:var(--green);color:#fff;cursor:pointer;font-weight:500;font-family:var(--font);display:none;}
+.quit-btn{font-size:12px;padding:7px 14px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);}
 
-/* RESULT SCREEN */
-.result-screen{display:none;text-align:center;}
-.result-screen.active{display:block;}
-.result-circle{width:110px;height:110px;border-radius:50%;border:4px solid var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem;}
-.result-pct{font-size:28px;font-weight:600;font-family:var(--mono);color:var(--green);}
-.result-lbl{font-size:10px;color:var(--text3);}
-.result-title{font-size:18px;font-weight:600;margin-bottom:6px;}
-.result-sub{font-size:13px;color:var(--text3);margin-bottom:1.5rem;}
-.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem;}
-.rs-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px;}
-.rs-val{font-size:20px;font-weight:600;font-family:var(--mono);}
-.rs-lbl{font-size:10px;color:var(--text3);margin-top:2px;}
-.review-list{text-align:left;margin-bottom:1.5rem;}
-.review-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:10px 14px;margin-bottom:6px;}
-.review-q{font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px;}
+/* Result screen */
+.mock-result-screen{display:none;}
+.mock-result-screen.active{display:block;}
+.result-card{background:var(--green-bg);border:1.5px solid var(--green-light);border-radius:var(--radius-xl);padding:1.5rem;text-align:center;margin-bottom:1rem;}
+.res-pct{font-size:52px;font-weight:700;color:var(--green);font-family:var(--mono);letter-spacing:-2px;}
+.res-title{font-size:18px;font-weight:600;color:var(--text);margin:0.25rem 0;}
+.res-sub{font-size:12px;color:var(--text3);}
+.res-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0 0;}
+.res-stat{background:var(--bg2);border-radius:var(--radius);padding:8px;}
+.res-stat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:3px;}
+.res-stat-val{font-size:18px;font-weight:600;font-family:var(--mono);}
+.res-stat-val.c{color:var(--green);}
+.res-stat-val.w{color:var(--red);}
+.res-stat-val.s{color:var(--amber);}
+.res-btns{display:flex;gap:8px;margin-bottom:1rem;}
+.retake-btn{flex:1;padding:10px;border-radius:var(--radius-lg);border:1px solid var(--green);background:var(--green-bg);color:var(--green);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);}
+.retake-btn:hover{background:var(--green-light);}
+.new-test-btn{flex:1;padding:10px;border-radius:var(--radius-lg);border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);}
+.new-test-btn:hover{background:var(--bg3);}
+.review-list{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px;}
+.review-item{padding:8px 0;border-bottom:1px solid var(--border);}
+.review-item:last-child{border-bottom:none;}
+.review-q{font-size:12px;color:var(--text);margin-bottom:3px;line-height:1.5;}
 .review-ans{font-size:11px;color:var(--text3);}
-.review-ans .correct-ans{color:var(--green);font-weight:500;}
-.review-ans .your-ans{color:var(--red);}
-  
+.correct-ans{color:var(--green);}
+.your-ans{color:var(--red);}
+
+/* Mock test history in analytics */
+.mock-hist-item{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;margin-bottom:6px;}
+.mock-hist-subj{font-size:12px;font-weight:500;min-width:140px;}
+.mock-hist-score{font-size:13px;font-weight:600;font-family:var(--mono);color:var(--green);}
+.mock-hist-meta{font-size:10px;color:var(--text3);margin-left:auto;}
 </style>
 </head>
 <body>
@@ -325,28 +321,15 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 
   <div class="sync-bar" id="sync-bar"></div>
 
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('timetable',this)">Timetable</div>
-  <div class="tab" onclick="switchTab('analytics',this)">Analytics</div>
-  <div class="tab" onclick="switchTab('mocktest',this)">Mock Test</div>
-  <div class="tab" onclick="switchTab('settings',this)">Settings</div>
-</div>
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('timetable',this)">Timetable</div>
+    <div class="tab" onclick="switchTab('analytics',this)">Analytics</div>
+    <div class="tab" onclick="switchTab('mock',this)">Mock Test</div>
+    <div class="tab" onclick="switchTab('settings',this)">Settings</div>
+  </div>
 
   <!-- TIMETABLE TAB -->
   <div class="panel active" id="panel-timetable">
-
-<div class="quote-card" id="quote-card">
-  <div class="quote-accent"></div>
-  <div style="flex:1;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-      <div class="quote-label">Today's motivation</div>
-      <button class="quote-refresh-btn" onclick="refreshQuote()" title="Get new quote">↻ New quote</button>
-    </div>
-    <div class="quote-text" id="quote-text">Loading...</div>
-    <div class="quote-author" id="quote-author"></div>
-  </div>
-</div>
-    
     <div class="stats-row">
       <div class="stat-card"><div class="stat-lbl">Studied</div><div class="stat-val green" id="s-studied">0h 0m</div></div>
       <div class="stat-card"><div class="stat-lbl">Sessions</div><div class="stat-val" id="s-sessions">0/0</div></div>
@@ -404,111 +387,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
     </div>
   </div>
 
-<!-- MOCK TEST TAB -->
-<div class="panel" id="panel-mocktest">
-
-  <!-- SETUP SCREEN -->
-  <div id="mock-setup-screen">
-    <div class="mock-setup">
-      <h2>Mock Test</h2>
-      <p>AI-generated questions from CA Inter Group 1 syllabus</p>
-
-      <div style="font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:0.4px;">Choose subject</div>
-      <div class="subject-grid">
-        <div class="subject-card" onclick="selectSubject('Financial Reporting',this)">
-          <div class="sc-name">Financial Reporting</div>
-          <div class="sc-sub">Ind AS, AS, IFRS concepts</div>
-        </div>
-        <div class="subject-card" onclick="selectSubject('Corporate & Other Laws',this)">
-          <div class="sc-name">Corporate & Other Laws</div>
-          <div class="sc-sub">Companies Act, LLP, FEMA</div>
-        </div>
-        <div class="subject-card" onclick="selectSubject('Taxation',this)">
-          <div class="sc-name">Taxation</div>
-          <div class="sc-sub">Income Tax, GST</div>
-        </div>
-        <div class="subject-card" onclick="selectSubject('Cost & Management Accounting',this)">
-          <div class="sc-name">Cost & Management Acc.</div>
-          <div class="sc-sub">Costing methods, budgeting</div>
-        </div>
-      </div>
-
-      <div class="mock-row">
-        <label>No. of questions</label>
-        <select id="q-count-sel">
-          <option value="5">5 questions</option>
-          <option value="10" selected>10 questions</option>
-          <option value="15">15 questions</option>
-          <option value="20">20 questions</option>
-        </select>
-      </div>
-
-      <div style="font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:0.4px;">Test mode</div>
-      <div class="mode-btns">
-        <div class="mode-btn selected" id="mode-practice" onclick="selectMode('practice')">
-          📖 Practice<br><span style="font-size:10px;font-weight:400;opacity:0.75;">Explanation after each Q</span>
-        </div>
-        <div class="mode-btn" id="mode-mock" onclick="selectMode('mock')">
-          ⏱ Mock Test<br><span style="font-size:10px;font-weight:400;opacity:0.75;">Timer · Score at end</span>
-        </div>
-      </div>
-
-      <button class="start-test-btn" id="start-test-btn" onclick="startTest()" disabled>Select a subject to start</button>
-    </div>
-  </div>
-
-  <!-- QUESTION SCREEN -->
-  <div class="q-screen" id="mock-q-screen">
-    <div class="q-topbar">
-      <span class="q-meta" id="q-meta-lbl">Q 1 of 10</span>
-      <div class="q-progress-wrap">
-        <div class="q-prog-track"><div class="q-prog-fill" id="q-prog-fill" style="width:0%"></div></div>
-      </div>
-      <span class="q-timer" id="q-timer-lbl" style="display:none"></span>
-      <button class="btn" style="margin-left:8px;font-size:11px;" onclick="quitTest()">Quit</button>
-    </div>
-
-    <div id="q-diff-badge" class="diff-badge diff-easy">Easy</div>
-
-    <div class="q-card" id="q-card">
-      <div class="q-number" id="q-number-lbl">Question 1</div>
-      <div class="q-loading" id="q-loading">
-        <div class="q-dots"><span></span><span></span><span></span></div>
-        Generating question...
-      </div>
-      <div class="q-text" id="q-text" style="display:none"></div>
-      <div class="options-list" id="q-options" style="display:none"></div>
-      <div class="explanation-box" id="q-explanation"><strong>Explanation</strong><span id="q-exp-text"></span></div>
-    </div>
-
-    <div class="q-actions" id="q-actions" style="display:none">
-      <button class="btn" id="skip-btn" onclick="skipQuestion()">Skip</button>
-      <button class="btn green" id="next-btn" onclick="nextQuestion()" style="display:none">Next →</button>
-    </div>
-  </div>
-
-  <!-- RESULT SCREEN -->
-  <div class="result-screen" id="mock-result-screen">
-    <div class="result-circle">
-      <div class="result-pct" id="res-pct">0%</div>
-      <div class="result-lbl">Score</div>
-    </div>
-    <div class="result-title" id="res-title">Test Complete!</div>
-    <div class="result-sub" id="res-sub"></div>
-    <div class="result-stats">
-      <div class="rs-card"><div class="rs-val" id="res-correct" style="color:var(--green)">0</div><div class="rs-lbl">Correct</div></div>
-      <div class="rs-card"><div class="rs-val" id="res-wrong" style="color:var(--red)">0</div><div class="rs-lbl">Wrong</div></div>
-      <div class="rs-card"><div class="rs-val" id="res-skipped" style="color:var(--amber)">0</div><div class="rs-lbl">Skipped</div></div>
-    </div>
-    <div class="review-list" id="review-list"></div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn green" style="flex:1;padding:10px;" onclick="retakeTest()">Retake test</button>
-      <button class="btn" style="flex:1;padding:10px;" onclick="quitTest()">New test</button>
-    </div>
-  </div>
-
-</div>
-  
   <!-- ANALYTICS TAB -->
   <div class="panel" id="panel-analytics">
     <div class="section-hdr">
@@ -520,6 +398,119 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
     <div class="history-list" id="history-list"></div>
     <div style="text-align:center;padding:1rem 0;">
       <button class="btn red" onclick="clearHistory()">Clear all history</button>
+    </div>
+  </div>
+
+  <!-- MOCK TEST TAB -->
+  <div class="panel" id="panel-mock">
+
+    <!-- SETUP SCREEN -->
+    <div class="mock-setup" id="mock-setup-screen">
+      <div class="mock-section-title" style="margin-bottom:12px;">Select subject</div>
+      <div class="subject-grid">
+        <div class="subject-card" onclick="selectSubject('Financial Reporting',this)">
+          <div class="subject-card-name">Financial Reporting</div>
+          <div class="subject-card-tag">Ind AS · AS · Consolidation</div>
+        </div>
+        <div class="subject-card" onclick="selectSubject('Corporate & Other Laws',this)">
+          <div class="subject-card-name">Corporate & Other Laws</div>
+          <div class="subject-card-tag">Companies Act · FEMA · IBC</div>
+        </div>
+        <div class="subject-card" onclick="selectSubject('Taxation',this)">
+          <div class="subject-card-name">Taxation</div>
+          <div class="subject-card-tag">Income Tax · GST</div>
+        </div>
+        <div class="subject-card" onclick="selectSubject('Cost & Management Accounting',this)">
+          <div class="subject-card-name">Cost & Management Acc.</div>
+          <div class="subject-card-tag">Costing · Variance · CVP</div>
+        </div>
+        <div class="subject-card" onclick="selectSubject('Strategic Financial Management',this)">
+          <div class="subject-card-name">SFM</div>
+          <div class="subject-card-tag">Derivatives · Valuation · Risk</div>
+        </div>
+        <div class="subject-card" onclick="selectSubject('Auditing & Ethics',this)">
+          <div class="subject-card-name">Auditing & Ethics</div>
+          <div class="subject-card-tag">SA · Standards · Ethics</div>
+        </div>
+      </div>
+
+      <div class="mock-section-title">Mode</div>
+      <div class="mode-row">
+        <div class="mode-btn selected" id="mode-practice" onclick="selectMode('practice')">
+          Practice
+          <span class="mode-sub">Explanation after each question</span>
+        </div>
+        <div class="mode-btn" id="mode-mock" onclick="selectMode('mock')">
+          Mock Exam
+          <span class="mode-sub">Timer on · Results at end</span>
+        </div>
+      </div>
+
+      <div class="mock-section-title">Number of questions</div>
+      <div class="q-config-row">
+        <label>Questions per test</label>
+        <select id="q-count-sel">
+          <option value="5">5 questions</option>
+          <option value="10" selected>10 questions</option>
+          <option value="20">20 questions</option>
+          <option value="30">30 questions</option>
+        </select>
+      </div>
+
+      <button class="start-test-btn" id="start-test-btn" disabled onclick="startTest()">Select a subject to start →</button>
+
+      <div style="margin-top:1.5rem;">
+        <div class="mock-section-title">Mock test history</div>
+        <div id="mock-hist-list"><div style="font-size:12px;color:var(--text3);padding:8px 0;">No tests taken yet.</div></div>
+      </div>
+    </div>
+
+    <!-- QUESTION SCREEN -->
+    <div class="mock-q-screen" id="mock-q-screen">
+      <div class="q-topbar">
+        <span class="q-meta" id="q-meta-lbl">Q 1 of 10</span>
+        <span class="q-timer" id="q-timer-lbl">10:00</span>
+        <button class="quit-btn" onclick="quitTest()">✕ Quit</button>
+      </div>
+      <div class="q-prog-track"><div class="q-prog-fill" id="q-prog-fill" style="width:0%"></div></div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <span class="q-number" id="q-number-lbl">Question 1</span>
+          <span class="diff-badge diff-easy" id="q-diff-badge">Easy</span>
+        </div>
+        <div class="q-loading" id="q-loading">
+          <div class="spinner" style="width:18px;height:18px;border-width:2px;"></div>
+          Generating question...
+        </div>
+        <div class="q-text" id="q-text"></div>
+        <div class="q-options" id="q-options"></div>
+        <div class="q-explanation" id="q-explanation">
+          <strong>Explanation:</strong> <span id="q-exp-text"></span>
+        </div>
+        <div class="q-actions" id="q-actions">
+          <button class="skip-btn" id="skip-btn" onclick="skipQuestion()">Skip</button>
+          <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div class="mock-result-screen" id="mock-result-screen">
+      <div class="result-card">
+        <div class="res-pct" id="res-pct">0%</div>
+        <div class="res-title" id="res-title">Good effort!</div>
+        <div class="res-sub" id="res-sub"></div>
+        <div class="res-stats">
+          <div class="res-stat"><div class="res-stat-lbl">Correct</div><div class="res-stat-val c" id="res-correct">0</div></div>
+          <div class="res-stat"><div class="res-stat-lbl">Wrong</div><div class="res-stat-val w" id="res-wrong">0</div></div>
+          <div class="res-stat"><div class="res-stat-lbl">Skipped</div><div class="res-stat-val s" id="res-skipped">0</div></div>
+        </div>
+      </div>
+      <div class="res-btns">
+        <button class="retake-btn" onclick="retakeTest()">Retake test</button>
+        <button class="new-test-btn" onclick="quitTest()">New test</button>
+      </div>
+      <div class="review-list" id="review-list"></div>
     </div>
   </div>
 
@@ -988,99 +979,19 @@ function toggleDark() {
   document.getElementById('dark-toggle').classList.toggle('on',isDark);
 }
 
-// ── TAB SWITCHING ─────────────────────────────────────────────
-function switchTab(id,el) {
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  el.classList.add('active');
-  if(id==='analytics'){buildCalendar();buildHistory();}
-}
+// ── MOCK TEST ─────────────────────────────────────────────────
+const GEMINI_API_KEY = 'AIzaSyD4yDDmSL7CoU-CH_ZNqVeXys5thX-fsf4';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-// ── TIMER TICK ────────────────────────────────────────────────
-let lastActive = -1;
-function tick() {
-  const prev=activeIdx;
-  activeIdx=getActiveIdx();
-  if(activeIdx>=0){
-    remainSecs=getRemainSecs(activeIdx);
-    const cdEl=document.getElementById('cd-'+activeIdx);
-    if(cdEl)cdEl.textContent=fmtSecs(remainSecs);
-    if(focusMode)updateFocusBanner();
-    if(activeIdx!==prev){
-      if(prev>=0)playChime();
-      render();
-    }
-  } else {
-    if(prev!==activeIdx)render();
-  }
-}
-setInterval(tick,1000);
+const SUBJECT_SYLLABUS = {
+  'Financial Reporting': 'Ind AS (Indian Accounting Standards), AS (Accounting Standards), financial statements preparation, consolidation, business combinations, revenue recognition Ind AS 115, leases Ind AS 116, financial instruments Ind AS 109, share-based payments, impairment of assets, provisions, contingencies, segment reporting, related party disclosures, earnings per share, deferred tax, investment property, PPE, intangible assets',
+  'Corporate & Other Laws': 'Companies Act 2013 (incorporation, share capital, debentures, meetings, directors, audit, winding up), LLP Act 2008, FEMA basics, SEBI regulations, Insolvency and Bankruptcy Code, Prevention of Money Laundering, partnership law, contract act',
+  'Taxation': 'Income Tax Act (heads of income, salary, house property, PGBP, capital gains, other sources, deductions Chapter VI-A, TDS, advance tax, assessment, appeals), GST (CGST SGST IGST, registration, supply, ITC, returns, reverse charge, composition scheme, valuation, place of supply)',
+  'Cost & Management Accounting': 'Cost concepts and classification, material costing, labour costing, overheads absorption, job costing, process costing, standard costing and variance analysis, marginal costing, CVP analysis, budgetary control, activity based costing, throughput accounting',
+  'Strategic Financial Management': 'Portfolio management, CAPM, derivatives (futures options swaps), foreign exchange risk, interest rate risk, business valuation, mergers and acquisitions, mutual funds, hedge funds, capital budgeting under risk',
+  'Auditing & Ethics': 'Standards on Auditing (SA), audit planning, risk assessment, internal controls, sampling, evidence, audit report, company audit, bank audit, special audits, CARO, ethics under ICAI code of ethics, independence'
+};
 
-// ── DAILY QUOTE ───────────────────────────────────────────────
-const CA_QUOTES = [
-  {q:"Success is not final, failure is not fatal — it is the courage to continue that counts.", a:"Winston Churchill"},
-  {q:"The CA exam doesn't test how smart you are. It tests how well you prepared.", a:"CA Wisdom"},
-  {q:"Every page you study today is a brick in the foundation of your career.", a:"CA Wisdom"},
-  {q:"Accounting is the language of business. You are learning to speak it fluently.", a:"Warren Buffett (adapted)"},
-  {q:"Hard work beats talent when talent doesn't work hard.", a:"Tim Notke"},
-  {q:"Your struggle today is your strength tomorrow.", a:"CA Wisdom"},
-  {q:"Don't count the days. Make the days count.", a:"Muhammad Ali"},
-  {q:"The difference between try and triumph is just a little 'umph'.", a:"Marvin Phillips"},
-  {q:"Discipline is the bridge between goals and accomplishment.", a:"Jim Rohn"},
-  {q:"CA is not just a degree. It is a character built through pressure.", a:"CA Wisdom"},
-  {q:"One more chapter. One step closer to the life you're working for.", a:"CA Wisdom"},
-  {q:"Sleep is temporary. The CA designation is forever.", a:"CA Wisdom"},
-  {q:"The expert in anything was once a beginner who refused to give up.", a:"Helen Hayes"},
-  {q:"You don't have to be great to start, but you have to start to be great.", a:"Zig Ziglar"},
-  {q:"Audit your habits like you audit books — remove what doesn't add value.", a:"CA Wisdom"},
-  {q:"Taxation is complex. Your commitment to master it is not.", a:"CA Wisdom"},
-  {q:"FR standards change. Your dedication to understand them shouldn't.", a:"CA Wisdom"},
-  {q:"Every mock test is a rehearsal. The final exam is your premiere.", a:"CA Wisdom"},
-  {q:"Pressure makes diamonds. The CA exam is your pressure.", a:"CA Wisdom"},
-  {q:"Small daily improvements lead to staggering long-term results.", a:"Robin Sharma"},
-  {q:"Law today. Audit tomorrow. CA always.", a:"CA Wisdom"},
-  {q:"Study not to pass, but to know. The pass will follow.", a:"CA Wisdom"},
-  {q:"Your future self is watching you right now through your memories.", a:"Aubrey De Grey"},
-  {q:"The grind is temporary. The results are permanent.", a:"CA Wisdom"},
-  {q:"Revision is not repetition — it is understanding deeper each time.", a:"CA Wisdom"},
-  {q:"Behind every successful CA is an articleship that tested their limits.", a:"CA Wisdom"},
-  {q:"A chapter a day keeps the backlog away.", a:"CA Wisdom"},
-  {q:"Don't wish it were easier. Wish you were better.", a:"Jim Rohn"},
-  {q:"You are closer than you think. Keep going.", a:"CA Wisdom"},
-  {q:"ICAI didn't make it easy. They made it worth it.", a:"CA Wisdom"},
-];
-
-let currentQuoteIdx = Math.floor(Date.now() / 86400000) % CA_QUOTES.length;
-
-function showQuote(idx) {
-  const q = CA_QUOTES[idx];
-  const textEl = document.getElementById('quote-text');
-  const authorEl = document.getElementById('quote-author');
-  textEl.style.opacity = '0';
-  authorEl.style.opacity = '0';
-  setTimeout(() => {
-    textEl.textContent = '"' + q.q + '"';
-    authorEl.textContent = '— ' + q.a;
-    textEl.style.transition = 'opacity 0.4s';
-    authorEl.style.transition = 'opacity 0.4s';
-    textEl.style.opacity = '1';
-    authorEl.style.opacity = '1';
-  }, 200);
-}
-
-function loadDailyQuote() {
-  showQuote(currentQuoteIdx);
-}
-
-function refreshQuote() {
-  currentQuoteIdx = (currentQuoteIdx + 1) % CA_QUOTES.length;
-  showQuote(currentQuoteIdx);
-}
-
-loadDailyQuote();
-
-  // ── MOCK TEST ─────────────────────────────────────────────────
 let mockSubject = '';
 let mockMode = 'practice';
 let mockTotal = 10;
@@ -1093,13 +1004,6 @@ let mockSecsLeft = 0;
 let mockAnswered = false;
 let mockHistory = [];
 let currentQ = null;
-
-const SUBJECT_SYLLABUS = {
-  'Financial Reporting': 'Ind AS (Indian Accounting Standards), AS (Accounting Standards), financial statements preparation, consolidation, business combinations, revenue recognition Ind AS 115, leases Ind AS 116, financial instruments Ind AS 109, share-based payments, impairment of assets, provisions, contingencies, segment reporting, related party disclosures, earnings per share, deferred tax, investment property, property plant and equipment, intangible assets, IFRS overview',
-  'Corporate & Other Laws': 'Companies Act 2013 (incorporation, share capital, debentures, meetings, directors, audit, winding up), LLP Act 2008, FEMA basics, SEBI regulations, Insolvency and Bankruptcy Code basics, Prevention of Money Laundering, partnership law, contract act applicable provisions',
-  'Taxation': 'Income Tax Act (heads of income, salary, house property, PGBP, capital gains, other sources, deductions under Chapter VI-A, TDS, advance tax, assessment, appeals), GST (CGST SGST IGST, registration, supply, ITC, returns, reverse charge, composition scheme, valuation, place of supply)',
-  'Cost & Management Accounting': 'Cost concepts and classification, material costing, labour costing, overheads absorption, job costing, process costing, standard costing and variance analysis, marginal costing, CVP analysis, budgetary control, activity based costing, throughput accounting, life cycle costing'
-};
 
 function selectSubject(name, el) {
   mockSubject = name;
@@ -1118,20 +1022,16 @@ function selectMode(mode) {
 
 function startTest() {
   mockTotal = parseInt(document.getElementById('q-count-sel').value);
-  mockCurrent = 0;
-  mockCorrect = 0;
-  mockWrong = 0;
-  mockSkipped = 0;
-  mockHistory = [];
-
+  mockCurrent = 0; mockCorrect = 0; mockWrong = 0; mockSkipped = 0; mockHistory = [];
   document.getElementById('mock-setup-screen').style.display = 'none';
   document.getElementById('mock-q-screen').classList.add('active');
   document.getElementById('mock-result-screen').classList.remove('active');
-
   if (mockMode === 'mock') {
     mockSecsLeft = mockTotal * 90;
     document.getElementById('q-timer-lbl').style.display = 'block';
     startMockTimer();
+  } else {
+    document.getElementById('q-timer-lbl').style.display = 'none';
   }
   loadQuestion();
 }
@@ -1144,9 +1044,7 @@ function getDifficulty() {
 }
 
 async function loadQuestion() {
-  mockAnswered = false;
-  currentQ = null;
-
+  mockAnswered = false; currentQ = null;
   const diff = getDifficulty();
   const qNum = mockCurrent + 1;
 
@@ -1155,7 +1053,6 @@ async function loadQuestion() {
   document.getElementById('q-number-lbl').textContent = 'Question ' + qNum;
   document.getElementById('q-diff-badge').textContent = diff;
   document.getElementById('q-diff-badge').className = 'diff-badge diff-' + diff.toLowerCase();
-
   document.getElementById('q-loading').style.display = 'flex';
   document.getElementById('q-text').style.display = 'none';
   document.getElementById('q-options').style.display = 'none';
@@ -1164,68 +1061,48 @@ async function loadQuestion() {
   document.getElementById('next-btn').style.display = 'none';
   document.getElementById('skip-btn').style.display = 'inline-block';
 
-  const syllabus = SUBJECT_SYLLABUS[mockSubject];
-  const avoidTopics = mockHistory.slice(-3).map(h => h.topic).join(', ');
+  const syllabus = SUBJECT_SYLLABUS[mockSubject] || mockSubject;
+  const avoidTopics = mockHistory.slice(-3).map(h => h.topic).filter(Boolean).join(', ');
 
-  const prompt = `You are a CA Inter exam question generator for ${mockSubject}.
-
-Syllabus context: ${syllabus}
-
-Generate ONE ${diff} difficulty MCQ question for CA Inter Group 1 exam.
+  const prompt = `You are a CA Final/Inter exam question generator for ${mockSubject}.
+Syllabus: ${syllabus}
+Generate ONE ${diff} difficulty MCQ for CA Inter Group 1 exam.
 ${avoidTopics ? 'Do NOT repeat topics similar to: ' + avoidTopics : ''}
-
 Rules:
-- Question must be specific, exam-style, practical
-- 4 options labeled A, B, C, D
-- Only one correct answer
-- For Easy: definition or direct concept
-- For Medium: application-based scenario
-- For Hard: complex scenario, calculations, or trick question
-- Explanation must cite the specific section/standard/rule
+- Specific, exam-style, practical question
+- 4 options labeled A, B, C, D — only one correct
+- Easy: definition/direct concept | Medium: application scenario | Hard: complex/calculation/trick
+- Explanation must cite specific section/standard/rule
+Respond ONLY in valid JSON, no markdown, no extra text:
+{"topic":"topic name","question":"question text","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"detailed explanation with section/rule"}`;
 
-Respond ONLY in this exact JSON format (no markdown, no extra text):
-{"topic":"topic name here","question":"question text here","options":{"A":"option text","B":"option text","C":"option text","D":"option text"},"correct":"A","explanation":"detailed explanation citing relevant section/rule"}`;
-
-try {
-  const response = await fetch(
-    "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=AIzaSyD4yDDmSL7CoU-CH_ZNqVeXys5thX-fsf4",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+  try {
+    const res = await fetch(GEMINI_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        contents: [
-          {
-            parts: [{ text: prompt }]
-          }
-        ]
+        contents: [{parts: [{text: prompt}]}],
+        generationConfig: {temperature: 0.7, maxOutputTokens: 1024}
       })
-    }
-  );
-
-  const data = await response.json();
-
-  // Extract reply
-  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-  console.log(reply);
-
-} catch (err) {
-  console.error(err);
-}
-
-    const data = await response.json();
-    const raw = data.content[0].text.trim();
-    const clean = raw.replace(/```json|```/g, '').trim();
-    currentQ = JSON.parse(clean);
-    mockHistory.push({ topic: currentQ.topic });
+    });
+    const data = await res.json();
+    let raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    raw = raw.replace(/```json|```/g, '').trim();
+    // Extract JSON object if wrapped in extra text
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('No JSON found');
+    currentQ = JSON.parse(match[0]);
+    mockHistory.push({topic: currentQ.topic});
     renderQuestion(currentQ, diff);
   } catch(e) {
     document.getElementById('q-loading').style.display = 'none';
     document.getElementById('q-text').style.display = 'block';
-    document.getElementById('q-text').textContent = 'Failed to load question. Check your internet connection and try again.';
+    document.getElementById('q-text').textContent = 'Failed to load question. Check your internet and try again. (' + e.message + ')';
     document.getElementById('q-actions').style.display = 'flex';
+    document.getElementById('skip-btn').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'inline-block';
+    document.getElementById('next-btn').textContent = 'Retry';
+    document.getElementById('next-btn').onclick = () => { document.getElementById('next-btn').onclick=()=>nextQuestion(); loadQuestion(); };
   }
 }
 
@@ -1233,11 +1110,8 @@ function renderQuestion(q, diff) {
   document.getElementById('q-loading').style.display = 'none';
   document.getElementById('q-text').style.display = 'block';
   document.getElementById('q-text').textContent = q.question;
-
   const optList = document.getElementById('q-options');
-  optList.innerHTML = '';
-  optList.style.display = 'flex';
-
+  optList.innerHTML = ''; optList.style.display = 'flex';
   ['A','B','C','D'].forEach(key => {
     const btn = document.createElement('button');
     btn.className = 'opt-btn';
@@ -1245,53 +1119,41 @@ function renderQuestion(q, diff) {
     btn.onclick = () => selectAnswer(key, btn);
     optList.appendChild(btn);
   });
-
   document.getElementById('q-actions').style.display = 'flex';
 }
 
 function selectAnswer(chosen, btnEl) {
   if (mockAnswered) return;
   mockAnswered = true;
-
   const allBtns = document.querySelectorAll('.opt-btn');
   allBtns.forEach(b => b.disabled = true);
-
   const correct = currentQ.correct;
   const keys = ['A','B','C','D'];
-
   allBtns.forEach((b, i) => {
     const key = keys[i];
     if (key === correct && key === chosen) b.classList.add('correct');
     else if (key === chosen && key !== correct) b.classList.add('wrong');
     else if (key === correct) b.classList.add('reveal');
   });
-
-  if (chosen === correct) {
-    mockCorrect++;
-    playChime();
-  } else {
-    mockWrong++;
-  }
-
-  mockHistory[mockHistory.length - 1].correct = (chosen === correct);
-  mockHistory[mockHistory.length - 1].chosen = chosen;
-  mockHistory[mockHistory.length - 1].question = currentQ.question;
-  mockHistory[mockHistory.length - 1].correctAns = correct + '. ' + currentQ.options[correct];
-  mockHistory[mockHistory.length - 1].yourAns = chosen + '. ' + currentQ.options[chosen];
-
+  if (chosen === correct) { mockCorrect++; playChime(); } else { mockWrong++; }
+  const last = mockHistory[mockHistory.length - 1];
+  last.correct = (chosen === correct);
+  last.chosen = chosen;
+  last.question = currentQ.question;
+  last.correctAns = correct + '. ' + currentQ.options[correct];
+  last.yourAns = chosen + '. ' + currentQ.options[chosen];
   if (mockMode === 'practice') {
     document.getElementById('q-exp-text').textContent = currentQ.explanation;
     document.getElementById('q-explanation').classList.add('show');
   }
-
   document.getElementById('skip-btn').style.display = 'none';
   document.getElementById('next-btn').style.display = 'inline-block';
+  document.getElementById('next-btn').onclick = () => nextQuestion();
 }
 
 function skipQuestion() {
   if (mockAnswered) return;
-  mockAnswered = true;
-  mockSkipped++;
+  mockAnswered = true; mockSkipped++;
   if (mockHistory.length > 0) {
     mockHistory[mockHistory.length - 1].skipped = true;
     mockHistory[mockHistory.length - 1].question = currentQ ? currentQ.question : '—';
@@ -1301,66 +1163,65 @@ function skipQuestion() {
 
 function nextQuestion() {
   mockCurrent++;
-  if (mockCurrent >= mockTotal) {
-    showResult();
-  } else {
-    loadQuestion();
-  }
+  if (mockCurrent >= mockTotal) showResult();
+  else loadQuestion();
 }
 
 function startMockTimer() {
   if (mockTimerInterval) clearInterval(mockTimerInterval);
   mockTimerInterval = setInterval(() => {
     mockSecsLeft--;
-    const m = Math.floor(mockSecsLeft / 60);
-    const s = mockSecsLeft % 60;
+    const m = Math.floor(mockSecsLeft / 60), s = mockSecsLeft % 60;
     const lbl = document.getElementById('q-timer-lbl');
     lbl.textContent = m + ':' + (s < 10 ? '0' + s : s);
     lbl.className = 'q-timer' + (mockSecsLeft < 60 ? ' urgent' : '');
-    if (mockSecsLeft <= 0) {
-      clearInterval(mockTimerInterval);
-      showResult();
-    }
+    if (mockSecsLeft <= 0) { clearInterval(mockTimerInterval); showResult(); }
   }, 1000);
 }
 
-function showResult() {
+async function showResult() {
   if (mockTimerInterval) clearInterval(mockTimerInterval);
   document.getElementById('mock-q-screen').classList.remove('active');
   document.getElementById('mock-result-screen').classList.add('active');
-
-  const total = mockCorrect + mockWrong + mockSkipped;
-  const pct = total > 0 ? Math.round(mockCorrect / mockTotal * 100) : 0;
-
+  const pct = Math.round(mockCorrect / mockTotal * 100);
   document.getElementById('res-pct').textContent = pct + '%';
   document.getElementById('res-correct').textContent = mockCorrect;
   document.getElementById('res-wrong').textContent = mockWrong;
   document.getElementById('res-skipped').textContent = mockSkipped;
-
-  let title = 'Good effort!';
-  if (pct >= 80) title = 'Excellent work!';
-  else if (pct >= 60) title = 'Good attempt!';
-  else if (pct < 40) title = 'Keep practising!';
+  let title = 'Keep practising!';
+  if (pct >= 80) title = 'Excellent work! 🎉';
+  else if (pct >= 60) title = 'Good attempt! 👍';
+  else if (pct >= 40) title = 'Keep going! 💪';
   document.getElementById('res-title').textContent = title;
-  document.getElementById('res-sub').textContent = mockSubject + ' · ' + mockTotal + ' questions · ' + mockMode + ' mode';
-
+  document.getElementById('res-sub').textContent = mockSubject + ' · ' + mockTotal + ' Qs · ' + (mockMode === 'mock' ? 'Mock exam' : 'Practice') + ' mode';
   const rl = document.getElementById('review-list');
-  rl.innerHTML = '<div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Review</div>';
+  rl.innerHTML = '<div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Question Review</div>';
   mockHistory.forEach((h, i) => {
-    const el = document.createElement('div');
-    el.className = 'review-item';
+    const el = document.createElement('div'); el.className = 'review-item';
     if (h.skipped) {
-      el.innerHTML = '<div class="review-q">Q' + (i+1) + '. ' + (h.question||'') + '</div><div class="review-ans" style="color:var(--amber);">Skipped</div>';
+      el.innerHTML = '<div class="review-q">Q' + (i+1) + '. ' + (h.question||'') + '</div><div class="review-ans" style="color:var(--amber);">⏭ Skipped</div>';
     } else {
-      const ok = h.correct;
       el.innerHTML = '<div class="review-q">Q' + (i+1) + '. ' + (h.question||'') + '</div>'
         + '<div class="review-ans">'
-        + (ok ? '<span class="correct-ans">✓ ' + (h.correctAns||'') + '</span>'
-               : '<span class="your-ans">✗ You: ' + (h.yourAns||'') + '</span> &nbsp;·&nbsp; <span class="correct-ans">Correct: ' + (h.correctAns||'') + '</span>')
+        + (h.correct
+          ? '<span class="correct-ans">✓ ' + (h.correctAns||'') + '</span>'
+          : '<span class="your-ans">✗ You: ' + (h.yourAns||'') + '</span> &nbsp;·&nbsp; <span class="correct-ans">✓ ' + (h.correctAns||'') + '</span>')
         + '</div>';
     }
     rl.appendChild(el);
   });
+  // Save to Firestore
+  if (currentUser) {
+    try {
+      await userDoc().collection('mockTests').add({
+        subject: mockSubject, mode: mockMode, total: mockTotal,
+        correct: mockCorrect, wrong: mockWrong, skipped: mockSkipped,
+        pct, date: new Date().toISOString().slice(0,10),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      loadMockHistory();
+    } catch(e) {}
+  }
 }
 
 function retakeTest() {
@@ -1376,8 +1237,51 @@ function quitTest() {
   document.getElementById('mock-q-screen').classList.remove('active');
   document.getElementById('mock-result-screen').classList.remove('active');
   document.getElementById('mock-setup-screen').style.display = 'block';
+  loadMockHistory();
 }
-  
+
+async function loadMockHistory() {
+  if (!currentUser) return;
+  const el = document.getElementById('mock-hist-list');
+  try {
+    const snap = await userDoc().collection('mockTests').orderBy('timestamp','desc').limit(8).get();
+    if (snap.empty) { el.innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 0;">No tests taken yet.</div>'; return; }
+    el.innerHTML = '';
+    snap.forEach(doc => {
+      const d = doc.data();
+      const div = document.createElement('div'); div.className = 'mock-hist-item';
+      div.innerHTML = `<span class="mock-hist-subj">${d.subject}</span><span class="mock-hist-score">${d.pct}%</span><span class="mock-hist-meta">${d.correct}/${d.total} correct · ${d.date}</span>`;
+      el.appendChild(div);
+    });
+  } catch(e) { el.innerHTML = '<div style="font-size:12px;color:var(--text3);">Could not load history.</div>'; }
+}
+
+// ── UPDATE switchTab TO HANDLE MOCK ───────────────────────────
+function switchTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  el.classList.add('active');
+  if (id === 'analytics') { buildCalendar(); buildHistory(); }
+  if (id === 'mock') { loadMockHistory(); }
+}
+
+// ── TIMER TICK ────────────────────────────────────────────────
+let lastActive = -1;
+function tick() {
+  const prev = activeIdx;
+  activeIdx = getActiveIdx();
+  if (activeIdx >= 0) {
+    remainSecs = getRemainSecs(activeIdx);
+    const cdEl = document.getElementById('cd-' + activeIdx);
+    if (cdEl) cdEl.textContent = fmtSecs(remainSecs);
+    if (focusMode) updateFocusBanner();
+    if (activeIdx !== prev) { if (prev >= 0) playChime(); render(); }
+  } else {
+    if (prev !== activeIdx) render();
+  }
+}
+setInterval(tick, 1000);
 </script>
 </body>
 </html>
