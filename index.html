@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CA Study Planner</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#f7f6f2;--bg2:#ffffff;--bg3:#f0efe9;--bg4:#e8e6de;
+  --text:#1a1a18;--text2:#5a5a54;--text3:#8a8a82;
+  --green:#2d7a5f;--green-bg:#e8f5ef;--green-light:#c8ead8;
+  --amber:#c47a1a;--amber-bg:#fdf3e0;
+  --blue:#1a5fa8;--blue-bg:#e8f0fb;
+  --red:#b83232;--red-bg:#fdeaea;
+  --purple:#5a3ab5;--purple-bg:#f0ecff;
+  --border:#e0ddd4;--border2:#ccc9be;
+  --radius:10px;--radius-lg:14px;--radius-xl:18px;
+  --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+.dark{
+  --bg:#141412;--bg2:#1e1e1a;--bg3:#252520;--bg4:#2e2e28;
+  --text:#f0ede4;--text2:#a8a89e;--text3:#6a6a62;
+  --green:#3daa7f;--green-bg:#1a3028;--green-light:#1f3d2c;
+  --amber:#e09030;--amber-bg:#2a1f08;
+  --blue:#4a8fd8;--blue-bg:#0e1e30;
+  --red:#d85050;--red-bg:#2a1010;
+  --purple:#8060e0;--purple-bg:#1a1030;
+  --border:#2e2e28;--border2:#3a3a32;
+}
+html,body{background:var(--bg);min-height:100vh;}
+body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
+
+/* LOGIN */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.login-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2.5rem 2rem;text-align:center;max-width:340px;width:92%;}
+.login-logo{width:52px;height:52px;background:var(--green-bg);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:24px;}
+.login-title{font-size:20px;font-weight:600;margin-bottom:6px;}
+.login-sub{font-size:13px;color:var(--text3);margin-bottom:1.75rem;line-height:1.6;}
+.google-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:11px 16px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font);transition:background 0.15s;}
+.google-btn:hover{background:var(--bg3);}
+.google-btn svg{width:18px;height:18px;flex-shrink:0;}
+.login-note{font-size:11px;color:var(--text3);margin-top:1rem;}
+#login-error{font-size:12px;color:var(--red);margin-top:0.75rem;display:none;}
+
+/* MAIN APP */
+#app{display:none;max-width:700px;margin:0 auto;padding:0 1rem 3rem;}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 0 0.75rem;border-bottom:1px solid var(--border);margin-bottom:0;}
+.topbar-left{display:flex;flex-direction:column;}
+.app-title{font-size:16px;font-weight:600;letter-spacing:-0.3px;}
+.app-sub{font-size:11px;color:var(--text3);margin-top:1px;}
+.topbar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.streak-badge{display:flex;align-items:center;gap:4px;background:var(--amber-bg);color:var(--amber);font-size:12px;font-weight:500;padding:4px 10px;border-radius:99px;border:1px solid #f0c870;}
+.user-pill{display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 10px 4px 4px;cursor:pointer;}
+.user-avatar{width:22px;height:22px;border-radius:50%;object-fit:cover;}
+.user-avatar-fallback{width:22px;height:22px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+.user-name{font-size:11px;font-weight:500;color:var(--text2);}
+.signout-btn{font-size:11px;color:var(--text3);cursor:pointer;padding:2px 0;}
+.signout-btn:hover{color:var(--red);}
+.dark-toggle{width:34px;height:18px;border-radius:99px;background:var(--bg4);border:1px solid var(--border2);cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0;}
+.dark-toggle.on{background:var(--green);}
+.dark-toggle-knob{position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:var(--bg2);transition:left 0.2s;}
+.dark-toggle.on .dark-toggle-knob{left:18px;}
+
+/* SYNC STATUS */
+.sync-bar{font-size:11px;color:var(--text3);padding:5px 0;text-align:right;min-height:22px;}
+.sync-bar.saving{color:var(--amber);}
+.sync-bar.saved{color:var(--green);}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.25rem;}
+.tab{font-size:13px;font-weight:500;color:var(--text3);padding:0.65rem 1rem;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 0.15s;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--green);border-bottom-color:var(--green);}
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;}
+.stat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;}
+.stat-val{font-size:19px;font-weight:600;color:var(--text);font-family:var(--mono);}
+.stat-val.green{color:var(--green);}
+
+/* PROGRESS */
+.prog-wrap{margin-bottom:1rem;}
+.prog-header{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:5px;}
+.prog-track{height:5px;background:var(--bg4);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--green);border-radius:99px;transition:width 0.6s ease;}
+
+/* WATER REMINDER */
+.water-bar{display:flex;align-items:center;gap:10px;background:var(--blue-bg);border:1px solid #b5d0f0;border-radius:var(--radius);padding:8px 12px;margin-bottom:1rem;font-size:12px;color:var(--blue);display:none;}
+.water-dismiss{margin-left:auto;font-size:11px;cursor:pointer;opacity:0.7;}
+.water-dismiss:hover{opacity:1;}
+
+/* FOCUS CARD */
+.focus-card{background:var(--green-bg);border:1.5px solid var(--green-light);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1rem;display:none;}
+.focus-card.show{display:block;}
+.focus-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.5rem;}
+.focus-name{font-size:20px;font-weight:600;color:var(--green);}
+.focus-range{font-size:12px;color:var(--green);opacity:0.7;margin-top:2px;}
+.focus-cd{font-size:44px;font-weight:600;color:var(--green);font-family:var(--mono);letter-spacing:-2px;margin:0.5rem 0;}
+.focus-btns{display:flex;gap:8px;margin-top:0.75rem;}
+
+/* TIMETABLE */
+.timetable{display:flex;flex-direction:column;gap:4px;}
+.slot{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color 0.2s;}
+.slot.active-now{border-color:var(--green);border-width:1.5px;}
+.slot.done-slot .slot-body{opacity:0.38;}
+.slot-body{display:flex;align-items:center;gap:8px;padding:9px 12px;}
+.chk{width:17px;height:17px;border-radius:4px;border:1.5px solid var(--border2);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s,border-color 0.15s;}
+.chk.on{background:var(--green);border-color:var(--green);}
+.chk svg{display:none;width:9px;height:9px;}
+.chk.on svg{display:block;}
+.slot-time{font-size:11px;color:var(--text3);min-width:108px;font-family:var(--mono);}
+.slot-name-wrap{flex:1;min-width:0;}
+.slot-name{font-size:13px;font-weight:500;color:var(--text);cursor:pointer;border-bottom:1px dashed transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.slot-name:hover{border-bottom-color:var(--border2);}
+.slot-name-input{font-size:13px;font-weight:500;font-family:var(--font);color:var(--text);background:transparent;border:none;border-bottom:1.5px solid var(--green);outline:none;width:100%;}
+.slot-dur{font-size:10px;color:var(--text3);margin-top:1px;}
+.pill{font-size:10px;padding:2px 7px;border-radius:99px;font-weight:500;white-space:nowrap;}
+.pill-study{background:var(--blue-bg);color:var(--blue);}
+.pill-break{background:var(--green-bg);color:var(--green);}
+.pill-meal{background:var(--amber-bg);color:var(--amber);}
+.pill-revision{background:var(--purple-bg);color:var(--purple);}
+.slot-cd{font-size:11px;font-family:var(--mono);font-weight:500;color:var(--green);min-width:42px;text-align:right;}
+.note-btn{font-size:10px;padding:3px 8px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;white-space:nowrap;}
+.note-btn:hover{background:var(--bg3);}
+.note-btn.has-note{color:var(--green);border-color:var(--green-light);}
+.del-btn{font-size:18px;color:var(--text3);cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}
+.del-btn:hover{color:var(--red);}
+.note-area{padding:0 12px 8px 37px;display:none;}
+.note-area.open{display:block;}
+.note-area textarea{width:100%;font-size:11px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);padding:5px 8px;resize:none;font-family:var(--font);}
+
+/* ADD FORM */
+.add-slot-form{background:var(--bg3);border:1px dashed var(--border2);border-radius:var(--radius-lg);padding:12px;margin-top:8px;}
+.add-slot-form h3{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.4px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;}
+.form-row label{font-size:10px;color:var(--text3);display:block;margin-bottom:3px;}
+.form-row input,.form-row select{font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-family:var(--font);width:100%;}
+.add-btn-sm{font-size:12px;padding:7px 14px;border-radius:6px;border:1px solid var(--green);background:var(--green-bg);color:var(--green);cursor:pointer;font-weight:500;}
+.add-btn-sm:hover{background:var(--green-light);}
+
+/* BUTTONS */
+.btn{font-size:12px;padding:6px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg2);color:var(--text);cursor:pointer;font-family:var(--font);}
+.btn:hover{background:var(--bg3);}
+.btn.green{background:var(--green-bg);color:var(--green);border-color:var(--green-light);}
+.btn.green:hover{background:var(--green-light);}
+.btn.red{background:var(--red-bg);color:var(--red);border-color:#f0b0b0;}
+
+/* ANALYTICS */
+.section-hdr{display:flex;align-items:center;justify-content:space-between;margin:1.5rem 0 0.75rem;}
+.section-title{font-size:13px;font-weight:600;letter-spacing:-0.2px;}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:1.5rem;}
+.cal-day-lbl{font-size:10px;color:var(--text3);text-align:center;padding:2px 0;font-weight:500;}
+.cal-day{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:var(--mono);background:var(--bg3);color:var(--text3);}
+.cal-day.hit{background:var(--green);color:#fff;font-weight:600;}
+.cal-day.today{outline:2px solid var(--green);outline-offset:1px;color:var(--text);background:var(--bg2);}
+.cal-day.today.hit{color:#fff;}
+.cal-day.empty{background:transparent;}
+.history-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem;}
+.history-item{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;}
+.hist-date{font-size:12px;font-weight:500;min-width:90px;}
+.hist-bar-wrap{flex:1;height:6px;background:var(--bg4);border-radius:99px;overflow:hidden;}
+.hist-bar{height:100%;border-radius:99px;background:var(--green);}
+.hist-pct{font-size:11px;font-family:var(--mono);color:var(--text2);min-width:36px;text-align:right;}
+.hist-badge{font-size:10px;padding:2px 7px;border-radius:99px;}
+.hist-hit{background:var(--green-bg);color:var(--green);}
+.hist-miss{background:var(--bg4);color:var(--text3);}
+
+/* SETTINGS */
+.settings-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:1rem;}
+.settings-section h3{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem;}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
+.setting-row:last-child{border-bottom:none;}
+.setting-lbl{font-size:13px;}
+.setting-sub{font-size:11px;color:var(--text3);margin-top:1px;}
+.toggle{width:34px;height:18px;border-radius:99px;background:var(--bg4);border:1px solid var(--border2);cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0;}
+.toggle.on{background:var(--green);}
+.toggle-knob{position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:left 0.2s;}
+.toggle.on .toggle-knob{left:18px;}
+.pdf-btn{width:100%;padding:10px;border-radius:var(--radius);border:1px solid var(--green);background:var(--green-bg);color:var(--green);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);margin-top:0.5rem;}
+.pdf-btn:hover{background:var(--green-light);}
+
+/* LOADING */
+#loading-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
+.spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading-screen">
+  <div class="spinner"></div>
+  <div style="font-size:13px;color:var(--text3);">Loading your planner...</div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen" style="display:none;">
+  <div class="login-card">
+    <div class="login-logo">📚</div>
+    <div class="login-title">CA Study Planner</div>
+    <div class="login-sub">Sign in to sync your timetable across all your devices — phone, tablet, laptop.</div>
+    <button class="google-btn" onclick="signInWithGoogle()">
+      <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16.1 19 13 24 13c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.5 26.8 36.5 24 36.5c-5.2 0-9.6-3.3-11.3-8H6.3C9.7 35.6 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.6l6.2 5.2C43 34.8 48 30 48 24c0-1.3-.1-2.7-.4-3.9z"/></svg>
+      Continue with Google
+    </button>
+    <div id="login-error"></div>
+    <div class="login-note">Your data is saved securely and syncs in real time.</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="app-title">CA Study Planner</div>
+      <div class="app-sub" id="date-sub"></div>
+    </div>
+    <div class="topbar-right">
+      <div class="streak-badge" id="streak-badge">🔥 0 day streak</div>
+      <div class="user-pill" id="user-pill">
+        <div class="user-avatar-fallback" id="user-avatar-fallback">?</div>
+        <span class="user-name" id="user-name-lbl">User</span>
+        <span class="signout-btn" onclick="signOut()" title="Sign out">✕</span>
+      </div>
+      <div class="dark-toggle" id="dark-toggle" onclick="toggleDark()"><div class="dark-toggle-knob"></div></div>
+    </div>
+  </div>
+
+  <div class="sync-bar" id="sync-bar"></div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('timetable',this)">Timetable</div>
+    <div class="tab" onclick="switchTab('analytics',this)">Analytics</div>
+    <div class="tab" onclick="switchTab('settings',this)">Settings</div>
+  </div>
+
+  <!-- TIMETABLE TAB -->
+  <div class="panel active" id="panel-timetable">
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-lbl">Studied</div><div class="stat-val green" id="s-studied">0h 0m</div></div>
+      <div class="stat-card"><div class="stat-lbl">Sessions</div><div class="stat-val" id="s-sessions">0/0</div></div>
+      <div class="stat-card"><div class="stat-lbl">Breaks</div><div class="stat-val" id="s-breaks">0</div></div>
+      <div class="stat-card"><div class="stat-lbl">Remaining</div><div class="stat-val" id="s-left">14h</div></div>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-header"><span>Daily progress</span><span id="prog-pct">0%</span></div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+    <div class="water-bar" id="water-bar">
+      💧 <span>Time to drink water! Stay hydrated.</span>
+      <span class="water-dismiss" onclick="dismissWater()">Dismiss</span>
+    </div>
+    <div class="focus-card" id="focus-card">
+      <div class="focus-top">
+        <div>
+          <div class="focus-name" id="f-name">—</div>
+          <div class="focus-range" id="f-range">—</div>
+        </div>
+        <button class="btn" onclick="toggleFocus()">Exit focus</button>
+      </div>
+      <div class="focus-cd" id="f-cd">—</div>
+      <div class="focus-btns">
+        <button class="btn green" onclick="markActiveDone()">Mark done</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:0.75rem;flex-wrap:wrap;">
+      <button class="btn green" onclick="toggleFocus()">Focus mode</button>
+      <button class="btn" onclick="resetDay()">Reset day</button>
+      <button class="btn" id="add-toggle-btn" onclick="toggleAddForm()">+ Add session</button>
+    </div>
+    <div class="timetable" id="timetable"></div>
+    <div id="add-form" style="display:none;">
+      <div class="add-slot-form">
+        <h3>Add custom session</h3>
+        <div class="form-row">
+          <div><label>Name</label><input id="new-name" placeholder="e.g. FR Block"></div>
+          <div><label>Start time</label><input id="new-start" type="time" value="12:00"></div>
+          <div><label>Type</label>
+            <select id="new-type">
+              <option value="study">Study</option>
+              <option value="revision">Revision</option>
+              <option value="break">Break</option>
+              <option value="meal">Meal</option>
+            </select>
+          </div>
+          <div><label>&nbsp;</label><button class="add-btn-sm" onclick="addSlot()">Add</button></div>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+          <label style="font-size:10px;color:var(--text3);">Duration (mins)</label>
+          <input id="new-dur" type="number" min="5" max="240" value="90" style="width:70px;font-size:12px;padding:4px 6px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYTICS TAB -->
+  <div class="panel" id="panel-analytics">
+    <div class="section-hdr">
+      <span class="section-title">Monthly calendar</span>
+      <span style="font-size:11px;color:var(--text3);">Green = 10h target hit</span>
+    </div>
+    <div class="calendar-grid" id="cal-grid"></div>
+    <div class="section-hdr"><span class="section-title">Completion history</span></div>
+    <div class="history-list" id="history-list"></div>
+    <div style="text-align:center;padding:1rem 0;">
+      <button class="btn red" onclick="clearHistory()">Clear all history</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div class="panel" id="panel-settings">
+    <div class="settings-section">
+      <h3>Alerts & reminders</h3>
+      <div class="setting-row">
+        <div><div class="setting-lbl">Water reminder</div><div class="setting-sub">Alert every 45 minutes</div></div>
+        <div class="toggle on" id="tog-water" onclick="toggleSetting('water')"><div class="toggle-knob"></div></div>
+      </div>
+      <div class="setting-row">
+        <div><div class="setting-lbl">Sound alerts</div><div class="setting-sub">Chime when session ends or break starts</div></div>
+        <div class="toggle on" id="tog-sound" onclick="toggleSetting('sound')"><div class="toggle-knob"></div></div>
+      </div>
+    </div>
+    <div class="settings-section">
+      <h3>Daily target</h3>
+      <div class="setting-row">
+        <div><div class="setting-lbl">Study goal</div><div class="setting-sub">Hours needed to count day as complete</div></div>
+        <select id="target-sel" style="font-size:12px;padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);" onchange="saveSetting('target',parseInt(this.value))">
+          <option value="6">6 hours</option>
+          <option value="8">8 hours</option>
+          <option value="10" selected>10 hours</option>
+          <option value="12">12 hours</option>
+        </select>
+      </div>
+    </div>
+    <div class="settings-section">
+      <h3>Sync & account</h3>
+      <div class="setting-row">
+        <div><div class="setting-lbl">Save today's progress</div><div class="setting-sub">Logs completion % to history & calendar</div></div>
+        <button class="btn green" onclick="saveToHistory()">Save now</button>
+      </div>
+      <div class="setting-row">
+        <div><div class="setting-lbl">Signed in as</div><div class="setting-sub" id="settings-email">—</div></div>
+        <button class="btn red" onclick="signOut()">Sign out</button>
+      </div>
+    </div>
+    <div class="settings-section">
+      <h3>Export</h3>
+      <button class="pdf-btn" onclick="exportPDF()">Export today's timetable as PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+// ── FIREBASE CONFIG ──────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyDr_Lhjojk14_9lRN7P5lcHD8_tWSdzcSI",
+  authDomain: "ca-study-planner-f1bee.firebaseapp.com",
+  projectId: "ca-study-planner-f1bee",
+  storageBucket: "ca-study-planner-f1bee.firebasestorage.app",
+  messagingSenderId: "833323764716",
+  appId: "1:833323764716:web:6c9c89de12032296560ec9",
+  measurementId: "G-SVXSEMHC21"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// ── DEFAULT TIMETABLE ─────────────────────────────────────────
+const DEFAULT_SLOTS = [
+  {name:"Session 1",start:"12:00",end:"13:30",type:"study",dur:90},
+  {name:"Lunch",start:"13:30",end:"14:00",type:"meal",dur:30},
+  {name:"Session 2",start:"14:00",end:"16:00",type:"study",dur:120},
+  {name:"Break",start:"16:00",end:"16:15",type:"break",dur:15},
+  {name:"Session 3",start:"16:15",end:"17:45",type:"study",dur:90},
+  {name:"Break",start:"17:45",end:"18:05",type:"break",dur:20},
+  {name:"Session 4",start:"18:05",end:"20:05",type:"study",dur:120},
+  {name:"Break",start:"20:05",end:"20:20",type:"break",dur:15},
+  {name:"Session 5",start:"20:20",end:"21:20",type:"study",dur:60},
+  {name:"Dinner",start:"21:20",end:"22:20",type:"meal",dur:60},
+  {name:"Session 6",start:"22:20",end:"00:20",type:"study",dur:120},
+  {name:"Break",start:"00:20",end:"00:40",type:"break",dur:20},
+  {name:"Session 7",start:"00:40",end:"02:00",type:"revision",dur:80},
+];
+
+// ── STATE ─────────────────────────────────────────────────────
+let currentUser = null;
+let slots = [];
+let settings = {water:true, sound:true, target:10};
+let focusMode = false;
+let activeIdx = -1;
+let remainSecs = 0;
+let waterTimer = null;
+let saveTimeout = null;
+let isDark = false;
+
+// ── AUTH ──────────────────────────────────────────────────────
+auth.onAuthStateChanged(user => {
+  document.getElementById('loading-screen').style.display = 'none';
+  if (user) {
+    currentUser = user;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    setupUser(user);
+    loadFromFirestore();
+  } else {
+    currentUser = null;
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+  }
+});
+
+function signInWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch(err => {
+    const el = document.getElementById('login-error');
+    el.textContent = 'Sign in failed: ' + err.message;
+    el.style.display = 'block';
+  });
+}
+
+function signOut() {
+  if (confirm('Sign out?')) auth.signOut();
+}
+
+function setupUser(user) {
+  document.getElementById('user-name-lbl').textContent = user.displayName ? user.displayName.split(' ')[0] : 'User';
+  document.getElementById('settings-email').textContent = user.email;
+  const fallback = document.getElementById('user-avatar-fallback');
+  if (user.photoURL) {
+    const img = document.createElement('img');
+    img.src = user.photoURL;
+    img.className = 'user-avatar';
+    img.onerror = () => {};
+    fallback.parentNode.replaceChild(img, fallback);
+  } else {
+    fallback.textContent = (user.displayName || 'U')[0].toUpperCase();
+  }
+}
+
+// ── FIRESTORE ─────────────────────────────────────────────────
+function userDoc() {
+  return db.collection('users').doc(currentUser.uid);
+}
+
+async function loadFromFirestore() {
+  setSyncStatus('loading');
+  try {
+    const doc = await userDoc().get();
+    if (doc.exists) {
+      const data = doc.data();
+      slots = (data.slots || DEFAULT_SLOTS).map((s,i) => ({
+        ...s, id: i, done: s.done||false, note: s.note||'', noteOpen: false, editing: false
+      }));
+      settings = {...settings, ...(data.settings||{})};
+    } else {
+      slots = DEFAULT_SLOTS.map((s,i) => ({...s, id:i, done:false, note:'', noteOpen:false, editing:false}));
+      await saveToFirestore(true);
+    }
+    applySettings();
+    render();
+    setSyncStatus('saved');
+  } catch(e) {
+    console.error(e);
+    slots = DEFAULT_SLOTS.map((s,i) => ({...s, id:i, done:false, note:'', noteOpen:false, editing:false}));
+    render();
+    setSyncStatus('error');
+  }
+}
+
+async function saveToFirestore(immediate) {
+  if (!currentUser) return;
+  setSyncStatus('saving');
+  if (saveTimeout) clearTimeout(saveTimeout);
+  const doSave = async () => {
+    try {
+      const clean = slots.map(s => ({
+        name: s.name, start: s.start, end: s.end,
+        type: s.type, dur: s.dur, done: s.done, note: s.note
+      }));
+      await userDoc().set({slots: clean, settings, updatedAt: firebase.firestore.FieldValue.serverTimestamp()}, {merge:true});
+      setSyncStatus('saved');
+    } catch(e) { setSyncStatus('error'); }
+  };
+  if (immediate) { await doSave(); }
+  else { saveTimeout = setTimeout(doSave, 1200); }
+}
+
+function setSyncStatus(state) {
+  const el = document.getElementById('sync-bar');
+  if (state==='saving') { el.className='sync-bar saving'; el.textContent='Syncing...'; }
+  else if (state==='saved') { el.className='sync-bar saved'; el.textContent='✓ Synced'; setTimeout(()=>{el.textContent='';el.className='sync-bar';},2500); }
+  else if (state==='loading') { el.className='sync-bar'; el.textContent='Loading...'; }
+  else if (state==='error') { el.className='sync-bar'; el.textContent='Sync error — check connection'; }
+}
+
+// ── HISTORY FIRESTORE ─────────────────────────────────────────
+async function getHistory() {
+  try {
+    const doc = await userDoc().get();
+    return (doc.exists && doc.data().history) ? doc.data().history : {};
+  } catch(e) { return {}; }
+}
+
+async function saveHistory(hist) {
+  try { await userDoc().set({history: hist}, {merge:true}); } catch(e) {}
+}
+
+// ── HELPERS ───────────────────────────────────────────────────
+function toMins(t) { if(!t)return 0; const[h,m]=t.split(':').map(Number); return h*60+m; }
+function fmt12(t) { if(!t)return''; const[h,m]=t.split(':').map(Number); const ap=h>=12?'PM':'AM'; const h12=h%12||12; return h12+':'+(m<10?'0'+m:m)+' '+ap; }
+function fmtDur(mins) { if(mins>=60){const h=Math.floor(mins/60),m=mins%60;return m?h+'h '+m+'m':h+'h';} return mins+'m'; }
+function fmtSecs(s) { const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sc=s%60; return(h?h+':':'')+(h?(m<10?'0'+m:m):m)+':'+(sc<10?'0'+sc:sc); }
+function addMins(t,mins) { let[h,m]=t.split(':').map(Number);m+=mins;h+=Math.floor(m/60);m=m%60;h=h%24;return(h<10?'0'+h:h)+':'+(m<10?'0'+m:m); }
+
+function getActiveIdx() {
+  const now = new Date();
+  let nm = now.getHours()*60+now.getMinutes();
+  for(let i=0;i<slots.length;i++){
+    let s=toMins(slots[i].start),e=toMins(slots[i].end);
+    if(e<s)e+=1440;
+    let cn=nm; if(s>720&&cn<360)cn+=1440;
+    if(cn>=s&&cn<e)return i;
+  }
+  return -1;
+}
+
+function getRemainSecs(idx) {
+  const now = new Date();
+  let nm = now.getHours()*60+now.getMinutes(), ns = now.getSeconds();
+  let em = toMins(slots[idx].end);
+  if(em < toMins(slots[idx].start)) em+=1440;
+  return Math.max(0, em*60 - (nm*60+ns));
+}
+
+function playChime() {
+  if(!settings.sound) return;
+  try {
+    const ctx = new(window.AudioContext||window.webkitAudioContext)();
+    [523,659,784].forEach((f,i)=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=f;o.type='sine';
+      g.gain.setValueAtTime(0,ctx.currentTime+i*0.18);
+      g.gain.linearRampToValueAtTime(0.18,ctx.currentTime+i*0.18+0.05);
+      g.gain.linearRampToValueAtTime(0,ctx.currentTime+i*0.18+0.35);
+      o.start(ctx.currentTime+i*0.18);
+      o.stop(ctx.currentTime+i*0.18+0.4);
+    });
+  } catch(e) {}
+}
+
+// ── RENDER ────────────────────────────────────────────────────
+function render() {
+  const tbl = document.getElementById('timetable');
+  tbl.innerHTML = '';
+  slots.forEach((s,i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'slot'+(s.done?' done-slot':'')+(i===activeIdx?' active-now':'');
+
+    const body = document.createElement('div'); body.className='slot-body';
+
+    const chk = document.createElement('div');
+    chk.className = 'chk'+(s.done?' on':'');
+    chk.innerHTML = '<svg viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    chk.onclick = () => { slots[i].done=!slots[i].done; saveToFirestore(); render(); updateStats(); };
+
+    const timeEl = document.createElement('span');
+    timeEl.className='slot-time';
+    timeEl.textContent = fmt12(s.start)+' — '+fmt12(s.end);
+
+    const nameWrap = document.createElement('div'); nameWrap.className='slot-name-wrap';
+    if(s.editing) {
+      const inp = document.createElement('input'); inp.className='slot-name-input'; inp.value=s.name;
+      inp.onblur = () => { slots[i].name=inp.value||s.name; slots[i].editing=false; saveToFirestore(); render(); };
+      inp.onkeydown = e => { if(e.key==='Enter') inp.blur(); };
+      nameWrap.appendChild(inp);
+      setTimeout(()=>inp.focus(),10);
+    } else {
+      const nameEl = document.createElement('div'); nameEl.className='slot-name';
+      nameEl.textContent=s.name; nameEl.title='Click to rename';
+      nameEl.onclick = () => { slots[i].editing=true; render(); };
+      nameWrap.appendChild(nameEl);
+    }
+    const durEl = document.createElement('div'); durEl.className='slot-dur';
+    durEl.textContent=fmtDur(s.dur); nameWrap.appendChild(durEl);
+
+    const pill = document.createElement('span');
+    pill.className='pill pill-'+s.type;
+    pill.textContent=s.type==='revision'?'Revision':s.type==='meal'?'Meal':s.type==='break'?'Break':'Study';
+
+    const cdEl = document.createElement('span'); cdEl.className='slot-cd'; cdEl.id='cd-'+i;
+    cdEl.textContent=(i===activeIdx&&remainSecs>0)?fmtSecs(remainSecs):'';
+
+    const noteBtn = document.createElement('button');
+    noteBtn.className='note-btn'+(s.note?' has-note':'');
+    noteBtn.textContent=s.note?'Note ✓':'Note';
+    noteBtn.onclick = () => { slots[i].noteOpen=!slots[i].noteOpen; render(); };
+
+    const delBtn = document.createElement('span'); delBtn.className='del-btn'; delBtn.textContent='×';
+    delBtn.onclick = () => { slots.splice(i,1); saveToFirestore(); render(); updateStats(); };
+
+    body.appendChild(chk); body.appendChild(timeEl); body.appendChild(nameWrap);
+    body.appendChild(pill); body.appendChild(cdEl); body.appendChild(noteBtn); body.appendChild(delBtn);
+    wrap.appendChild(body);
+
+    const noteArea = document.createElement('div');
+    noteArea.className='note-area'+(s.noteOpen?' open':'');
+    const ta = document.createElement('textarea'); ta.rows=2;
+    ta.placeholder='Notes — e.g. Ind AS 16, Sec 44AD, Ch 5 ICAI SM...';
+    ta.value=s.note;
+    ta.oninput = () => { slots[i].note=ta.value; saveToFirestore(); noteBtn.className='note-btn'+(ta.value?' has-note':''); noteBtn.textContent=ta.value?'Note ✓':'Note'; };
+    noteArea.appendChild(ta); wrap.appendChild(noteArea);
+    tbl.appendChild(wrap);
+  });
+  updateStats();
+}
+
+function updateStats() {
+  const study = slots.filter(s=>s.type==='study'||s.type==='revision');
+  const doneSt = study.filter(s=>s.done);
+  const totalMins = study.reduce((a,s)=>a+s.dur,0);
+  const doneMins = doneSt.reduce((a,s)=>a+s.dur,0);
+  const brkDone = slots.filter(s=>s.type==='break'&&s.done).length;
+  document.getElementById('s-studied').textContent=fmtDur(doneMins);
+  document.getElementById('s-sessions').textContent=doneSt.length+'/'+study.length;
+  document.getElementById('s-breaks').textContent=brkDone;
+  document.getElementById('s-left').textContent=fmtDur(Math.max(0,totalMins-doneMins));
+  const pct=totalMins>0?Math.round(doneMins/totalMins*100):0;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
+  document.getElementById('date-sub').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  updateStreak();
+}
+
+async function updateStreak() {
+  const hist = await getHistory();
+  const study = slots.filter(s=>s.type==='study'||s.type==='revision');
+  const totalMins = study.reduce((a,s)=>a+s.dur,0);
+  const targetPct = totalMins>0?Math.round((settings.target*60)/totalMins*100):100;
+  let streak=0, d=new Date();
+  for(let i=0;i<365;i++){
+    const key=d.toISOString().slice(0,10);
+    if(hist[key]&&hist[key].pct>=targetPct){streak++;d.setDate(d.getDate()-1);}
+    else break;
+  }
+  document.getElementById('streak-badge').textContent='🔥 '+streak+' day streak';
+}
+
+// ── SETTINGS ─────────────────────────────────────────────────
+function applySettings() {
+  document.getElementById('tog-water').className='toggle'+(settings.water?' on':'');
+  document.getElementById('tog-sound').className='toggle'+(settings.sound?' on':'');
+  const tsel=document.getElementById('target-sel'); if(tsel)tsel.value=settings.target;
+  setupWaterTimer();
+}
+function saveSetting(k,v) { settings[k]=v; saveToFirestore(); applySettings(); }
+function toggleSetting(k) { settings[k]=!settings[k]; saveSetting(k,settings[k]); }
+function setupWaterTimer() {
+  if(waterTimer)clearInterval(waterTimer);
+  if(settings.water) waterTimer=setInterval(()=>showWater(),45*60*1000);
+}
+function showWater() { document.getElementById('water-bar').style.display='flex'; }
+function dismissWater() { document.getElementById('water-bar').style.display='none'; }
+
+// ── ACTIONS ───────────────────────────────────────────────────
+function toggleFocus() {
+  focusMode=!focusMode;
+  document.getElementById('focus-card').className='focus-card'+(focusMode?' show':'');
+  updateFocusBanner();
+}
+function updateFocusBanner() {
+  if(activeIdx<0){document.getElementById('f-name').textContent='No active session';document.getElementById('f-range').textContent='—';document.getElementById('f-cd').textContent='—';return;}
+  const s=slots[activeIdx];
+  document.getElementById('f-name').textContent=s.name;
+  document.getElementById('f-range').textContent=fmt12(s.start)+' — '+fmt12(s.end);
+  document.getElementById('f-cd').textContent=fmtSecs(remainSecs);
+}
+function markActiveDone() { if(activeIdx>=0){slots[activeIdx].done=true;saveToFirestore();render();} }
+function resetDay() { if(confirm('Reset all sessions for today?')){slots.forEach(s=>{s.done=false;});saveToFirestore();render();} }
+function toggleAddForm() { const f=document.getElementById('add-form'); f.style.display=f.style.display==='none'?'block':'none'; }
+
+function addSlot() {
+  const name=document.getElementById('new-name').value.trim()||'New Session';
+  const start=document.getElementById('new-start').value||'12:00';
+  const type=document.getElementById('new-type').value;
+  const dur=parseInt(document.getElementById('new-dur').value)||90;
+  const end=addMins(start,dur);
+  slots.push({name,start,end,type,dur,done:false,note:'',noteOpen:false,editing:false,id:Date.now()});
+  slots.sort((a,b)=>toMins(a.start)-toMins(b.start));
+  saveToFirestore();render();
+  document.getElementById('add-form').style.display='none';
+}
+
+// ── ANALYTICS ─────────────────────────────────────────────────
+async function buildCalendar() {
+  const grid=document.getElementById('cal-grid'); grid.innerHTML='';
+  ['S','M','T','W','T','F','S'].forEach(d=>{const el=document.createElement('div');el.className='cal-day-lbl';el.textContent=d;grid.appendChild(el);});
+  const now=new Date(),y=now.getFullYear(),m=now.getMonth();
+  const first=new Date(y,m,1).getDay(), days=new Date(y,m+1,0).getDate();
+  const hist=await getHistory();
+  const study=slots.filter(s=>s.type==='study'||s.type==='revision');
+  const totalMins=study.reduce((a,s)=>a+s.dur,0);
+  const targetPct=totalMins>0?Math.round((settings.target*60)/totalMins*100):100;
+  for(let i=0;i<first;i++){const el=document.createElement('div');el.className='cal-day empty';grid.appendChild(el);}
+  for(let d=1;d<=days;d++){
+    const el=document.createElement('div');
+    const mn=(m+1<10?'0'+(m+1):m+1),dn=(d<10?'0'+d:d);
+    const key=y+'-'+mn+'-'+dn;
+    const isToday=d===now.getDate();
+    const hit=hist[key]&&hist[key].pct>=targetPct;
+    el.className='cal-day'+(hit?' hit':'')+(isToday?' today':'');
+    el.textContent=d; grid.appendChild(el);
+  }
+}
+
+async function buildHistory() {
+  const list=document.getElementById('history-list'); list.innerHTML='';
+  const hist=await getHistory();
+  const keys=Object.keys(hist).sort().reverse().slice(0,14);
+  const study=slots.filter(s=>s.type==='study'||s.type==='revision');
+  const totalMins=study.reduce((a,s)=>a+s.dur,0);
+  const targetPct=totalMins>0?Math.round((settings.target*60)/totalMins*100):100;
+  if(!keys.length){list.innerHTML='<div style="text-align:center;padding:1.5rem;color:var(--text3);font-size:13px;">No history yet — save your progress daily from Settings.</div>';return;}
+  keys.forEach(k=>{
+    const h=hist[k],el=document.createElement('div');el.className='history-item';
+    const d=new Date(k);
+    el.innerHTML=`<span class="hist-date">${d.toLocaleDateString('en-IN',{day:'numeric',month:'short',weekday:'short'})}</span><div class="hist-bar-wrap"><div class="hist-bar" style="width:${h.pct}%"></div></div><span class="hist-pct">${h.pct}%</span><span class="hist-badge ${h.pct>=targetPct?'hist-hit':'hist-miss'}">${h.pct>=targetPct?'Hit':'Miss'}</span>`;
+    list.appendChild(el);
+  });
+}
+
+async function saveToHistory() {
+  const study=slots.filter(s=>s.type==='study'||s.type==='revision');
+  const total=study.reduce((a,s)=>a+s.dur,0);
+  const done=study.filter(s=>s.done).reduce((a,s)=>a+s.dur,0);
+  const pct=total>0?Math.round(done/total*100):0;
+  const key=new Date().toISOString().slice(0,10);
+  const hist=await getHistory();
+  hist[key]={pct,done,total};
+  await saveHistory(hist);
+  await updateStreak();
+  buildCalendar();buildHistory();
+  alert('Progress saved! '+pct+'% complete for today.');
+}
+
+async function clearHistory() {
+  if(confirm('Clear all history? This cannot be undone.')) {
+    await saveHistory({});
+    buildCalendar();buildHistory();updateStreak();
+  }
+}
+
+// ── EXPORT PDF ────────────────────────────────────────────────
+function exportPDF() {
+  const win=window.open('','_blank');
+  const now=new Date();
+  const rows=slots.map(s=>`<tr><td>${fmt12(s.start)} — ${fmt12(s.end)}</td><td>${s.name}</td><td>${s.type}</td><td>${s.done?'✓ Done':''}</td><td>${s.note||''}</td></tr>`).join('');
+  win.document.write(`<!DOCTYPE html><html><head><title>CA Study Timetable</title><style>body{font-family:sans-serif;padding:2rem;color:#111;}h1{font-size:20px;margin-bottom:4px;}p{font-size:12px;color:#888;margin-bottom:1.5rem;}table{width:100%;border-collapse:collapse;font-size:13px;}th{text-align:left;padding:6px 10px;border-bottom:2px solid #ddd;color:#aaa;font-size:11px;}td{padding:7px 10px;border-bottom:1px solid #eee;}tr:last-child td{border-bottom:none;}</style></head><body><h1>CA Study Timetable</h1><p>${now.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</p><table><thead><tr><th>Time</th><th>Session</th><th>Type</th><th>Status</th><th>Notes</th></tr></thead><tbody>${rows}</tbody></table></body></html>`);
+  win.document.close();
+  setTimeout(()=>win.print(),400);
+}
+
+// ── DARK MODE ─────────────────────────────────────────────────
+function toggleDark() {
+  isDark=!isDark;
+  document.documentElement.classList.toggle('dark',isDark);
+  document.getElementById('dark-toggle').classList.toggle('on',isDark);
+}
+
+// ── TAB SWITCHING ─────────────────────────────────────────────
+function switchTab(id,el) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  el.classList.add('active');
+  if(id==='analytics'){buildCalendar();buildHistory();}
+}
+
+// ── TIMER TICK ────────────────────────────────────────────────
+let lastActive = -1;
+function tick() {
+  const prev=activeIdx;
+  activeIdx=getActiveIdx();
+  if(activeIdx>=0){
+    remainSecs=getRemainSecs(activeIdx);
+    const cdEl=document.getElementById('cd-'+activeIdx);
+    if(cdEl)cdEl.textContent=fmtSecs(remainSecs);
+    if(focusMode)updateFocusBanner();
+    if(activeIdx!==prev){
+      if(prev>=0)playChime();
+      render();
+    }
+  } else {
+    if(prev!==activeIdx)render();
+  }
+}
+setInterval(tick,1000);
+</script>
+</body>
+</html>
