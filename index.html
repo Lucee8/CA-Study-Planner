@@ -26,6 +26,9 @@
 .quote-text{font-size:13px;color:var(--text);line-height:1.65;font-style:italic;flex:1;}
 .quote-author{font-size:11px;color:var(--text3);margin-top:6px;font-style:normal;font-weight:500;}
 .quote-label{font-size:10px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+
+  .quote-refresh-btn{font-size:10px;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);transition:color 0.15s,border-color 0.15s;}
+.quote-refresh-btn:hover{color:var(--green);border-color:var(--green-light);}
   
 .dark{
   --bg:#141412;--bg2:#1e1e1a;--bg3:#252520;--bg4:#2e2e28;
@@ -252,10 +255,13 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
   <!-- TIMETABLE TAB -->
   <div class="panel active" id="panel-timetable">
 
-    <div class="quote-card" id="quote-card">
+<div class="quote-card" id="quote-card">
   <div class="quote-accent"></div>
   <div style="flex:1;">
-    <div class="quote-label">Today's motivation</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <div class="quote-label">Today's motivation</div>
+      <button class="quote-refresh-btn" onclick="refreshQuote()" title="Get new quote">↻ New quote</button>
+    </div>
     <div class="quote-text" id="quote-text">Loading...</div>
     <div class="quote-author" id="quote-author"></div>
   </div>
@@ -826,7 +832,7 @@ function tick() {
 }
 setInterval(tick,1000);
 
-  // ── DAILY QUOTE ───────────────────────────────────────────────
+// ── DAILY QUOTE ───────────────────────────────────────────────
 const CA_QUOTES = [
   {q:"Success is not final, failure is not fatal — it is the courage to continue that counts.", a:"Winston Churchill"},
   {q:"The CA exam doesn't test how smart you are. It tests how well you prepared.", a:"CA Wisdom"},
@@ -860,11 +866,31 @@ const CA_QUOTES = [
   {q:"ICAI didn't make it easy. They made it worth it.", a:"CA Wisdom"},
 ];
 
-function loadDailyQuote() {
-  const idx = Math.floor(Date.now() / 86400000) % CA_QUOTES.length;
+let currentQuoteIdx = Math.floor(Date.now() / 86400000) % CA_QUOTES.length;
+
+function showQuote(idx) {
   const q = CA_QUOTES[idx];
-  document.getElementById('quote-text').textContent = '"' + q.q + '"';
-  document.getElementById('quote-author').textContent = '— ' + q.a;
+  const textEl = document.getElementById('quote-text');
+  const authorEl = document.getElementById('quote-author');
+  textEl.style.opacity = '0';
+  authorEl.style.opacity = '0';
+  setTimeout(() => {
+    textEl.textContent = '"' + q.q + '"';
+    authorEl.textContent = '— ' + q.a;
+    textEl.style.transition = 'opacity 0.4s';
+    authorEl.style.transition = 'opacity 0.4s';
+    textEl.style.opacity = '1';
+    authorEl.style.opacity = '1';
+  }, 200);
+}
+
+function loadDailyQuote() {
+  showQuote(currentQuoteIdx);
+}
+
+function refreshQuote() {
+  currentQuoteIdx = (currentQuoteIdx + 1) % CA_QUOTES.length;
+  showQuote(currentQuoteIdx);
 }
 
 loadDailyQuote();
