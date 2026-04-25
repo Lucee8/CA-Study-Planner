@@ -271,17 +271,11 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .correct-ans{color:var(--green);}
 .your-ans{color:var(--red);}
 
-/* Mock test history in analytics */
-.mock-hist-item{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;margin-bottom:6px;}
-.mock-hist-subj{font-size:12px;font-weight:500;min-width:140px;}
-.mock-hist-score{font-size:13px;font-weight:600;font-family:var(--mono);color:var(--green);}
-.mock-hist-meta{font-size:10px;color:var(--text3);margin-left:auto;}
-
-  .mock-hist-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;}
+/* Mock test history */
+.mock-hist-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;}
 .mock-hist-subj{font-size:12px;font-weight:500;flex:1;color:var(--text);}
 .mock-hist-score{font-size:13px;font-weight:600;font-family:var(--mono);color:var(--green);}
 .mock-hist-meta{font-size:10px;color:var(--text3);}
-  
 </style>
 </head>
 <body>
@@ -438,13 +432,13 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
           <div class="subject-card-name">Auditing & Ethics</div>
           <div class="subject-card-tag">SA · Standards · Ethics</div>
         </div>
-<div style="margin-top:1.25rem;">
-  <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Recent tests</div>
-  <div id="mock-hist-list">
-    <div style="font-size:12px;color:var(--text3);padding:8px 0;">No tests taken yet.</div>
-  </div>
-</div>
-        
+      </div>
+
+      <div style="margin-top:1.25rem;">
+        <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Recent tests</div>
+        <div id="mock-hist-list">
+          <div style="font-size:12px;color:var(--text3);padding:8px 0;">No tests taken yet.</div>
+        </div>
       </div>
 
       <div class="mock-section-title">Mode</div>
@@ -471,11 +465,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
       </div>
 
       <button class="start-test-btn" id="start-test-btn" disabled onclick="startTest()">Select a subject to start →</button>
-
-      <div style="margin-top:1.5rem;">
-        <div class="mock-section-title">Mock test history</div>
-        <div id="mock-hist-list"><div style="font-size:12px;color:var(--text3);padding:8px 0;">No tests taken yet.</div></div>
-      </div>
     </div>
 
     <!-- QUESTION SCREEN -->
@@ -591,6 +580,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 // ── DEFAULT TIMETABLE ─────────────────────────────────────────
+// FIX: Session 7 end corrected to 02:00, dur corrected to 40
 const DEFAULT_SLOTS = [
   {name:"Session 1",start:"12:00",end:"13:30",type:"study",dur:90},
   {name:"Lunch",start:"13:30",end:"14:00",type:"meal",dur:30},
@@ -600,12 +590,13 @@ const DEFAULT_SLOTS = [
   {name:"Break",start:"17:45",end:"18:05",type:"break",dur:20},
   {name:"Session 4",start:"18:05",end:"20:05",type:"study",dur:120},
   {name:"Break",start:"20:05",end:"20:20",type:"break",dur:15},
-  {name:"Session 5",start:"20:20",	end:"21:20",type:"study",dur:60},
+  {name:"Session 5",start:"20:20",end:"21:20",type:"study",dur:60},
   {name:"Dinner",start:"22:00",end:"23:00",type:"meal",dur:60},
   {name:"Session 6",start:"23:00",end:"01:00",type:"study",dur:120},
   {name:"Break",start:"01:00",end:"01:20",type:"break",dur:20},
-  {name:"Session 7",start:"01:20",end:"02:40",type:"revision",dur:80},
+  {name:"Session 7",start:"01:20",end:"02:00",type:"revision",dur:40},
 ];
+
 // ── STATE ─────────────────────────────────────────────────────
 let currentUser = null;
 let slots = [];
@@ -1076,50 +1067,60 @@ async function loadQuestion() {
   const syllabus = SUBJECT_SYLLABUS[mockSubject] || mockSubject;
   const avoidTopics = mockHistory.slice(-3).map(h => h.topic).filter(Boolean).join(', ');
 
-  const prompt = `You are a CA Final/Inter exam question generator for ${mockSubject}.
+  const prompt = `You are a CA Inter/Final exam MCQ generator.
+Subject: ${mockSubject}
 Syllabus: ${syllabus}
-Generate ONE ${diff} difficulty MCQ for CA Inter Group 1 exam.
-${avoidTopics ? 'Do NOT repeat topics similar to: ' + avoidTopics : ''}
-Rules:
-- Specific, exam-style, practical question
-- 4 options labeled A, B, C, D — only one correct
-- Easy: definition/direct concept | Medium: application scenario | Hard: complex/calculation/trick
-- Explanation must cite specific section/standard/rule
-Respond ONLY in valid JSON, no markdown, no extra text:
-{"topic":"topic name","question":"question text","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"detailed explanation with section/rule"}`;
+${avoidTopics ? 'Avoid topics: ' + avoidTopics : ''}
+
+Generate ONE ${diff} difficulty MCQ. Rules:
+- Easy: definition/concept | Medium: application | Hard: calculation/trick
+- 4 options A B C D, exactly one correct
+- Cite specific section/standard in explanation
+
+IMPORTANT: Reply with ONLY the raw JSON object below. No markdown. No code fences. No extra text.
+{"topic":"...","question":"...","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"..."}`;
 
   try {
     const res = await fetch(GEMINI_URL, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},  
-body: JSON.stringify({
-  contents: [{parts: [{text: prompt}]}],
-  generationConfig: {
-    temperature: 0.7,
-    maxOutputTokens: 1024,
-    responseMimeType: "application/json"
-  }
-})
-      
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+      })
     });
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error('Gemini error ' + res.status + ': ' + (errData.error?.message || res.statusText));
+    }
+
     const data = await res.json();
-    let raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    raw = raw.replace(/```json|```/g, '').trim();
-    // Extract JSON object if wrapped in extra text
+    let raw = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').trim();
+    // Strip markdown fences if Gemini adds them anyway
+    raw = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
     const match = raw.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error('No JSON found');
+    if (!match) throw new Error('No JSON in response. Got: ' + raw.slice(0, 80));
     currentQ = JSON.parse(match[0]);
-    mockHistory.push({topic: currentQ.topic});
+    if (!currentQ.question || !currentQ.options || !currentQ.correct) {
+      throw new Error('Incomplete question data from Gemini');
+    }
+    mockHistory.push({ topic: currentQ.topic });
     renderQuestion(currentQ, diff);
   } catch(e) {
+    console.error('Question load error:', e);
     document.getElementById('q-loading').style.display = 'none';
     document.getElementById('q-text').style.display = 'block';
-    document.getElementById('q-text').textContent = 'Failed to load question. Check your internet and try again. (' + e.message + ')';
+    document.getElementById('q-text').textContent = 'Failed to load question. ' + e.message + '. Tap Retry to try again.';
     document.getElementById('q-actions').style.display = 'flex';
     document.getElementById('skip-btn').style.display = 'none';
     document.getElementById('next-btn').style.display = 'inline-block';
     document.getElementById('next-btn').textContent = 'Retry';
-    document.getElementById('next-btn').onclick = () => { document.getElementById('next-btn').onclick=()=>nextQuestion(); loadQuestion(); };
+    document.getElementById('next-btn').onclick = () => {
+      document.getElementById('next-btn').onclick = () => nextQuestion();
+      document.getElementById('next-btn').textContent = 'Next →';
+      loadQuestion();
+    };
   }
 }
 
@@ -1273,14 +1274,14 @@ async function loadMockHistory() {
   } catch(e) { el.innerHTML = '<div style="font-size:12px;color:var(--text3);">Could not load history.</div>'; }
 }
 
-// ── UPDATE switchTab TO HANDLE MOCK ───────────────────────────
+// ── TABS ──────────────────────────────────────────────────────
 function switchTab(id, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
   el.classList.add('active');
   if (id === 'analytics') { buildCalendar(); buildHistory(); }
-  if (id === 'mocktest') { loadMockHistory(); }
+  if (id === 'mock') { loadMockHistory(); }
 }
 
 // ── TIMER TICK ────────────────────────────────────────────────
