@@ -590,11 +590,11 @@ const DEFAULT_SLOTS = [
   {name:"Break",start:"17:45",end:"18:05",type:"break",dur:20},
   {name:"Session 4",start:"18:05",end:"20:05",type:"study",dur:120},
   {name:"Break",start:"20:05",end:"20:20",type:"break",dur:15},
-  {name:"Session 5",start:"20:20",end:"22:00",type:"study",dur:40},
+  {name:"Session 5",start:"20:20",end:"21:20",type:"study",dur:60},
   {name:"Dinner",start:"22:00",end:"23:00",type:"meal",dur:60},
   {name:"Session 6",start:"23:00",end:"01:00",type:"study",dur:120},
   {name:"Break",start:"01:00",end:"01:20",type:"break",dur:20},
-  {name:"Session 7",start:"01:20",end:"02:40",type:"revision",dur:80},
+  {name:"Session 7",start:"01:20",end:"02:00",type:"revision",dur:40},
 ];
 
 // ── STATE ─────────────────────────────────────────────────────
@@ -983,10 +983,9 @@ function toggleDark() {
 }
 
 // ── MOCK TEST ─────────────────────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyDIWQ3n-rv-wTnMMz4iDk4o_KrRW1V-fII';
-// NEW
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
-  
+const GROQ_API_KEY = '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';
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
 const SUBJECT_SYLLABUS = {
   'Financial Reporting': 'Ind AS (Indian Accounting Standards), AS (Accounting Standards), financial statements preparation, consolidation, business combinations, revenue recognition Ind AS 115, leases Ind AS 116, financial instruments Ind AS 109, share-based payments, impairment of assets, provisions, contingencies, segment reporting, related party disclosures, earnings per share, deferred tax, investment property, PPE, intangible assets',
   'Corporate & Other Laws': 'Companies Act 2013 (incorporation, share capital, debentures, meetings, directors, audit, winding up), LLP Act 2008, FEMA basics, SEBI regulations, Insolvency and Bankruptcy Code, Prevention of Money Laundering, partnership law, contract act',
@@ -1082,29 +1081,36 @@ IMPORTANT: Reply with ONLY the raw JSON object below. No markdown. No code fence
 {"topic":"...","question":"...","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"..."}`;
 
   try {
-    const res = await fetch(GEMINI_URL, {
+    const res = await fetch(GROQ_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + GROQ_API_KEY
+      },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+        model: 'llama-3.1-8b-instant',
+        temperature: 0.7,
+        max_tokens: 1024,
+        messages: [
+          { role: 'system', content: 'You are a CA Inter/Final exam MCQ generator. Respond with ONLY a valid JSON object, no markdown, no code fences, no extra text.' },
+          { role: 'user', content: prompt }
+        ]
       })
     });
 
     if (!res.ok) {
       const errData = await res.json().catch(() => ({}));
-      throw new Error('Gemini error ' + res.status + ': ' + (errData.error?.message || res.statusText));
+      throw new Error('Groq error ' + res.status + ': ' + (errData.error?.message || res.statusText));
     }
 
     const data = await res.json();
-    let raw = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').trim();
-    // Strip markdown fences if Gemini adds them anyway
+    let raw = (data.choices?.[0]?.message?.content || '').trim();
     raw = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
     const match = raw.match(/\{[\s\S]*\}/);
     if (!match) throw new Error('No JSON in response. Got: ' + raw.slice(0, 80));
     currentQ = JSON.parse(match[0]);
     if (!currentQ.question || !currentQ.options || !currentQ.correct) {
-      throw new Error('Incomplete question data from Gemini');
+      throw new Error('Incomplete question data');
     }
     mockHistory.push({ topic: currentQ.topic });
     renderQuestion(currentQ, diff);
