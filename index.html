@@ -276,6 +276,40 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .mock-hist-subj{font-size:12px;font-weight:500;flex:1;color:var(--text);}
 .mock-hist-score{font-size:13px;font-weight:600;font-family:var(--mono);color:var(--green);}
 .mock-hist-meta{font-size:10px;color:var(--text3);}
+
+  /* ── EXAM COUNTDOWN ── */
+.countdown-bar{display:flex;align-items:center;justify-content:space-between;border-radius:var(--radius-lg);padding:10px 16px;margin-bottom:0.75rem;border:1.5px solid var(--border);background:var(--bg2);gap:12px;flex-wrap:wrap;}
+.countdown-bar.urgent-high{background:var(--red-bg);border-color:#f0b0b0;}
+.countdown-bar.urgent-mid{background:var(--amber-bg);border-color:#f0d080;}
+.countdown-bar.urgent-low{background:var(--green-bg);border-color:var(--green-light);}
+.cd-left{display:flex;align-items:center;gap:10px;}
+.cd-icon{font-size:20px;}
+.cd-days{font-size:26px;font-weight:700;font-family:var(--mono);letter-spacing:-1px;}
+.cd-days.red{color:var(--red);}
+.cd-days.amber{color:var(--amber);}
+.cd-days.green{color:var(--green);}
+.cd-label{font-size:11px;color:var(--text3);margin-top:1px;}
+.cd-exam-name{font-size:12px;font-weight:600;color:var(--text2);}
+.cd-right{display:flex;align-items:center;gap:8px;}
+.cd-set-btn{font-size:11px;padding:5px 12px;border-radius:99px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;font-family:var(--font);}
+.cd-set-btn:hover{background:var(--bg4);}
+.cd-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;display:flex;align-items:center;justify-content:center;}
+.cd-modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem;width:90%;max-width:320px;}
+.cd-modal h3{font-size:15px;font-weight:600;margin-bottom:1rem;}
+.cd-modal label{font-size:11px;color:var(--text3);display:block;margin-bottom:4px;margin-top:10px;}
+.cd-modal input{width:100%;font-size:13px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-family:var(--font);}
+.cd-modal-btns{display:flex;gap:8px;margin-top:1.25rem;}
+.cd-save-btn{flex:1;padding:9px;border-radius:var(--radius);border:none;background:var(--green);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);}
+.cd-cancel-btn{padding:9px 16px;border-radius:var(--radius);border:1px solid var(--border2);background:transparent;color:var(--text3);font-size:13px;cursor:pointer;font-family:var(--font);}
+.cd-clear-btn{padding:9px 12px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--red);font-size:12px;cursor:pointer;font-family:var(--font);}
+
+/* QUOTE CARD */
+.quote-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;margin-bottom:1rem;display:flex;gap:14px;align-items:flex-start;}
+.quote-accent{width:3px;min-height:40px;background:var(--green);border-radius:99px;flex-shrink:0;margin-top:2px;}
+.quote-text{font-size:13px;color:var(--text);line-height:1.65;font-style:italic;flex:1;}
+.quote-author{font-size:11px;color:var(--text3);margin-top:6px;font-style:normal;font-weight:500;}
+.quote-label{font-size:10px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+  
 </style>
 </head>
 <body>
@@ -320,7 +354,23 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
   </div>
 
   <div class="sync-bar" id="sync-bar"></div>
-
+<!-- EXAM COUNTDOWN -->
+<div id="countdown-bar" style="display:none;"></div>
+<div id="cd-modal-overlay" class="cd-modal-overlay" style="display:none;">
+  <div class="cd-modal">
+    <h3>📅 Set Exam Date</h3>
+    <label>Exam name</label>
+    <input id="cd-exam-name" placeholder="e.g. CA Final May 2026" maxlength="40">
+    <label>Exam date</label>
+    <input id="cd-exam-date" type="date">
+    <div class="cd-modal-btns">
+      <button class="cd-cancel-btn" onclick="closeCdModal()">Cancel</button>
+      <button class="cd-clear-btn" onclick="clearExamDate()">Clear</button>
+      <button class="cd-save-btn" onclick="saveExamDate()">Save</button>
+    </div>
+  </div>
+</div>
+  
   <div class="tabs">
     <div class="tab active" onclick="switchTab('timetable',this)">Timetable</div>
     <div class="tab" onclick="switchTab('analytics',this)">Analytics</div>
@@ -330,6 +380,16 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 
   <!-- TIMETABLE TAB -->
   <div class="panel active" id="panel-timetable">
+
+    <div class="quote-card" id="quote-card">
+  <div class="quote-accent"></div>
+  <div style="flex:1;">
+    <div class="quote-label">Today's motivation</div>
+    <div class="quote-text" id="quote-text">Loading...</div>
+    <div class="quote-author" id="quote-author"></div>
+  </div>
+</div>
+    
     <div class="stats-row">
       <div class="stat-card"><div class="stat-lbl">Studied</div><div class="stat-val green" id="s-studied">0h 0m</div></div>
       <div class="stat-card"><div class="stat-lbl">Sessions</div><div class="stat-val" id="s-sessions">0/0</div></div>
@@ -562,6 +622,8 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
     </div>
   </div>
 </div>
+
+  
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -1312,6 +1374,133 @@ function tick() {
   }
 }
 setInterval(tick, 1000);
+
+  // ── EXAM COUNTDOWN ────────────────────────────────────────────
+function renderCountdown() {
+  const bar = document.getElementById('countdown-bar');
+  const examDate = settings.examDate;
+  const examName = settings.examName || 'CA Exam';
+  if (!examDate) {
+    bar.style.display = 'flex';
+    bar.className = 'countdown-bar';
+    bar.innerHTML = `
+      <div class="cd-left">
+        <span class="cd-icon">🎯</span>  
+        <div>
+          <div class="cd-exam-name">No exam date set</div>
+          <div class="cd-label">Set your exam date to see countdown</div>
+        </div>
+      </div>
+      <div class="cd-right">
+        <button class="cd-set-btn" onclick="openCdModal()">Set date</button>
+      </div>`;
+    return;
+  }
+  const now = new Date(); now.setHours(0,0,0,0);
+  const target = new Date(examDate); target.setHours(0,0,0,0);
+  const diff = Math.ceil((target - now) / (1000*60*60*24));
+  let urgencyClass = 'urgent-low', dayColor = 'green', icon = '📗';
+  if (diff <= 0) {
+    urgencyClass = ''; icon = '🏁';
+  } else if (diff <= 15) {
+    urgencyClass = 'urgent-high'; dayColor = 'red'; icon = '🔥';
+  } else if (diff <= 45) {
+    urgencyClass = 'urgent-mid'; dayColor = 'amber'; icon = '⚡';
+  }
+  const label = diff < 0 ? 'days since exam' : diff === 0 ? 'Exam is TODAY!' : 'days remaining';
+  bar.style.display = 'flex';
+  bar.className = 'countdown-bar ' + urgencyClass;
+  bar.innerHTML = `
+  
+    <div class="cd-left">
+      <span class="cd-icon">${icon}</span>
+      <div>
+        <div class="cd-days ${dayColor}">${Math.abs(diff)}</div>
+        <div class="cd-label">${label}</div>
+      </div>
+      <div style="border-left:1px solid var(--border);margin:0 4px;height:32px;"></div>
+      <div>
+        <div class="cd-exam-name">${examName}</div>
+        <div class="cd-label">${target.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</div>
+      </div>
+    </div>
+    <div class="cd-right">
+      <button class="cd-set-btn" onclick="openCdModal()">Edit</button>
+    </div>`;
+}
+
+function openCdModal() {
+  document.getElementById('cd-modal-overlay').style.display = 'flex';
+  document.getElementById('cd-exam-name').value = settings.examName || '';
+  document.getElementById('cd-exam-date').value = settings.examDate || '';
+}
+
+function closeCdModal() {
+  document.getElementById('cd-modal-overlay').style.display = 'none';
+}
+
+function saveExamDate() {
+  const name = document.getElementById('cd-exam-name').value.trim();
+  const date = document.getElementById('cd-exam-date').value;
+  if (!date) { alert('Please select a date.'); return; }
+  settings.examName = name || 'CA Exam';
+  settings.examDate = date;
+  saveToFirestore();
+  closeCdModal();
+  renderCountdown();
+}
+
+function clearExamDate() {
+  if (!confirm('Clear exam date?')) return;
+  delete settings.examDate;
+  delete settings.examName;
+  saveToFirestore();
+  closeCdModal();
+  renderCountdown();
+}
+
+  // ── DAILY QUOTE ───────────────────────────────────────────────
+const CA_QUOTES = [
+  {q:"Success is not final, failure is not fatal — it is the courage to continue that counts.", a:"Winston Churchill"},
+  {q:"The CA exam doesn't test how smart you are. It tests how well you prepared.", a:"CA Wisdom"},
+  {q:"Every page you study today is a brick in the foundation of your career.", a:"CA Wisdom"},
+  {q:"Accounting is the language of business. You are learning to speak it fluently.", a:"Warren Buffett (adapted)"},
+  {q:"Hard work beats talent when talent doesn't work hard.", a:"Tim Notke"},
+  {q:"Your struggle today is your strength tomorrow.", a:"CA Wisdom"},
+  {q:"Don't count the days. Make the days count.", a:"Muhammad Ali"},
+  {q:"The difference between try and triumph is just a little 'umph'.", a:"Marvin Phillips"},
+  {q:"Discipline is the bridge between goals and accomplishment.", a:"Jim Rohn"},
+  {q:"CA is not just a degree. It is a character built through pressure.", a:"CA Wisdom"},
+  {q:"One more chapter. One step closer to the life you're working for.", a:"CA Wisdom"},
+  {q:"Sleep is temporary. The CA designation is forever.", a:"CA Wisdom"},
+  {q:"The expert in anything was once a beginner who refused to give up.", a:"Helen Hayes"},
+  {q:"You don't have to be great to start, but you have to start to be great.", a:"Zig Ziglar"},
+  {q:"Audit your habits like you audit books — remove what doesn't add value.", a:"CA Wisdom"},
+  {q:"Taxation is complex. Your commitment to master it is not.", a:"CA Wisdom"},
+  {q:"FR standards change. Your dedication to understand them shouldn't.", a:"CA Wisdom"},
+  {q:"Every mock test is a rehearsal. The final exam is your premiere.", a:"CA Wisdom"},
+  {q:"Pressure makes diamonds. The CA exam is your pressure.", a:"CA Wisdom"},
+  {q:"Small daily improvements lead to staggering long-term results.", a:"Robin Sharma"},
+  {q:"Law today. Audit tomorrow. CA always.", a:"CA Wisdom"},
+  {q:"Study not to pass, but to know. The pass will follow.", a:"CA Wisdom"},
+  {q:"Your future self is watching you right now through your memories.", a:"Aubrey De Grey"},
+  {q:"The grind is temporary. The results are permanent.", a:"CA Wisdom"},
+  {q:"Revision is not repetition — it is understanding deeper each time.", a:"CA Wisdom"},
+  {q:"Behind every successful CA is an articleship that tested their limits.", a:"CA Wisdom"},
+  {q:"A chapter a day keeps the backlog away.", a:"CA Wisdom"},
+  {q:"Don't wish it were easier. Wish you were better.", a:"Jim Rohn"},
+  {q:"You are closer than you think. Keep going.", a:"CA Wisdom"},
+  {q:"ICAI didn't make it easy. They made it worth it.", a:"CA Wisdom"},
+];
+
+function loadDailyQuote() {
+  const idx = Math.floor(Date.now() / 86400000) % CA_QUOTES.length;
+  const q = CA_QUOTES[idx];
+  document.getElementById('quote-text').textContent = '"' + q.q + '"';
+  document.getElementById('quote-author').textContent = '— ' + q.a;
+}
+
+loadDailyQuote();
 </script>
 </body>
 </html>
