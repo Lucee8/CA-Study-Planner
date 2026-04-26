@@ -852,15 +852,7 @@ const db = firebase.firestore();
 
 // ── DEFAULT TIMETABLE ─────────────────────────────────────────
 // FIX: Session 7 end corrected to 02:00, dur corrected to 40
-
-const DEFAULT_SLOTS = [
-  const { startTime, endTime } = getSlotTimes(
-  slot.start,
-  slot.end
-);
-
-const remaining = endTime - new Date();
-
+ const DEFAULT_SLOTS = [
   {name:"Session 1",start:"12:00",end:"14:00",type:"study",dur:120},
   {name:"Lunch",start:"14:00",end:"14:30",type:"meal",dur:30},
   {name:"Session 2",start:"14:30",end:"16:00",type:"study",dur:90},
@@ -875,6 +867,37 @@ const remaining = endTime - new Date();
   {name:"Break",start:"01:00",end:"01:20",type:"break",dur:20},
   {name:"Session 7",start:"01:20",end:"02:00",type:"revision",dur:40},
 ];
+
+function getSlotTimes(start, end) {
+  const now = new Date();
+
+  const [startHour, startMin] = start.split(":").map(Number);
+  const [endHour, endMin] = end.split(":").map(Number);
+
+  const startTime = new Date(now);
+  startTime.setHours(startHour, startMin, 0, 0);
+
+  const endTime = new Date(now);
+  endTime.setHours(endHour, endMin, 0, 0);
+
+  if (endTime <= startTime) {
+    endTime.setDate(endTime.getDate() + 1);
+  }
+
+  return { startTime, endTime };
+}
+
+DEFAULT_SLOTS.forEach(slot => {
+  const { startTime, endTime } = getSlotTimes(
+    slot.start,
+    slot.end
+  );
+
+  const remaining = endTime - new Date();
+
+  console.log(slot.name, remaining);
+});
+
 
 // ── STATE ─────────────────────────────────────────────────────
 let currentUser = null;
