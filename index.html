@@ -825,6 +825,7 @@ const db = firebase.firestore();
 
 // ── DEFAULT TIMETABLE ─────────────────────────────────────────
 // FIX: Session 7 end corrected to 02:00, dur corrected to 40
+
 const DEFAULT_SLOTS = [
   {name:"Session 1",start:"12:00",end:"13:30",type:"study",dur:90},
   {name:"Lunch",start:"13:30",end:"14:00",type:"meal",dur:30},
@@ -834,8 +835,8 @@ const DEFAULT_SLOTS = [
   {name:"Break",start:"17:45",end:"18:05",type:"break",dur:20},
   {name:"Session 4",start:"18:05",end:"20:05",type:"study",dur:120},
   {name:"Break",start:"20:05",end:"20:20",type:"break",dur:15},
-  {name:"Session 5",start:"20:20",end:"21:20",type:"study",dur:60},
-  {name:"Dinner",start:"22:00",end:"23:00",type:"meal",dur:60},
+  {name:"Session 5",start:"20:20",end:"21:50",type:"study",dur:90},
+  {name:"Dinner",start:"21:50",end:"23:00",type:"meal",dur:70},
   {name:"Session 6",start:"23:00",end:"01:00",type:"study",dur:120},
   {name:"Break",start:"01:00",end:"01:20",type:"break",dur:20},
   {name:"Session 7",start:"01:20",end:"02:00",type:"revision",dur:40},
