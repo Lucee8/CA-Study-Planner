@@ -867,53 +867,34 @@ const db = firebase.firestore();
   {name:"Break",start:"01:00",end:"01:20",type:"break",dur:20},
   {name:"Session 7",start:"01:20",end:"02:00",type:"revision",dur:40},
 ];
+function getRemainingSeconds(slot, nowDate) {
+  const now = nowDate || new Date();
+  const nowMins = now.getHours() * 60 + now.getMinutes();
+  const nowSecs = nowMins * 60 + now.getSeconds();
 
-function getSlotTimes(start, end) {
-  const now = new Date();
+  // Parse end time
+  const [endH, endM] = slot.end.split(":").map(Number);
+  let endMins = endH * 60 + endM;
 
-  const [startHour, startMin] = start.split(":").map(Number);
-  const [endHour, endMin] = end.split(":").map(Number);
+  // Parse start time
+  const [startH, startM] = slot.start.split(":").map(Number);
+  let startMins = startH * 60 + startM;
 
-  let startTime = new Date(now);
-  startTime.setHours(startHour, startMin, 0, 0);
-
-  let endTime = new Date(now);
-  endTime.setHours(endHour, endMin, 0, 0);
-
-  // If slot crosses midnight
-  if (endTime <= startTime) {
-    endTime.setDate(endTime.getDate() + 1);
-
-    // If current time is after midnight (like 12:30 AM),
-    // move start time to previous day
-    if (now.getHours() < 12) {
-      startTime.setDate(startTime.getDate() - 1);
-    }
+  // Handle midnight crossover: if end < start, session crosses midnight
+  if (endMins < startMins) {
+    endMins += 24 * 60; // add 24 hours to end
   }
 
-  return { startTime, endTime };
+  // Also adjust nowMins if we're past midnight and end is next day
+  let adjustedNow = nowSecs;
+  if (endMins > 24 * 60 && nowMins < startMins) {
+    // We're past midnight (e.g. now=00:23, start=23:00)
+    adjustedNow = (nowMins + 24 * 60) * 60 + now.getSeconds();
+  }
+
+  const endSecs = endMins * 60;
+  return Math.max(0, endSecs - adjustedNow);
 }
-DEFAULT_SLOTS.forEach(slot => {
-  const { startTime, endTime } = getSlotTimes(
-    slot.start,
-    slot.end
-  );
-
-  const now = new Date();
-
-  if (now >= startTime && now <= endTime) {
-    const remaining = endTime - now;
-
-    const hours = Math.floor(remaining / (1000 * 60 * 60));
-    const minutes = Math.floor((remaining / (1000 * 60)) % 60);
-    const seconds = Math.floor((remaining / 1000) % 60);
-
-    console.log(
-      `${slot.name}: ${hours}:${minutes}:${seconds}`
-    );
-  }
-});
-
 
 // ── STATE ─────────────────────────────────────────────────────
 let currentUser = null;
