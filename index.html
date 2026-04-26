@@ -893,16 +893,11 @@ function getActiveIdx() {
 }
 
 function getRemainSecs(idx) {
-function getRemainSecs(idx) {
   const now = new Date();
   let nm = now.getHours()*60+now.getMinutes(), ns = now.getSeconds();
-  let sm = toMins(slots[idx].start);
   let em = toMins(slots[idx].end);
-  if(em < sm) em += 1440; // session crosses midnight
-  // if we're past midnight and start was before midnight, shift now forward
-  let adjustedNm = nm;
-  if(em > 1440 && nm < sm) adjustedNm = nm + 1440;
-  return Math.max(0, em*60 - (adjustedNm*60+ns));
+  if(em < toMins(slots[idx].start)) em+=1440;
+  return Math.max(0, em*60 - (nm*60+ns));
 }
 
 function playChime() {
