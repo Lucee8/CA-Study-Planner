@@ -874,28 +874,44 @@ function getSlotTimes(start, end) {
   const [startHour, startMin] = start.split(":").map(Number);
   const [endHour, endMin] = end.split(":").map(Number);
 
-  const startTime = new Date(now);
+  let startTime = new Date(now);
   startTime.setHours(startHour, startMin, 0, 0);
 
-  const endTime = new Date(now);
+  let endTime = new Date(now);
   endTime.setHours(endHour, endMin, 0, 0);
 
+  // If slot crosses midnight
   if (endTime <= startTime) {
     endTime.setDate(endTime.getDate() + 1);
+
+    // If current time is after midnight (like 12:30 AM),
+    // move start time to previous day
+    if (now.getHours() < 12) {
+      startTime.setDate(startTime.getDate() - 1);
+    }
   }
 
   return { startTime, endTime };
 }
-
 DEFAULT_SLOTS.forEach(slot => {
   const { startTime, endTime } = getSlotTimes(
     slot.start,
     slot.end
   );
 
-  const remaining = endTime - new Date();
+  const now = new Date();
 
-  console.log(slot.name, remaining);
+  if (now >= startTime && now <= endTime) {
+    const remaining = endTime - now;
+
+    const hours = Math.floor(remaining / (1000 * 60 * 60));
+    const minutes = Math.floor((remaining / (1000 * 60)) % 60);
+    const seconds = Math.floor((remaining / 1000) % 60);
+
+    console.log(
+      `${slot.name}: ${hours}:${minutes}:${seconds}`
+    );
+  }
 });
 
 
