@@ -459,6 +459,10 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
     <div class="mock-setup" id="mock-setup-screen">
       <div class="mock-section-title" style="margin-bottom:12px;">Select subject</div>
       <div class="subject-grid">
+        <div class="subject-card" onclick="selectSubject('Advanced Accounting',this)">
+  <div class="subject-card-name">Advanced Accounting</div>
+  <div class="subject-card-tag">AS · Partnership · Company Accounts</div>
+</div>
         <div class="subject-card" onclick="selectSubject('Financial Reporting',this)">
           <div class="subject-card-name">Financial Reporting</div>
           <div class="subject-card-tag">Ind AS · AS · Consolidation</div>
@@ -1265,6 +1269,7 @@ const GROQ_API_KEY = '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';
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 const SUBJECT_SYLLABUS = {
+  'Advanced Accounting': 'Accounting Standards (AS 1-29), partnership accounts (admission retirement death dissolution), company accounts (issue forfeiture redemption of shares and debentures), amalgamation absorption and reconstruction, internal reconstruction, liquidation of companies, banking company accounts, insurance company accounts, departmental accounts, hire purchase and installment, investment accounts, branch accounts',
   'Financial Reporting': 'Ind AS (Indian Accounting Standards), AS (Accounting Standards), financial statements preparation, consolidation, business combinations, revenue recognition Ind AS 115, leases Ind AS 116, financial instruments Ind AS 109, share-based payments, impairment of assets, provisions, contingencies, segment reporting, related party disclosures, earnings per share, deferred tax, investment property, PPE, intangible assets',
   'Corporate & Other Laws': 'Companies Act 2013 (incorporation, share capital, debentures, meetings, directors, audit, winding up), LLP Act 2008, FEMA basics, SEBI regulations, Insolvency and Bankruptcy Code, Prevention of Money Laundering, partnership law, contract act',
   'Taxation': 'Income Tax Act (heads of income, salary, house property, PGBP, capital gains, other sources, deductions Chapter VI-A, TDS, advance tax, assessment, appeals), GST (CGST SGST IGST, registration, supply, ITC, returns, reverse charge, composition scheme, valuation, place of supply)',
