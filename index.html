@@ -655,126 +655,7 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js">
-// ── EXAM COUNTDOWN PILL ───────────────────────────────────────
-function renderCountdown() {
-  const pill = document.getElementById('cd-pill');
-  if (!pill) return;
-  const examDate = settings.examDate;
-  if (!examDate) {
-    pill.className = 'cd-pill';
-    pill.textContent = '📅 Set exam';
-    return;
-  }
-  const now = new Date(); now.setHours(0,0,0,0);
-  const target = new Date(examDate); target.setHours(0,0,0,0);
-  const diff = Math.ceil((target - now) / (1000*60*60*24));
-  if (diff <= 0) {
-    pill.className = 'cd-pill cd-red';
-    pill.textContent = '🏁 Exam day!';
-  } else if (diff <= 15) {
-    pill.className = 'cd-pill cd-red';
-    pill.textContent = '🔥 ' + diff + 'd left';
-  } else if (diff <= 45) {
-    pill.className = 'cd-pill cd-amber';
-    pill.textContent = '⚡ ' + diff + 'd left';
-  } else {
-    pill.className = 'cd-pill cd-green';
-    pill.textContent = '📅 ' + diff + 'd left';
-  }
-}
-
-function openCdModal() {
-  const el = document.getElementById('cd-modal-overlay');
-  el.style.display = 'flex';
-  document.getElementById('cd-exam-name').value = settings.examName || '';
-  document.getElementById('cd-exam-date').value = settings.examDate || '';
-}
-
-function closeCdModal() {
-  document.getElementById('cd-modal-overlay').style.display = 'none';
-}
-
-function saveExamDate() {
-  const name = document.getElementById('cd-exam-name').value.trim();
-  const date = document.getElementById('cd-exam-date').value;
-  if (!date) { alert('Please select a date.'); return; }
-  settings.examName = name || 'CA Exam';
-  settings.examDate = date;
-  saveToFirestore();
-  closeCdModal();
-  renderCountdown();
-}
-
-function clearExamDate() {
-  if (!confirm('Clear exam date?')) return;
-  delete settings.examDate;
-  delete settings.examName;
-  saveToFirestore();
-  closeCdModal();
-  renderCountdown();
-}
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js">
-// ── EXAM COUNTDOWN PILL ───────────────────────────────────────
-function renderCountdown() {
-  const pill = document.getElementById('cd-pill');
-  if (!pill) return;
-  const examDate = settings.examDate;
-  if (!examDate) {
-    pill.className = 'cd-pill';
-    pill.textContent = '📅 Set exam';
-    return;
-  }
-  const now = new Date(); now.setHours(0,0,0,0);
-  const target = new Date(examDate); target.setHours(0,0,0,0);
-  const diff = Math.ceil((target - now) / (1000*60*60*24));
-  if (diff <= 0) {
-    pill.className = 'cd-pill cd-red';
-    pill.textContent = '🏁 Exam day!';
-  } else if (diff <= 15) {
-    pill.className = 'cd-pill cd-red';
-    pill.textContent = '🔥 ' + diff + 'd left';
-  } else if (diff <= 45) {
-    pill.className = 'cd-pill cd-amber';
-    pill.textContent = '⚡ ' + diff + 'd left';
-  } else {
-    pill.className = 'cd-pill cd-green';
-    pill.textContent = '📅 ' + diff + 'd left';
-  }
-}
-
-function openCdModal() {
-  const el = document.getElementById('cd-modal-overlay');
-  el.style.display = 'flex';
-  document.getElementById('cd-exam-name').value = settings.examName || '';
-  document.getElementById('cd-exam-date').value = settings.examDate || '';
-}
-
-function closeCdModal() {
-  document.getElementById('cd-modal-overlay').style.display = 'none';
-}
-
-function saveExamDate() {
-  const name = document.getElementById('cd-exam-name').value.trim();
-  const date = document.getElementById('cd-exam-date').value;
-  if (!date) { alert('Please select a date.'); return; }
-  settings.examName = name || 'CA Exam';
-  settings.examDate = date;
-  saveToFirestore();
-  closeCdModal();
-  renderCountdown();
-}
-
-function clearExamDate() {
-  if (!confirm('Clear exam date?')) return;
-  delete settings.examDate;
-  delete settings.examName;
-  saveToFirestore();
-  closeCdModal();
-  renderCountdown();
-}
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js">
+  
 // ── EXAM COUNTDOWN PILL ───────────────────────────────────────
 function renderCountdown() {
   const pill = document.getElementById('cd-pill');
@@ -851,7 +732,6 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 // ── DEFAULT TIMETABLE ─────────────────────────────────────────
-// FIX: Session 7 end corrected to 02:00, dur corrected to 40
  const DEFAULT_SLOTS = [
   {name:"Session 1",start:"12:00",end:"14:00",type:"study",dur:120},
   {name:"Lunch",start:"14:00",end:"14:30",type:"meal",dur:30},
@@ -867,34 +747,7 @@ const db = firebase.firestore();
   {name:"Break",start:"01:00",end:"01:20",type:"break",dur:20},
   {name:"Session 7",start:"01:20",end:"02:00",type:"revision",dur:40},
 ];
-function getRemainingSeconds(slot, nowDate) {
-  const now = nowDate || new Date();
-  const nowMins = now.getHours() * 60 + now.getMinutes();
-  const nowSecs = nowMins * 60 + now.getSeconds();
 
-  // Parse end time
-  const [endH, endM] = slot.end.split(":").map(Number);
-  let endMins = endH * 60 + endM;
-
-  // Parse start time
-  const [startH, startM] = slot.start.split(":").map(Number);
-  let startMins = startH * 60 + startM;
-
-  // Handle midnight crossover: if end < start, session crosses midnight
-  if (endMins < startMins) {
-    endMins += 24 * 60; // add 24 hours to end
-  }
-
-  // Also adjust nowMins if we're past midnight and end is next day
-  let adjustedNow = nowSecs;
-  if (endMins > 24 * 60 && nowMins < startMins) {
-    // We're past midnight (e.g. now=00:23, start=23:00)
-    adjustedNow = (nowMins + 24 * 60) * 60 + now.getSeconds();
-  }
-
-  const endSecs = endMins * 60;
-  return Math.max(0, endSecs - adjustedNow);
-}
 
 // ── STATE ─────────────────────────────────────────────────────
 let currentUser = null;
@@ -1040,11 +893,16 @@ function getActiveIdx() {
 }
 
 function getRemainSecs(idx) {
+function getRemainSecs(idx) {
   const now = new Date();
   let nm = now.getHours()*60+now.getMinutes(), ns = now.getSeconds();
+  let sm = toMins(slots[idx].start);
   let em = toMins(slots[idx].end);
-  if(em < toMins(slots[idx].start)) em+=1440;
-  return Math.max(0, em*60 - (nm*60+ns));
+  if(em < sm) em += 1440; // session crosses midnight
+  // if we're past midnight and start was before midnight, shift now forward
+  let adjustedNm = nm;
+  if(em > 1440 && nm < sm) adjustedNm = nm + 1440;
+  return Math.max(0, em*60 - (adjustedNm*60+ns));
 }
 
 function playChime() {
