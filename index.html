@@ -308,6 +308,9 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .cd-pill.cd-green{background:var(--green-bg);color:var(--green);border-color:var(--green-light);}
 .cd-pill.cd-amber{background:var(--amber-bg);color:var(--amber);border-color:#f0d080;}
 .cd-pill.cd-red{background:var(--red-bg);color:var(--red);border-color:#f0b0b0;}
+
+  .quote-refresh-btn{font-size:10px;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);transition:color 0.15s,border-color 0.15s;}
+.quote-refresh-btn:hover{color:var(--green);border-color:var(--green-light);}
 </style>
 </head>
 <body>
@@ -437,7 +440,17 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
       </div>
     </div>
   </div>
-
+<div class="quote-card" id="quote-card">
+  <div class="quote-accent"></div>
+  <div style="flex:1;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <div class="quote-label">Today's motivation</div>
+      <button class="quote-refresh-btn" onclick="refreshQuote()" title="Get new quote">↻ New quote</button>
+    </div>
+    <div class="quote-text" id="quote-text">Loading...</div>
+    <div class="quote-author" id="quote-author"></div>
+  </div>
+</div>
   <!-- ANALYTICS TAB -->
   <div class="panel" id="panel-analytics">
     <div class="section-hdr">
@@ -1733,6 +1746,69 @@ function clearExamDate() {
   closeCdModal();
   renderCountdown();
 }
+
+  // ── DAILY QUOTE ───────────────────────────────────────────────
+const CA_QUOTES = [
+  {q:"Success is not final, failure is not fatal — it is the courage to continue that counts.", a:"Winston Churchill"},
+  {q:"The CA exam doesn't test how smart you are. It tests how well you prepared.", a:"CA Wisdom"},
+  {q:"Every page you study today is a brick in the foundation of your career.", a:"CA Wisdom"},
+  {q:"Accounting is the language of business. You are learning to speak it fluently.", a:"Warren Buffett (adapted)"},
+  {q:"Hard work beats talent when talent doesn't work hard.", a:"Tim Notke"},
+  {q:"Your struggle today is your strength tomorrow.", a:"CA Wisdom"},
+  {q:"Don't count the days. Make the days count.", a:"Muhammad Ali"},
+  {q:"The difference between try and triumph is just a little 'umph'.", a:"Marvin Phillips"},
+  {q:"Discipline is the bridge between goals and accomplishment.", a:"Jim Rohn"},
+  {q:"CA is not just a degree. It is a character built through pressure.", a:"CA Wisdom"},
+  {q:"One more chapter. One step closer to the life you're working for.", a:"CA Wisdom"},
+  {q:"Sleep is temporary. The CA designation is forever.", a:"CA Wisdom"},
+  {q:"The expert in anything was once a beginner who refused to give up.", a:"Helen Hayes"},
+  {q:"You don't have to be great to start, but you have to start to be great.", a:"Zig Ziglar"},
+  {q:"Audit your habits like you audit books — remove what doesn't add value.", a:"CA Wisdom"},
+  {q:"Taxation is complex. Your commitment to master it is not.", a:"CA Wisdom"},
+  {q:"FR standards change. Your dedication to understand them shouldn't.", a:"CA Wisdom"},
+  {q:"Every mock test is a rehearsal. The final exam is your premiere.", a:"CA Wisdom"},
+  {q:"Pressure makes diamonds. The CA exam is your pressure.", a:"CA Wisdom"},
+  {q:"Small daily improvements lead to staggering long-term results.", a:"Robin Sharma"},
+  {q:"Law today. Audit tomorrow. CA always.", a:"CA Wisdom"},
+  {q:"Study not to pass, but to know. The pass will follow.", a:"CA Wisdom"},
+  {q:"Your future self is watching you right now through your memories.", a:"Aubrey De Grey"},
+  {q:"The grind is temporary. The results are permanent.", a:"CA Wisdom"},
+  {q:"Revision is not repetition — it is understanding deeper each time.", a:"CA Wisdom"},
+  {q:"Behind every successful CA is an articleship that tested their limits.", a:"CA Wisdom"},
+  {q:"A chapter a day keeps the backlog away.", a:"CA Wisdom"},
+  {q:"Don't wish it were easier. Wish you were better.", a:"Jim Rohn"},
+  {q:"You are closer than you think. Keep going.", a:"CA Wisdom"},
+  {q:"ICAI didn't make it easy. They made it worth it.", a:"CA Wisdom"},
+];
+
+let currentQuoteIdx = Math.floor(Date.now() / 86400000) % CA_QUOTES.length;
+
+function showQuote(idx) {
+  const q = CA_QUOTES[idx];
+  const textEl = document.getElementById('quote-text');
+  const authorEl = document.getElementById('quote-author');
+  textEl.style.opacity = '0';
+  authorEl.style.opacity = '0';
+  setTimeout(() => {
+    textEl.textContent = '"' + q.q + '"';
+    authorEl.textContent = '— ' + q.a;
+    textEl.style.transition = 'opacity 0.4s';
+    authorEl.style.transition = 'opacity 0.4s';
+    textEl.style.opacity = '1';
+    authorEl.style.opacity = '1';
+  }, 200);
+}
+
+function loadDailyQuote() {
+  showQuote(currentQuoteIdx);
+}
+
+function refreshQuote() {
+  currentQuoteIdx = (currentQuoteIdx + 1) % CA_QUOTES.length;
+  showQuote(currentQuoteIdx);
+}
+
+loadDailyQuote();
 </script>
 </body>
 </html>
