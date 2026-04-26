@@ -854,6 +854,13 @@ const db = firebase.firestore();
 // FIX: Session 7 end corrected to 02:00, dur corrected to 40
 
 const DEFAULT_SLOTS = [
+  const { startTime, endTime } = getSlotTimes(
+  slot.start,
+  slot.end
+);
+
+const remaining = endTime - new Date();
+
   {name:"Session 1",start:"12:00",end:"14:00",type:"study",dur:120},
   {name:"Lunch",start:"14:00",end:"14:30",type:"meal",dur:30},
   {name:"Session 2",start:"14:30",end:"16:00",type:"study",dur:90},
