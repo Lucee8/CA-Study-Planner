@@ -31,8 +31,6 @@
 }
 html,body{background:var(--bg);min-height:100vh;}
 body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
-
-/* LOGIN */
 #login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
 .login-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2.5rem 2rem;text-align:center;max-width:340px;width:92%;}
 .login-logo{width:52px;height:52px;background:var(--green-bg);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:24px;}
@@ -43,11 +41,7 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .google-btn svg{width:18px;height:18px;flex-shrink:0;}
 .login-note{font-size:11px;color:var(--text3);margin-top:1rem;}
 #login-error{font-size:12px;color:var(--red);margin-top:0.75rem;display:none;}
-
-/* MAIN APP */
 #app{display:none;max-width:700px;margin:0 auto;padding:0 1rem 3rem;}
-
-/* TOPBAR */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 0 0.75rem;border-bottom:1px solid var(--border);margin-bottom:0;}
 .topbar-left{display:flex;flex-direction:column;}
 .app-title{font-size:16px;font-weight:600;letter-spacing:-0.3px;}
@@ -64,48 +58,34 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .dark-toggle.on{background:var(--green);}
 .dark-toggle-knob{position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:var(--bg2);transition:left 0.2s;}
 .dark-toggle.on .dark-toggle-knob{left:18px;}
-
-/* SYNC STATUS */
 .sync-bar{font-size:11px;color:var(--text3);padding:5px 0;text-align:right;min-height:22px;}
 .sync-bar.saving{color:var(--amber);}
 .sync-bar.saved{color:var(--green);}
-
-  /* QUOTE CARD */
 .quote-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;margin-bottom:1rem;display:flex;gap:14px;align-items:flex-start;}
 .quote-accent{width:3px;min-height:40px;background:var(--green);border-radius:99px;flex-shrink:0;margin-top:2px;}
 .quote-text{font-size:13px;color:var(--text);line-height:1.65;font-style:italic;flex:1;}
 .quote-author{font-size:11px;color:var(--text3);margin-top:6px;font-style:normal;font-weight:500;}
 .quote-label{font-size:10px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
-  .quote-refresh-btn{font-size:10px;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);transition:color 0.15s,border-color 0.15s;}
+.quote-refresh-btn{font-size:10px;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);transition:color 0.15s,border-color 0.15s;}
 .quote-refresh-btn:hover{color:var(--green);border-color:var(--green-light);}
-  
-/* TABS */
 .tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.25rem;}
 .tab{font-size:13px;font-weight:500;color:var(--text3);padding:0.65rem 1rem;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 0.15s;}
 .tab:hover{color:var(--text);}
 .tab.active{color:var(--green);border-bottom-color:var(--green);}
 .panel{display:none;}
 .panel.active{display:block;}
-
-/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem;}
 .stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;}
 .stat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;}
 .stat-val{font-size:19px;font-weight:600;color:var(--text);font-family:var(--mono);}
 .stat-val.green{color:var(--green);}
-
-/* PROGRESS */
 .prog-wrap{margin-bottom:1rem;}
 .prog-header{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:5px;}
 .prog-track{height:5px;background:var(--bg4);border-radius:99px;overflow:hidden;}
 .prog-fill{height:100%;background:var(--green);border-radius:99px;transition:width 0.6s ease;}
-
-/* WATER REMINDER */
 .water-bar{display:flex;align-items:center;gap:10px;background:var(--blue-bg);border:1px solid #b5d0f0;border-radius:var(--radius);padding:8px 12px;margin-bottom:1rem;font-size:12px;color:var(--blue);display:none;}
 .water-dismiss{margin-left:auto;font-size:11px;cursor:pointer;opacity:0.7;}
 .water-dismiss:hover{opacity:1;}
-
-/* FOCUS CARD */
 .focus-card{background:var(--green-bg);border:1.5px solid var(--green-light);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1rem;display:none;}
 .focus-card.show{display:block;}
 .focus-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.5rem;}
@@ -113,8 +93,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .focus-range{font-size:12px;color:var(--green);opacity:0.7;margin-top:2px;}
 .focus-cd{font-size:44px;font-weight:600;color:var(--green);font-family:var(--mono);letter-spacing:-2px;margin:0.5rem 0;}
 .focus-btns{display:flex;gap:8px;margin-top:0.75rem;}
-
-/* TIMETABLE */
 .timetable{display:flex;flex-direction:column;gap:4px;}
 .slot{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color 0.2s;}
 .slot.active-now{border-color:var(--green);border-width:1.5px;}
@@ -144,8 +122,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .note-area{padding:0 12px 8px 37px;display:none;}
 .note-area.open{display:block;}
 .note-area textarea{width:100%;font-size:11px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);padding:5px 8px;resize:none;font-family:var(--font);}
-
-/* ADD FORM */
 .add-slot-form{background:var(--bg3);border:1px dashed var(--border2);border-radius:var(--radius-lg);padding:12px;margin-top:8px;}
 .add-slot-form h3{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.4px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;}
@@ -153,15 +129,11 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .form-row input,.form-row select{font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-family:var(--font);width:100%;}
 .add-btn-sm{font-size:12px;padding:7px 14px;border-radius:6px;border:1px solid var(--green);background:var(--green-bg);color:var(--green);cursor:pointer;font-weight:500;}
 .add-btn-sm:hover{background:var(--green-light);}
-
-/* BUTTONS */
 .btn{font-size:12px;padding:6px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg2);color:var(--text);cursor:pointer;font-family:var(--font);}
 .btn:hover{background:var(--bg3);}
 .btn.green{background:var(--green-bg);color:var(--green);border-color:var(--green-light);}
 .btn.green:hover{background:var(--green-light);}
 .btn.red{background:var(--red-bg);color:var(--red);border-color:#f0b0b0;}
-
-/* ANALYTICS */
 .section-hdr{display:flex;align-items:center;justify-content:space-between;margin:1.5rem 0 0.75rem;}
 .section-title{font-size:13px;font-weight:600;letter-spacing:-0.2px;}
 .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:1.5rem;}
@@ -180,8 +152,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .hist-badge{font-size:10px;padding:2px 7px;border-radius:99px;}
 .hist-hit{background:var(--green-bg);color:var(--green);}
 .hist-miss{background:var(--bg4);color:var(--text3);}
-
-/* SETTINGS */
 .settings-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:1rem;}
 .settings-section h3{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem;}
 .setting-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
@@ -194,13 +164,9 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .toggle.on .toggle-knob{left:18px;}
 .pdf-btn{width:100%;padding:10px;border-radius:var(--radius);border:1px solid var(--green);background:var(--green-bg);color:var(--green);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);margin-top:0.5rem;}
 .pdf-btn:hover{background:var(--green-light);}
-
-/* LOADING */
 #loading-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
 .spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
-/* ── MOCK TEST ── */
 .mock-setup{display:block;}
 .mock-section-title{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
 .subject-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem;}
@@ -220,8 +186,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .start-test-btn{width:100%;padding:12px;border-radius:var(--radius-lg);border:none;background:var(--green);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);transition:opacity 0.15s;}
 .start-test-btn:disabled{opacity:0.4;cursor:not-allowed;}
 .start-test-btn:not(:disabled):hover{opacity:0.88;}
-
-/* Question screen */
 .mock-q-screen{display:none;}
 .mock-q-screen.active{display:block;}
 .q-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
@@ -252,8 +216,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .skip-btn{font-size:12px;padding:7px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);}
 .next-btn{font-size:12px;padding:7px 16px;border-radius:var(--radius);border:none;background:var(--green);color:#fff;cursor:pointer;font-weight:500;font-family:var(--font);display:none;}
 .quit-btn{font-size:12px;padding:7px 14px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);}
-
-/* Result screen */
 .mock-result-screen{display:none;}
 .mock-result-screen.active{display:block;}
 .result-card{background:var(--green-bg);border:1.5px solid var(--green-light);border-radius:var(--radius-xl);padding:1.5rem;text-align:center;margin-bottom:1rem;}
@@ -279,14 +241,10 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .review-ans{font-size:11px;color:var(--text3);}
 .correct-ans{color:var(--green);}
 .your-ans{color:var(--red);}
-
-/* Mock test history */
 .mock-hist-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;}
 .mock-hist-subj{font-size:12px;font-weight:500;flex:1;color:var(--text);}
 .mock-hist-score{font-size:13px;font-weight:600;font-family:var(--mono);color:var(--green);}
 .mock-hist-meta{font-size:10px;color:var(--text3);}
-
-/* ── EXAM COUNTDOWN ── */
 .countdown-bar{display:flex;align-items:center;justify-content:space-between;border-radius:var(--radius-lg);padding:10px 16px;margin-bottom:0.75rem;border:1.5px solid var(--border);background:var(--bg2);gap:12px;flex-wrap:wrap;}
 .countdown-bar.urgent-high{background:var(--red-bg);border-color:#f0b0b0;}
 .countdown-bar.urgent-mid{background:var(--amber-bg);border-color:#f0d080;}
@@ -302,23 +260,10 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 .cd-right{display:flex;align-items:center;gap:8px;}
 .cd-set-btn{font-size:11px;padding:5px 12px;border-radius:99px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;font-family:var(--font);}
 .cd-set-btn:hover{background:var(--bg4);}
-.cd-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;display:flex;align-items:center;justify-content:center;}
-.cd-modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem;width:90%;max-width:320px;}
-.cd-modal h3{font-size:15px;font-weight:600;margin-bottom:1rem;}
-.cd-modal label{font-size:11px;color:var(--text3);display:block;margin-bottom:4px;margin-top:10px;}
-.cd-modal input,.cd-modal select{width:100%;font-size:13px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-family:var(--font);}
-.cd-modal-btns{display:flex;gap:8px;margin-top:1.25rem;}
-.cd-save-btn{flex:1;padding:9px;border-radius:var(--radius);border:none;background:var(--green);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);}
-.cd-cancel-btn{padding:9px 16px;border-radius:var(--radius);border:1px solid var(--border2);background:transparent;color:var(--text3);font-size:13px;cursor:pointer;font-family:var(--font);}
-.cd-clear-btn{padding:9px 12px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--red);font-size:12px;cursor:pointer;font-family:var(--font);}
-
-/* ── EXAM COUNTDOWN PILL ── */
 .cd-pill{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:500;padding:4px 10px;border-radius:99px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;}
 .cd-pill.cd-green{background:var(--green-bg);color:var(--green);border-color:var(--green-light);}
 .cd-pill.cd-amber{background:var(--amber-bg);color:var(--amber);border-color:#f0d080;}
 .cd-pill.cd-red{background:var(--red-bg);color:var(--red);border-color:#f0b0b0;}
-
-  
 </style>
 </head>
 <body>
@@ -365,36 +310,37 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 
   <div class="sync-bar" id="sync-bar"></div>
 
-
-  <!-- EXAM COUNTDOWN -->
+  <!-- EXAM COUNTDOWN BAR -->
   <div id="countdown-bar" style="display:none;"></div>
-  <div id="cd-modal-overlay" class="cd-modal-overlay" style="display:none;">
-    <div class="cd-modal">
-      <h3>📅 Set Exam Date</h3>
-      <label>Exam name</label>
-      <input id="cd-exam-name" placeholder="e.g. CA Final May 2026" maxlength="40">
-      <label>Exam date</label>
-      <input id="cd-exam-date" type="date">
-      <div class="cd-modal-btns">
-        <button class="cd-cancel-btn" onclick="closeCdModal()">Cancel</button>
-        <button class="cd-clear-btn" onclick="clearExamDate()">Clear</button>
-        <button class="cd-save-btn" onclick="saveExamDate()">Save</button>
+
+  <!-- EXAM DATE MODAL (single, correct one) -->
+  <div id="cd-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center;">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem;width:90%;max-width:300px;">
+      <div style="font-size:15px;font-weight:600;margin-bottom:1rem;">📅 Set Exam Date</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px;">Exam name</div>
+      <input id="cd-exam-name" placeholder="e.g. CA Final May 2026" maxlength="40" style="width:100%;font-size:13px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-family:var(--font);margin-bottom:10px;">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px;">Exam date</div>
+      <input id="cd-exam-date" type="date" style="width:100%;font-size:13px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-family:var(--font);">
+      <div style="display:flex;gap:8px;margin-top:1rem;">
+        <button onclick="closeCdModal()" style="padding:8px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:transparent;color:var(--text3);font-size:13px;cursor:pointer;font-family:var(--font);">Cancel</button>
+        <button onclick="clearExamDate()" style="padding:8px 12px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--red);font-size:12px;cursor:pointer;font-family:var(--font);">Clear</button>
+        <button onclick="saveExamDate()" style="flex:1;padding:8px;border-radius:var(--radius);border:none;background:var(--green);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);">Save</button>
       </div>
     </div>
   </div>
 
-<div class="quote-card" id="quote-card">
-  <div class="quote-accent"></div>
-  <div style="flex:1;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-      <div class="quote-label">Today's motivation</div>
-      <button class="quote-refresh-btn" onclick="refreshQuote()" title="Get new quote">↻ New quote</button>
+  <div class="quote-card" id="quote-card">
+    <div class="quote-accent"></div>
+    <div style="flex:1;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <div class="quote-label">Today's motivation</div>
+        <button class="quote-refresh-btn" onclick="refreshQuote()" title="Get new quote">↻ New quote</button>
+      </div>
+      <div class="quote-text" id="quote-text">Loading...</div>
+      <div class="quote-author" id="quote-author"></div>
     </div>
-    <div class="quote-text" id="quote-text">Loading...</div>
-    <div class="quote-author" id="quote-author"></div>
   </div>
-</div>
-  
+
   <div class="tabs">
     <div class="tab active" onclick="switchTab('timetable',this)">Timetable</div>
     <div class="tab" onclick="switchTab('analytics',this)">Analytics</div>
@@ -477,15 +423,13 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
 
   <!-- MOCK TEST TAB -->
   <div class="panel" id="panel-mock">
-
-    <!-- SETUP SCREEN -->
     <div class="mock-setup" id="mock-setup-screen">
       <div class="mock-section-title" style="margin-bottom:12px;">Select subject</div>
       <div class="subject-grid">
         <div class="subject-card" onclick="selectSubject('Advanced Accounting',this)">
-  <div class="subject-card-name">Advanced Accounting</div>
-  <div class="subject-card-tag">AS · Partnership · Company Accounts</div>
-</div>
+          <div class="subject-card-name">Advanced Accounting</div>
+          <div class="subject-card-tag">AS · Partnership · Company Accounts</div>
+        </div>
         <div class="subject-card" onclick="selectSubject('Financial Reporting',this)">
           <div class="subject-card-name">Financial Reporting</div>
           <div class="subject-card-tag">Ind AS · AS · Consolidation</div>
@@ -511,14 +455,12 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
           <div class="subject-card-tag">SA · Standards · Ethics</div>
         </div>
       </div>
-
       <div style="margin-top:1.25rem;">
         <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Recent tests</div>
         <div id="mock-hist-list">
           <div style="font-size:12px;color:var(--text3);padding:8px 0;">No tests taken yet.</div>
         </div>
       </div>
-
       <div class="mock-section-title">Mode</div>
       <div class="mode-row">
         <div class="mode-btn selected" id="mode-practice" onclick="selectMode('practice')">
@@ -530,7 +472,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
           <span class="mode-sub">Timer on · Results at end</span>
         </div>
       </div>
-
       <div class="mock-section-title">Number of questions</div>
       <div class="q-config-row">
         <label>Questions per test</label>
@@ -541,11 +482,8 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
           <option value="30">30 questions</option>
         </select>
       </div>
-
       <button class="start-test-btn" id="start-test-btn" disabled onclick="startTest()">Select a subject to start →</button>
     </div>
-
-    <!-- QUESTION SCREEN -->
     <div class="mock-q-screen" id="mock-q-screen">
       <div class="q-topbar">
         <span class="q-meta" id="q-meta-lbl">Q 1 of 10</span>
@@ -573,8 +511,6 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
         </div>
       </div>
     </div>
-
-    <!-- RESULT SCREEN -->
     <div class="mock-result-screen" id="mock-result-screen">
       <div class="result-card">
         <div class="res-pct" id="res-pct">0%</div>
@@ -635,87 +571,12 @@ body{font-family:var(--font);color:var(--text);font-size:14px;line-height:1.5;}
       <button class="pdf-btn" onclick="exportPDF()">Export today's timetable as PDF</button>
     </div>
   </div>
-
-  <!-- EXAM DATE MODAL -->
-  <div id="cd-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center;">
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem;width:90%;max-width:300px;">
-      <div style="font-size:15px;font-weight:600;margin-bottom:1rem;">📅 Set Exam Date</div>
-      <div style="font-size:11px;color:var(--text3);margin-bottom:4px;">Exam name</div>
-      <input id="cd-exam-name" placeholder="e.g. CA Final May 2026" maxlength="40" style="width:100%;font-size:13px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-family:var(--font);margin-bottom:10px;">
-      <div style="font-size:11px;color:var(--text3);margin-bottom:4px;">Exam date</div>
-      <input id="cd-exam-date" type="date" style="width:100%;font-size:13px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-family:var(--font);">
-      <div style="display:flex;gap:8px;margin-top:1rem;">
-        <button onclick="closeCdModal()" style="padding:8px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:transparent;color:var(--text3);font-size:13px;cursor:pointer;font-family:var(--font);">Cancel</button>
-        <button onclick="clearExamDate()" style="padding:8px 12px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--red);font-size:12px;cursor:pointer;font-family:var(--font);">Clear</button>
-        <button onclick="saveExamDate()" style="flex:1;padding:8px;border-radius:var(--radius);border:none;background:var(--green);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);">Save</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
-<script>
-// ── EXAM COUNTDOWN PILL ───────────────────────────────────────
-function renderCountdown() {
-  const pill = document.getElementById('cd-pill');
-  if (!pill) return;
-  const examDate = settings.examDate;
-  if (!examDate) {
-    pill.className = 'cd-pill';
-    pill.textContent = '📅 Set exam';
-    return;
-  }
-  const now = new Date(); now.setHours(0,0,0,0);
-  const target = new Date(examDate); target.setHours(0,0,0,0);
-  const diff = Math.ceil((target - now) / (1000*60*60*24));
-  if (diff <= 0) {
-    pill.className = 'cd-pill cd-red';
-    pill.textContent = '🏁 Exam day!';
-  } else if (diff <= 15) {
-    pill.className = 'cd-pill cd-red';
-    pill.textContent = '🔥 ' + diff + 'd left';
-  } else if (diff <= 45) {
-    pill.className = 'cd-pill cd-amber';
-    pill.textContent = '⚡ ' + diff + 'd left';
-  } else {
-    pill.className = 'cd-pill cd-green';
-    pill.textContent = '📅 ' + diff + 'd left';
-  }
-}
-
-function openCdModal() {
-  const el = document.getElementById('cd-modal-overlay');
-  el.style.display = 'flex';
-  document.getElementById('cd-exam-name').value = settings.examName || '';
-  document.getElementById('cd-exam-date').value = settings.examDate || '';
-}
-
-function closeCdModal() {
-  document.getElementById('cd-modal-overlay').style.display = 'none';
-}
-
-function saveExamDate() {
-  const name = document.getElementById('cd-exam-name').value.trim();
-  const date = document.getElementById('cd-exam-date').value;
-  if (!date) { alert('Please select a date.'); return; }
-  settings.examName = name || 'CA Exam';
-  settings.examDate = date;
-  saveToFirestore();
-  closeCdModal();
-  renderCountdown();
-}
-
-function clearExamDate() {
-  if (!confirm('Clear exam date?')) return;
-  delete settings.examDate;
-  delete settings.examName;
-  saveToFirestore();
-  closeCdModal();
-  renderCountdown();
-}
-</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
 // ── FIREBASE CONFIG ──────────────────────────────────────────
@@ -733,7 +594,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 // ── DEFAULT TIMETABLE ─────────────────────────────────────────
- const DEFAULT_SLOTS = [
+const DEFAULT_SLOTS = [
   {name:"Session 1",start:"12:00",end:"14:00",type:"study",dur:120},
   {name:"Lunch",start:"14:00",end:"14:30",type:"meal",dur:30},
   {name:"Session 2",start:"14:30",end:"16:00",type:"study",dur:90},
@@ -748,7 +609,6 @@ const db = firebase.firestore();
   {name:"Break",start:"01:00",end:"01:20",type:"break",dur:20},
   {name:"Session 7",start:"01:20",end:"02:00",type:"revision",dur:40},
 ];
-
 
 // ── STATE ─────────────────────────────────────────────────────
 let currentUser = null;
@@ -893,12 +753,17 @@ function getActiveIdx() {
   return -1;
 }
 
+// ── FIXED: midnight-crossing timer ───────────────────────────
 function getRemainSecs(idx) {
   const now = new Date();
   let nm = now.getHours()*60+now.getMinutes(), ns = now.getSeconds();
+  let sm = toMins(slots[idx].start);
   let em = toMins(slots[idx].end);
-  if(em < toMins(slots[idx].start)) em+=1440;
-  return Math.max(0, em*60 - (nm*60+ns));
+  if(em < sm) em += 1440; // session crosses midnight
+  // if we're past midnight and session started before midnight, shift now forward
+  let adjustedNm = nm;
+  if(em > 1440 && nm < sm) adjustedNm = nm + 1440;
+  return Math.max(0, em*60 - (adjustedNm*60+ns));
 }
 
 function playChime() {
@@ -925,18 +790,14 @@ function render() {
   slots.forEach((s,i) => {
     const wrap = document.createElement('div');
     wrap.className = 'slot'+(s.done?' done-slot':'')+(i===activeIdx?' active-now':'');
-
     const body = document.createElement('div'); body.className='slot-body';
-
     const chk = document.createElement('div');
     chk.className = 'chk'+(s.done?' on':'');
     chk.innerHTML = '<svg viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     chk.onclick = () => { slots[i].done=!slots[i].done; saveToFirestore(); render(); updateStats(); };
-
     const timeEl = document.createElement('span');
     timeEl.className='slot-time';
     timeEl.textContent = fmt12(s.start)+' — '+fmt12(s.end);
-
     const nameWrap = document.createElement('div'); nameWrap.className='slot-name-wrap';
     if(s.editing) {
       const inp = document.createElement('input'); inp.className='slot-name-input'; inp.value=s.name;
@@ -952,26 +813,20 @@ function render() {
     }
     const durEl = document.createElement('div'); durEl.className='slot-dur';
     durEl.textContent=fmtDur(s.dur); nameWrap.appendChild(durEl);
-
     const pill = document.createElement('span');
     pill.className='pill pill-'+s.type;
     pill.textContent=s.type==='revision'?'Revision':s.type==='meal'?'Meal':s.type==='break'?'Break':'Study';
-
     const cdEl = document.createElement('span'); cdEl.className='slot-cd'; cdEl.id='cd-'+i;
     cdEl.textContent=(i===activeIdx&&remainSecs>0)?fmtSecs(remainSecs):'';
-
     const noteBtn = document.createElement('button');
     noteBtn.className='note-btn'+(s.note?' has-note':'');
     noteBtn.textContent=s.note?'Note ✓':'Note';
     noteBtn.onclick = () => { slots[i].noteOpen=!slots[i].noteOpen; render(); };
-
     const delBtn = document.createElement('span'); delBtn.className='del-btn'; delBtn.textContent='×';
     delBtn.onclick = () => { slots.splice(i,1); saveToFirestore(); render(); updateStats(); };
-
     body.appendChild(chk); body.appendChild(timeEl); body.appendChild(nameWrap);
     body.appendChild(pill); body.appendChild(cdEl); body.appendChild(noteBtn); body.appendChild(delBtn);
     wrap.appendChild(body);
-
     const noteArea = document.createElement('div');
     noteArea.className='note-area'+(s.noteOpen?' open':'');
     const ta = document.createElement('textarea'); ta.rows=2;
@@ -1015,7 +870,7 @@ async function updateStreak() {
   document.getElementById('streak-badge').textContent='🔥 '+streak+' day streak';
 }
 
-// ── SETTINGS ─────────────────────────────────────────────────
+// ── SETTINGS ──────────────────────────────────────────────────
 function applySettings() {
   document.getElementById('tog-water').className='toggle'+(settings.water?' on':'');
   document.getElementById('tog-sound').className='toggle'+(settings.sound?' on':'');
@@ -1124,39 +979,7 @@ function exportPDF() {
   const win=window.open('','_blank');
   const now=new Date();
   const rows=slots.map(s=>`<tr><td>${fmt12(s.start)} — ${fmt12(s.end)}</td><td>${s.name}</td><td>${s.type}</td><td>${s.done?'✓ Done':''}</td><td>${s.note||''}</td></tr>`).join('');
-  win.document.write(`<!DOCTYPE html><html><head><title>CA Study Timetable</title><style>body{font-family:sans-serif;padding:2rem;color:#111;}h1{font-size:20px;margin-bottom:4px;}p{font-size:12px;color:#888;margin-bottom:1.5rem;}table{width:100%;border-collapse:collapse;font-size:13px;}th{text-align:left;padding:6px 10px;border-bottom:2px solid #ddd;color:#aaa;font-size:11px;}td{padding:7px 10px;border-bottom:1px solid #eee;}tr:last-child td{border-bottom:none;}
-/* ── EXAM COUNTDOWN ── */
-.countdown-bar{display:flex;align-items:center;justify-content:space-between;border-radius:var(--radius-lg);padding:10px 16px;margin-bottom:0.75rem;border:1.5px solid var(--border);background:var(--bg2);gap:12px;flex-wrap:wrap;}
-.countdown-bar.urgent-high{background:var(--red-bg);border-color:#f0b0b0;}
-.countdown-bar.urgent-mid{background:var(--amber-bg);border-color:#f0d080;}
-.countdown-bar.urgent-low{background:var(--green-bg);border-color:var(--green-light);}
-.cd-left{display:flex;align-items:center;gap:10px;}
-.cd-icon{font-size:20px;}
-.cd-days{font-size:26px;font-weight:700;font-family:var(--mono);letter-spacing:-1px;}
-.cd-days.red{color:var(--red);}
-.cd-days.amber{color:var(--amber);}
-.cd-days.green{color:var(--green);}
-.cd-label{font-size:11px;color:var(--text3);margin-top:1px;}
-.cd-exam-name{font-size:12px;font-weight:600;color:var(--text2);}
-.cd-right{display:flex;align-items:center;gap:8px;}
-.cd-set-btn{font-size:11px;padding:5px 12px;border-radius:99px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;font-family:var(--font);}
-.cd-set-btn:hover{background:var(--bg4);}
-.cd-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;display:flex;align-items:center;justify-content:center;}
-.cd-modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem;width:90%;max-width:320px;}
-.cd-modal h3{font-size:15px;font-weight:600;margin-bottom:1rem;}
-.cd-modal label{font-size:11px;color:var(--text3);display:block;margin-bottom:4px;margin-top:10px;}
-.cd-modal input,.cd-modal select{width:100%;font-size:13px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-family:var(--font);}
-.cd-modal-btns{display:flex;gap:8px;margin-top:1.25rem;}
-.cd-save-btn{flex:1;padding:9px;border-radius:var(--radius);border:none;background:var(--green);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);}
-.cd-cancel-btn{padding:9px 16px;border-radius:var(--radius);border:1px solid var(--border2);background:transparent;color:var(--text3);font-size:13px;cursor:pointer;font-family:var(--font);}
-.cd-clear-btn{padding:9px 12px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--red);font-size:12px;cursor:pointer;font-family:var(--font);}
-
-/* ── EXAM COUNTDOWN PILL ── */
-.cd-pill{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:500;padding:4px 10px;border-radius:99px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;}
-.cd-pill.cd-green{background:var(--green-bg);color:var(--green);border-color:var(--green-light);}
-.cd-pill.cd-amber{background:var(--amber-bg);color:var(--amber);border-color:#f0d080;}
-.cd-pill.cd-red{background:var(--red-bg);color:var(--red);border-color:#f0b0b0;}
-</style></head><body><h1>CA Study Timetable</h1><p>${now.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</p><table><thead><tr><th>Time</th><th>Session</th><th>Type</th><th>Status</th><th>Notes</th></tr></thead><tbody>${rows}</tbody></table></body></html>`);
+  win.document.write(`<!DOCTYPE html><html><head><title>CA Study Timetable</title><style>body{font-family:sans-serif;padding:2rem;color:#111;}h1{font-size:20px;margin-bottom:4px;}p{font-size:12px;color:#888;margin-bottom:1.5rem;}table{width:100%;border-collapse:collapse;font-size:13px;}th{text-align:left;padding:6px 10px;border-bottom:2px solid #ddd;color:#aaa;font-size:11px;}td{padding:7px 10px;border-bottom:1px solid #eee;}tr:last-child td{border-bottom:none;}</style></head><body><h1>CA Study Timetable</h1><p>${now.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</p><table><thead><tr><th>Time</th><th>Session</th><th>Type</th><th>Status</th><th>Notes</th></tr></thead><tbody>${rows}</tbody></table></body></html>`);
   win.document.close();
   setTimeout(()=>win.print(),400);
 }
@@ -1168,443 +991,46 @@ function toggleDark() {
   document.getElementById('dark-toggle').classList.toggle('on',isDark);
 }
 
-// ── MOCK TEST ─────────────────────────────────────────────────
-const GROQ_API_KEY = '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';
-const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
-
-const SUBJECT_SYLLABUS = {
-  'Advanced Accounting': 'Accounting Standards (AS 1-29), partnership accounts (admission retirement death dissolution), company accounts (issue forfeiture redemption of shares and debentures), amalgamation absorption and reconstruction, internal reconstruction, liquidation of companies, banking company accounts, insurance company accounts, departmental accounts, hire purchase and installment, investment accounts, branch accounts',
-  'Financial Reporting': 'Ind AS (Indian Accounting Standards), AS (Accounting Standards), financial statements preparation, consolidation, business combinations, revenue recognition Ind AS 115, leases Ind AS 116, financial instruments Ind AS 109, share-based payments, impairment of assets, provisions, contingencies, segment reporting, related party disclosures, earnings per share, deferred tax, investment property, PPE, intangible assets',
-  'Corporate & Other Laws': 'Companies Act 2013 (incorporation, share capital, debentures, meetings, directors, audit, winding up), LLP Act 2008, FEMA basics, SEBI regulations, Insolvency and Bankruptcy Code, Prevention of Money Laundering, partnership law, contract act',
-  'Taxation': 'Income Tax Act (heads of income, salary, house property, PGBP, capital gains, other sources, deductions Chapter VI-A, TDS, advance tax, assessment, appeals), GST (CGST SGST IGST, registration, supply, ITC, returns, reverse charge, composition scheme, valuation, place of supply)',
-  'Cost & Management Accounting': 'Cost concepts and classification, material costing, labour costing, overheads absorption, job costing, process costing, standard costing and variance analysis, marginal costing, CVP analysis, budgetary control, activity based costing, throughput accounting',
-  'Strategic Financial Management': 'Portfolio management, CAPM, derivatives (futures options swaps), foreign exchange risk, interest rate risk, business valuation, mergers and acquisitions, mutual funds, hedge funds, capital budgeting under risk',
-  'Auditing & Ethics': 'Standards on Auditing (SA), audit planning, risk assessment, internal controls, sampling, evidence, audit report, company audit, bank audit, special audits, CARO, ethics under ICAI code of ethics, independence'
-};
-
-let mockSubject = '';
-let mockMode = 'practice';
-let mockTotal = 10;
-let mockCurrent = 0;
-let mockCorrect = 0;
-let mockWrong = 0;
-let mockSkipped = 0;
-let mockTimerInterval = null;
-let mockSecsLeft = 0;
-let mockAnswered = false;
-let mockHistory = [];
-let currentQ = null;
-
-function selectSubject(name, el) {
-  mockSubject = name;
-  document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  const btn = document.getElementById('start-test-btn');
-  btn.disabled = false;
-  btn.textContent = 'Start ' + name + ' test →';
-}
-
-function selectMode(mode) {
-  mockMode = mode;
-  document.getElementById('mode-practice').classList.toggle('selected', mode === 'practice');
-  document.getElementById('mode-mock').classList.toggle('selected', mode === 'mock');
-}
-
-function startTest() {
-  mockTotal = parseInt(document.getElementById('q-count-sel').value);
-  mockCurrent = 0; mockCorrect = 0; mockWrong = 0; mockSkipped = 0; mockHistory = [];
-  document.getElementById('mock-setup-screen').style.display = 'none';
-  document.getElementById('mock-q-screen').classList.add('active');
-  document.getElementById('mock-result-screen').classList.remove('active');
-  if (mockMode === 'mock') {
-    mockSecsLeft = mockTotal * 90;
-    document.getElementById('q-timer-lbl').style.display = 'block';
-    startMockTimer();
-  } else {
-    document.getElementById('q-timer-lbl').style.display = 'none';
-  }
-  loadQuestion();
-}
-
-function getDifficulty() {
-  const pct = mockCurrent / mockTotal;
-  if (pct < 0.33) return 'Easy';
-  if (pct < 0.66) return 'Medium';
-  return 'Hard';
-}
-
-async function loadQuestion() {
-  mockAnswered = false; currentQ = null;
-  const diff = getDifficulty();
-  const qNum = mockCurrent + 1;
-
-  document.getElementById('q-meta-lbl').textContent = 'Q ' + qNum + ' of ' + mockTotal;
-  document.getElementById('q-prog-fill').style.width = (mockCurrent / mockTotal * 100) + '%';
-  document.getElementById('q-number-lbl').textContent = 'Question ' + qNum;
-  document.getElementById('q-diff-badge').textContent = diff;
-  document.getElementById('q-diff-badge').className = 'diff-badge diff-' + diff.toLowerCase();
-  document.getElementById('q-loading').style.display = 'flex';
-  document.getElementById('q-text').style.display = 'none';
-  document.getElementById('q-options').style.display = 'none';
-  document.getElementById('q-explanation').classList.remove('show');
-  document.getElementById('q-actions').style.display = 'none';
-  document.getElementById('next-btn').style.display = 'none';
-  document.getElementById('skip-btn').style.display = 'inline-block';
-
-  const syllabus = SUBJECT_SYLLABUS[mockSubject] || mockSubject;
-  const avoidTopics = mockHistory.slice(-3).map(h => h.topic).filter(Boolean).join(', ');
-
-  const prompt = `You are a CA Inter/Final exam MCQ generator.
-Subject: ${mockSubject}
-Syllabus: ${syllabus}
-${avoidTopics ? 'Avoid topics: ' + avoidTopics : ''}
-
-Generate ONE ${diff} difficulty MCQ. Rules:
-- Easy: definition/concept | Medium: application | Hard: calculation/trick
-- 4 options A B C D, exactly one correct
-- Cite specific section/standard in explanation
-
-IMPORTANT: Reply with ONLY the raw JSON object below. No markdown. No code fences. No extra text.
-{"topic":"...","question":"...","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"..."}`;
-
-  try {
-    const res = await fetch(GROQ_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + GROQ_API_KEY
-      },
-      body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
-        temperature: 0.7,
-        max_tokens: 1024,
-        messages: [
-          { role: 'system', content: 'You are a CA Inter/Final exam MCQ generator. Respond with ONLY a valid JSON object, no markdown, no code fences, no extra text.' },
-          { role: 'user', content: prompt }
-        ]
-      })
-    });
-
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      throw new Error('Groq error ' + res.status + ': ' + (errData.error?.message || res.statusText));
-    }
-
-    const data = await res.json();
-    let raw = (data.choices?.[0]?.message?.content || '').trim();
-    raw = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
-    const match = raw.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error('No JSON in response. Got: ' + raw.slice(0, 80));
-    currentQ = JSON.parse(match[0]);
-    if (!currentQ.question || !currentQ.options || !currentQ.correct) {
-      throw new Error('Incomplete question data');
-    }
-    mockHistory.push({ topic: currentQ.topic });
-    renderQuestion(currentQ, diff);
-  } catch(e) {
-    console.error('Question load error:', e);
-    document.getElementById('q-loading').style.display = 'none';
-    document.getElementById('q-text').style.display = 'block';
-    document.getElementById('q-text').textContent = 'Failed to load question. ' + e.message + '. Tap Retry to try again.';
-    document.getElementById('q-actions').style.display = 'flex';
-    document.getElementById('skip-btn').style.display = 'none';
-    document.getElementById('next-btn').style.display = 'inline-block';
-    document.getElementById('next-btn').textContent = 'Retry';
-    document.getElementById('next-btn').onclick = () => {
-      document.getElementById('next-btn').onclick = () => nextQuestion();
-      document.getElementById('next-btn').textContent = 'Next →';
-      loadQuestion();
-    };
-  }
-}
-
-function renderQuestion(q, diff) {
-  document.getElementById('q-loading').style.display = 'none';
-  document.getElementById('q-text').style.display = 'block';
-  document.getElementById('q-text').textContent = q.question;
-  const optList = document.getElementById('q-options');
-  optList.innerHTML = ''; optList.style.display = 'flex';
-  ['A','B','C','D'].forEach(key => {
-    const btn = document.createElement('button');
-    btn.className = 'opt-btn';
-    btn.innerHTML = '<span class="opt-key">' + key + '</span><span class="opt-text">' + q.options[key] + '</span>';
-    btn.onclick = () => selectAnswer(key, btn);
-    optList.appendChild(btn);
-  });
-  document.getElementById('q-actions').style.display = 'flex';
-}
-
-function selectAnswer(chosen, btnEl) {
-  if (mockAnswered) return;
-  mockAnswered = true;
-  const allBtns = document.querySelectorAll('.opt-btn');
-  allBtns.forEach(b => b.disabled = true);
-  const correct = currentQ.correct;
-  const keys = ['A','B','C','D'];
-  allBtns.forEach((b, i) => {
-    const key = keys[i];
-    if (key === correct && key === chosen) b.classList.add('correct');
-    else if (key === chosen && key !== correct) b.classList.add('wrong');
-    else if (key === correct) b.classList.add('reveal');
-  });
-  if (chosen === correct) { mockCorrect++; playChime(); } else { mockWrong++; }
-  const last = mockHistory[mockHistory.length - 1];
-  last.correct = (chosen === correct);
-  last.chosen = chosen;
-  last.question = currentQ.question;
-  last.correctAns = correct + '. ' + currentQ.options[correct];
-  last.yourAns = chosen + '. ' + currentQ.options[chosen];
-  if (mockMode === 'practice') {
-    document.getElementById('q-exp-text').textContent = currentQ.explanation;
-    document.getElementById('q-explanation').classList.add('show');
-  }
-  document.getElementById('skip-btn').style.display = 'none';
-  document.getElementById('next-btn').style.display = 'inline-block';
-  document.getElementById('next-btn').onclick = () => nextQuestion();
-}
-
-function skipQuestion() {
-  if (mockAnswered) return;
-  mockAnswered = true; mockSkipped++;
-  if (mockHistory.length > 0) {
-    mockHistory[mockHistory.length - 1].skipped = true;
-    mockHistory[mockHistory.length - 1].question = currentQ ? currentQ.question : '—';
-  }
-  nextQuestion();
-}
-
-function nextQuestion() {
-  mockCurrent++;
-  if (mockCurrent >= mockTotal) showResult();
-  else loadQuestion();
-}
-
-function startMockTimer() {
-  if (mockTimerInterval) clearInterval(mockTimerInterval);
-  mockTimerInterval = setInterval(() => {
-    mockSecsLeft--;
-    const m = Math.floor(mockSecsLeft / 60), s = mockSecsLeft % 60;
-    const lbl = document.getElementById('q-timer-lbl');
-    lbl.textContent = m + ':' + (s < 10 ? '0' + s : s);
-    lbl.className = 'q-timer' + (mockSecsLeft < 60 ? ' urgent' : '');
-    if (mockSecsLeft <= 0) { clearInterval(mockTimerInterval); showResult(); }
-  }, 1000);
-}
-
-async function showResult() {
-  if (mockTimerInterval) clearInterval(mockTimerInterval);
-  document.getElementById('mock-q-screen').classList.remove('active');
-  document.getElementById('mock-result-screen').classList.add('active');
-  const pct = Math.round(mockCorrect / mockTotal * 100);
-  document.getElementById('res-pct').textContent = pct + '%';
-  document.getElementById('res-correct').textContent = mockCorrect;
-  document.getElementById('res-wrong').textContent = mockWrong;
-  document.getElementById('res-skipped').textContent = mockSkipped;
-  let title = 'Keep practising!';
-  if (pct >= 80) title = 'Excellent work! 🎉';
-  else if (pct >= 60) title = 'Good attempt! 👍';
-  else if (pct >= 40) title = 'Keep going! 💪';
-  document.getElementById('res-title').textContent = title;
-  document.getElementById('res-sub').textContent = mockSubject + ' · ' + mockTotal + ' Qs · ' + (mockMode === 'mock' ? 'Mock exam' : 'Practice') + ' mode';
-  const rl = document.getElementById('review-list');
-  rl.innerHTML = '<div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Question Review</div>';
-  mockHistory.forEach((h, i) => {
-    const el = document.createElement('div'); el.className = 'review-item';
-    if (h.skipped) {
-      el.innerHTML = '<div class="review-q">Q' + (i+1) + '. ' + (h.question||'') + '</div><div class="review-ans" style="color:var(--amber);">⏭ Skipped</div>';
-    } else {
-      el.innerHTML = '<div class="review-q">Q' + (i+1) + '. ' + (h.question||'') + '</div>'
-        + '<div class="review-ans">'
-        + (h.correct
-          ? '<span class="correct-ans">✓ ' + (h.correctAns||'') + '</span>'
-          : '<span class="your-ans">✗ You: ' + (h.yourAns||'') + '</span> &nbsp;·&nbsp; <span class="correct-ans">✓ ' + (h.correctAns||'') + '</span>')
-        + '</div>';
-    }
-    rl.appendChild(el);
-  });
-  // Save to Firestore
-  if (currentUser) {
-    try {
-      await userDoc().collection('mockTests').add({
-        subject: mockSubject, mode: mockMode, total: mockTotal,
-        correct: mockCorrect, wrong: mockWrong, skipped: mockSkipped,
-        pct, date: new Date().toISOString().slice(0,10),
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      loadMockHistory();
-    } catch(e) {}
-  }
-}
-
-function retakeTest() {
-  document.getElementById('mock-result-screen').classList.remove('active');
-  mockCurrent = 0; mockCorrect = 0; mockWrong = 0; mockSkipped = 0; mockHistory = [];
-  if (mockMode === 'mock') { mockSecsLeft = mockTotal * 90; startMockTimer(); }
-  document.getElementById('mock-q-screen').classList.add('active');
-  loadQuestion();
-}
-
-function quitTest() {
-  if (mockTimerInterval) clearInterval(mockTimerInterval);
-  document.getElementById('mock-q-screen').classList.remove('active');
-  document.getElementById('mock-result-screen').classList.remove('active');
-  document.getElementById('mock-setup-screen').style.display = 'block';
-  loadMockHistory();
-}
-
-async function loadMockHistory() {
-  if (!currentUser) return;
-  const el = document.getElementById('mock-hist-list');
-  try {
-    const snap = await userDoc().collection('mockTests').orderBy('timestamp','desc').limit(8).get();
-    if (snap.empty) { el.innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 0;">No tests taken yet.</div>'; return; }
-    el.innerHTML = '';
-    snap.forEach(doc => {
-      const d = doc.data();
-      const div = document.createElement('div'); div.className = 'mock-hist-item';
-      div.innerHTML = `<span class="mock-hist-subj">${d.subject}</span><span class="mock-hist-score">${d.pct}%</span><span class="mock-hist-meta">${d.correct}/${d.total} correct · ${d.date}</span>`;
-      el.appendChild(div);
-    });
-  } catch(e) { el.innerHTML = '<div style="font-size:12px;color:var(--text3);">Could not load history.</div>'; }
-}
-
-// ── TABS ──────────────────────────────────────────────────────
-function switchTab(id, el) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('panel-' + id).classList.add('active');
-  el.classList.add('active');
-  if (id === 'analytics') { buildCalendar(); buildHistory(); }
-  if (id === 'mock') { loadMockHistory(); }
-}
-
-// ── TIMER TICK ────────────────────────────────────────────────
-let lastActive = -1;
-function tick() {
-  const prev = activeIdx;
-  activeIdx = getActiveIdx();
-  if (activeIdx >= 0) {
-    remainSecs = getRemainSecs(activeIdx);
-    const cdEl = document.getElementById('cd-' + activeIdx);
-    if (cdEl) cdEl.textContent = fmtSecs(remainSecs);
-    if (focusMode) updateFocusBanner();
-    if (activeIdx !== prev) { if (prev >= 0) playChime(); render(); }
-  } else {
-    if (prev !== activeIdx) render();
-  }
-}
-setInterval(tick, 1000);
-
-// ── EXAM COUNTDOWN ────────────────────────────────────────────
+// ── EXAM COUNTDOWN (single, combined) ────────────────────────
 function renderCountdown() {
+  // Update pill in topbar
+  const pill = document.getElementById('cd-pill');
+  if (pill) {
+    const examDate = settings.examDate;
+    if (!examDate) {
+      pill.className = 'cd-pill';
+      pill.textContent = '📅 Set exam';
+    } else {
+      const now = new Date(); now.setHours(0,0,0,0);
+      const target = new Date(examDate); target.setHours(0,0,0,0);
+      const diff = Math.ceil((target - now) / (1000*60*60*24));
+      if (diff <= 0) { pill.className='cd-pill cd-red'; pill.textContent='🏁 Exam day!'; }
+      else if (diff <= 15) { pill.className='cd-pill cd-red'; pill.textContent='🔥 '+diff+'d left'; }
+      else if (diff <= 45) { pill.className='cd-pill cd-amber'; pill.textContent='⚡ '+diff+'d left'; }
+      else { pill.className='cd-pill cd-green'; pill.textContent='📅 '+diff+'d left'; }
+    }
+  }
+  // Update countdown bar below topbar
   const bar = document.getElementById('countdown-bar');
   const examDate = settings.examDate;
   const examName = settings.examName || 'CA Exam';
   if (!examDate) {
     bar.style.display = 'flex';
     bar.className = 'countdown-bar';
-    bar.innerHTML = `
-      <div class="cd-left">
-        <span class="cd-icon">🎯</span>
-        <div>
-          <div class="cd-exam-name">No exam date set</div>
-          <div class="cd-label">Set your exam date to see countdown</div>
-        </div>
-      </div>
-      <div class="cd-right">
-        <button class="cd-set-btn" onclick="openCdModal()">Set date</button>
-      </div>`;
+    bar.innerHTML = `<div class="cd-left"><span class="cd-icon">🎯</span><div><div class="cd-exam-name">No exam date set</div><div class="cd-label">Set your exam date to see countdown</div></div></div><div class="cd-right"><button class="cd-set-btn" onclick="openCdModal()">Set date</button></div>`;
     return;
   }
-  const now = new Date(); now.setHours(0,0,0,0);
-  const target = new Date(examDate); target.setHours(0,0,0,0);
-  const diff = Math.ceil((target - now) / (1000*60*60*24));
-  let urgencyClass = 'urgent-low', dayColor = 'green', icon = '📗';
-  if (diff <= 0) {
-    urgencyClass = ''; icon = '🏁';
-  } else if (diff <= 15) {
-    urgencyClass = 'urgent-high'; dayColor = 'red'; icon = '🔥';
-  } else if (diff <= 45) {
-    urgencyClass = 'urgent-mid'; dayColor = 'amber'; icon = '⚡';
-  }
-  const label = diff < 0 ? 'days since exam' : diff === 0 ? 'Exam is TODAY!' : 'days remaining';
+  const now2 = new Date(); now2.setHours(0,0,0,0);
+  const target2 = new Date(examDate); target2.setHours(0,0,0,0);
+  const diff2 = Math.ceil((target2 - now2) / (1000*60*60*24));
+  let urgencyClass='urgent-low', dayColor='green', icon='📗';
+  if(diff2<=0){urgencyClass='';icon='🏁';}
+  else if(diff2<=15){urgencyClass='urgent-high';dayColor='red';icon='🔥';}
+  else if(diff2<=45){urgencyClass='urgent-mid';dayColor='amber';icon='⚡';}
+  const label = diff2<0?'days since exam':diff2===0?'Exam is TODAY!':'days remaining';
   bar.style.display = 'flex';
-  bar.className = 'countdown-bar ' + urgencyClass;
-  bar.innerHTML = `
-    <div class="cd-left">
-      <span class="cd-icon">${icon}</span>
-      <div>
-        <div class="cd-days ${dayColor}">${Math.abs(diff)}</div>
-        <div class="cd-label">${label}</div>
-      </div>
-      <div style="border-left:1px solid var(--border);margin:0 4px;height:32px;"></div>
-      <div>
-        <div class="cd-exam-name">${examName}</div>
-        <div class="cd-label">${target.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</div>
-      </div>
-    </div>
-    <div class="cd-right">
-      <button class="cd-set-btn" onclick="openCdModal()">Edit</button>
-    </div>`;
-}
-
-function openCdModal() {
-  document.getElementById('cd-modal-overlay').style.display = 'flex';
-  document.getElementById('cd-exam-name').value = settings.examName || '';
-  document.getElementById('cd-exam-date').value = settings.examDate || '';
-}
-
-function closeCdModal() {
-  document.getElementById('cd-modal-overlay').style.display = 'none';
-}
-
-function saveExamDate() {
-  const name = document.getElementById('cd-exam-name').value.trim();
-  const date = document.getElementById('cd-exam-date').value;
-  if (!date) { alert('Please select a date.'); return; }
-  settings.examName = name || 'CA Exam';
-  settings.examDate = date;
-  saveToFirestore();
-  closeCdModal();
-  renderCountdown();
-}
-
-function clearExamDate() {
-  if (!confirm('Clear exam date?')) return;
-  delete settings.examDate;
-  delete settings.examName;
-  saveToFirestore();
-  closeCdModal();
-  renderCountdown();
-}
-
-
-// ── EXAM COUNTDOWN PILL ───────────────────────────────────────
-function renderCountdown() {
-  const pill = document.getElementById('cd-pill');
-  if (!pill) return;
-  const examDate = settings.examDate;
-  if (!examDate) {
-    pill.className = 'cd-pill';
-    pill.textContent = '📅 Set exam';
-    return;
-  }
-  const now = new Date(); now.setHours(0,0,0,0);
-  const target = new Date(examDate); target.setHours(0,0,0,0);
-  const diff = Math.ceil((target - now) / (1000*60*60*24));
-  if (diff <= 0) {
-    pill.className = 'cd-pill cd-red';
-    pill.textContent = '🏁 Exam day!';
-  } else if (diff <= 15) {
-    pill.className = 'cd-pill cd-red';
-    pill.textContent = '🔥 ' + diff + 'd left';
-  } else if (diff <= 45) {
-    pill.className = 'cd-pill cd-amber';
-    pill.textContent = '⚡ ' + diff + 'd left';
-  } else {
-    pill.className = 'cd-pill cd-green';
-    pill.textContent = '📅 ' + diff + 'd left';
-  }
+  bar.className = 'countdown-bar '+urgencyClass;
+  bar.innerHTML = `<div class="cd-left"><span class="cd-icon">${icon}</span><div><div class="cd-days ${dayColor}">${Math.abs(diff2)}</div><div class="cd-label">${label}</div></div><div style="border-left:1px solid var(--border);margin:0 4px;height:32px;"></div><div><div class="cd-exam-name">${examName}</div><div class="cd-label">${target2.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</div></div></div><div class="cd-right"><button class="cd-set-btn" onclick="openCdModal()">Edit</button></div>`;
 }
 
 function openCdModal() {
@@ -1638,7 +1064,267 @@ function clearExamDate() {
   renderCountdown();
 }
 
-  // ── DAILY QUOTE ───────────────────────────────────────────────
+// ── MOCK TEST ─────────────────────────────────────────────────
+const GROQ_API_KEY = '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';
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+const SUBJECT_SYLLABUS = {
+  'Advanced Accounting': 'Accounting Standards (AS 1-29), partnership accounts (admission retirement death dissolution), company accounts (issue forfeiture redemption of shares and debentures), amalgamation absorption and reconstruction, internal reconstruction, liquidation of companies, banking company accounts, insurance company accounts, departmental accounts, hire purchase and installment, investment accounts, branch accounts',
+  'Financial Reporting': 'Ind AS (Indian Accounting Standards), AS (Accounting Standards), financial statements preparation, consolidation, business combinations, revenue recognition Ind AS 115, leases Ind AS 116, financial instruments Ind AS 109, share-based payments, impairment of assets, provisions, contingencies, segment reporting, related party disclosures, earnings per share, deferred tax, investment property, PPE, intangible assets',
+  'Corporate & Other Laws': 'Companies Act 2013 (incorporation, share capital, debentures, meetings, directors, audit, winding up), LLP Act 2008, FEMA basics, SEBI regulations, Insolvency and Bankruptcy Code, Prevention of Money Laundering, partnership law, contract act',
+  'Taxation': 'Income Tax Act (heads of income, salary, house property, PGBP, capital gains, other sources, deductions Chapter VI-A, TDS, advance tax, assessment, appeals), GST (CGST SGST IGST, registration, supply, ITC, returns, reverse charge, composition scheme, valuation, place of supply)',
+  'Cost & Management Accounting': 'Cost concepts and classification, material costing, labour costing, overheads absorption, job costing, process costing, standard costing and variance analysis, marginal costing, CVP analysis, budgetary control, activity based costing, throughput accounting',
+  'Strategic Financial Management': 'Portfolio management, CAPM, derivatives (futures options swaps), foreign exchange risk, interest rate risk, business valuation, mergers and acquisitions, mutual funds, hedge funds, capital budgeting under risk',
+  'Auditing & Ethics': 'Standards on Auditing (SA), audit planning, risk assessment, internal controls, sampling, evidence, audit report, company audit, bank audit, special audits, CARO, ethics under ICAI code of ethics, independence'
+};
+
+let mockSubject='', mockMode='practice', mockTotal=10, mockCurrent=0;
+let mockCorrect=0, mockWrong=0, mockSkipped=0;
+let mockTimerInterval=null, mockSecsLeft=0, mockAnswered=false;
+let mockHistory=[], currentQ=null;
+
+function selectSubject(name, el) {
+  mockSubject = name;
+  document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = document.getElementById('start-test-btn');
+  btn.disabled = false;
+  btn.textContent = 'Start ' + name + ' test →';
+}
+
+function selectMode(mode) {
+  mockMode = mode;
+  document.getElementById('mode-practice').classList.toggle('selected', mode === 'practice');
+  document.getElementById('mode-mock').classList.toggle('selected', mode === 'mock');
+}
+
+function startTest() {
+  mockTotal = parseInt(document.getElementById('q-count-sel').value);
+  mockCurrent=0; mockCorrect=0; mockWrong=0; mockSkipped=0; mockHistory=[];
+  document.getElementById('mock-setup-screen').style.display = 'none';
+  document.getElementById('mock-q-screen').classList.add('active');
+  document.getElementById('mock-result-screen').classList.remove('active');
+  if (mockMode === 'mock') {
+    mockSecsLeft = mockTotal * 90;
+    document.getElementById('q-timer-lbl').style.display = 'block';
+    startMockTimer();
+  } else {
+    document.getElementById('q-timer-lbl').style.display = 'none';
+  }
+  loadQuestion();
+}
+
+function getDifficulty() {
+  const pct = mockCurrent / mockTotal;
+  if (pct < 0.33) return 'Easy';
+  if (pct < 0.66) return 'Medium';
+  return 'Hard';
+}
+
+async function loadQuestion() {
+  mockAnswered=false; currentQ=null;
+  const diff = getDifficulty();
+  const qNum = mockCurrent + 1;
+  document.getElementById('q-meta-lbl').textContent = 'Q '+qNum+' of '+mockTotal;
+  document.getElementById('q-prog-fill').style.width = (mockCurrent/mockTotal*100)+'%';
+  document.getElementById('q-number-lbl').textContent = 'Question '+qNum;
+  document.getElementById('q-diff-badge').textContent = diff;
+  document.getElementById('q-diff-badge').className = 'diff-badge diff-'+diff.toLowerCase();
+  document.getElementById('q-loading').style.display = 'flex';
+  document.getElementById('q-text').style.display = 'none';
+  document.getElementById('q-options').style.display = 'none';
+  document.getElementById('q-explanation').classList.remove('show');
+  document.getElementById('q-actions').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('skip-btn').style.display = 'inline-block';
+  const syllabus = SUBJECT_SYLLABUS[mockSubject] || mockSubject;
+  const avoidTopics = mockHistory.slice(-3).map(h => h.topic).filter(Boolean).join(', ');
+  const prompt = `You are a CA Inter/Final exam MCQ generator.\nSubject: ${mockSubject}\nSyllabus: ${syllabus}\n${avoidTopics?'Avoid topics: '+avoidTopics:''}\n\nGenerate ONE ${diff} difficulty MCQ. Rules:\n- Easy: definition/concept | Medium: application | Hard: calculation/trick\n- 4 options A B C D, exactly one correct\n- Cite specific section/standard in explanation\n\nIMPORTANT: Reply with ONLY the raw JSON object below. No markdown. No code fences. No extra text.\n{"topic":"...","question":"...","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"..."}`;
+  try {
+    const res = await fetch(GROQ_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_API_KEY},
+      body:JSON.stringify({model:'llama-3.1-8b-instant',temperature:0.7,max_tokens:1024,messages:[{role:'system',content:'You are a CA Inter/Final exam MCQ generator. Respond with ONLY a valid JSON object, no markdown, no code fences, no extra text.'},{role:'user',content:prompt}]})
+    });
+    if (!res.ok) { const errData=await res.json().catch(()=>({})); throw new Error('Groq error '+res.status+': '+(errData.error?.message||res.statusText)); }
+    const data = await res.json();
+    let raw = (data.choices?.[0]?.message?.content||'').trim();
+    raw = raw.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'').trim();
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('No JSON in response. Got: '+raw.slice(0,80));
+    currentQ = JSON.parse(match[0]);
+    if (!currentQ.question||!currentQ.options||!currentQ.correct) throw new Error('Incomplete question data');
+    mockHistory.push({topic:currentQ.topic});
+    renderQuestion(currentQ, diff);
+  } catch(e) {
+    console.error('Question load error:',e);
+    document.getElementById('q-loading').style.display='none';
+    document.getElementById('q-text').style.display='block';
+    document.getElementById('q-text').textContent='Failed to load question. '+e.message+'. Tap Retry to try again.';
+    document.getElementById('q-actions').style.display='flex';
+    document.getElementById('skip-btn').style.display='none';
+    document.getElementById('next-btn').style.display='inline-block';
+    document.getElementById('next-btn').textContent='Retry';
+    document.getElementById('next-btn').onclick=()=>{document.getElementById('next-btn').onclick=()=>nextQuestion();document.getElementById('next-btn').textContent='Next →';loadQuestion();};
+  }
+}
+
+function renderQuestion(q, diff) {
+  document.getElementById('q-loading').style.display='none';
+  document.getElementById('q-text').style.display='block';
+  document.getElementById('q-text').textContent=q.question;
+  const optList=document.getElementById('q-options');
+  optList.innerHTML=''; optList.style.display='flex';
+  ['A','B','C','D'].forEach(key=>{
+    const btn=document.createElement('button');
+    btn.className='opt-btn';
+    btn.innerHTML='<span class="opt-key">'+key+'</span><span class="opt-text">'+q.options[key]+'</span>';
+    btn.onclick=()=>selectAnswer(key,btn);
+    optList.appendChild(btn);
+  });
+  document.getElementById('q-actions').style.display='flex';
+}
+
+function selectAnswer(chosen, btnEl) {
+  if (mockAnswered) return;
+  mockAnswered=true;
+  const allBtns=document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b=>b.disabled=true);
+  const correct=currentQ.correct;
+  const keys=['A','B','C','D'];
+  allBtns.forEach((b,i)=>{
+    const key=keys[i];
+    if(key===correct&&key===chosen)b.classList.add('correct');
+    else if(key===chosen&&key!==correct)b.classList.add('wrong');
+    else if(key===correct)b.classList.add('reveal');
+  });
+  if(chosen===correct){mockCorrect++;playChime();}else{mockWrong++;}
+  const last=mockHistory[mockHistory.length-1];
+  last.correct=(chosen===correct); last.chosen=chosen;
+  last.question=currentQ.question;
+  last.correctAns=correct+'. '+currentQ.options[correct];
+  last.yourAns=chosen+'. '+currentQ.options[chosen];
+  if(mockMode==='practice'){document.getElementById('q-exp-text').textContent=currentQ.explanation;document.getElementById('q-explanation').classList.add('show');}
+  document.getElementById('skip-btn').style.display='none';
+  document.getElementById('next-btn').style.display='inline-block';
+  document.getElementById('next-btn').onclick=()=>nextQuestion();
+}
+
+function skipQuestion() {
+  if(mockAnswered)return;
+  mockAnswered=true; mockSkipped++;
+  if(mockHistory.length>0){mockHistory[mockHistory.length-1].skipped=true;mockHistory[mockHistory.length-1].question=currentQ?currentQ.question:'—';}
+  nextQuestion();
+}
+
+function nextQuestion() {
+  mockCurrent++;
+  if(mockCurrent>=mockTotal)showResult();
+  else loadQuestion();
+}
+
+function startMockTimer() {
+  if(mockTimerInterval)clearInterval(mockTimerInterval);
+  mockTimerInterval=setInterval(()=>{
+    mockSecsLeft--;
+    const m=Math.floor(mockSecsLeft/60),s=mockSecsLeft%60;
+    const lbl=document.getElementById('q-timer-lbl');
+    lbl.textContent=m+':'+(s<10?'0'+s:s);
+    lbl.className='q-timer'+(mockSecsLeft<60?' urgent':'');
+    if(mockSecsLeft<=0){clearInterval(mockTimerInterval);showResult();}
+  },1000);
+}
+
+async function showResult() {
+  if(mockTimerInterval)clearInterval(mockTimerInterval);
+  document.getElementById('mock-q-screen').classList.remove('active');
+  document.getElementById('mock-result-screen').classList.add('active');
+  const pct=Math.round(mockCorrect/mockTotal*100);
+  document.getElementById('res-pct').textContent=pct+'%';
+  document.getElementById('res-correct').textContent=mockCorrect;
+  document.getElementById('res-wrong').textContent=mockWrong;
+  document.getElementById('res-skipped').textContent=mockSkipped;
+  let title='Keep practising!';
+  if(pct>=80)title='Excellent work! 🎉';
+  else if(pct>=60)title='Good attempt! 👍';
+  else if(pct>=40)title='Keep going! 💪';
+  document.getElementById('res-title').textContent=title;
+  document.getElementById('res-sub').textContent=mockSubject+' · '+mockTotal+' Qs · '+(mockMode==='mock'?'Mock exam':'Practice')+' mode';
+  const rl=document.getElementById('review-list');
+  rl.innerHTML='<div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Question Review</div>';
+  mockHistory.forEach((h,i)=>{
+    const el=document.createElement('div'); el.className='review-item';
+    if(h.skipped){el.innerHTML='<div class="review-q">Q'+(i+1)+'. '+(h.question||'')+'</div><div class="review-ans" style="color:var(--amber);">⏭ Skipped</div>';}
+    else{el.innerHTML='<div class="review-q">Q'+(i+1)+'. '+(h.question||'')+'</div><div class="review-ans">'+(h.correct?'<span class="correct-ans">✓ '+(h.correctAns||'')+'</span>':'<span class="your-ans">✗ You: '+(h.yourAns||'')+'</span> &nbsp;·&nbsp; <span class="correct-ans">✓ '+(h.correctAns||'')+'</span>')+'</div>';}
+    rl.appendChild(el);
+  });
+  if(currentUser){
+    try{
+      await userDoc().collection('mockTests').add({subject:mockSubject,mode:mockMode,total:mockTotal,correct:mockCorrect,wrong:mockWrong,skipped:mockSkipped,pct,date:new Date().toISOString().slice(0,10),timestamp:firebase.firestore.FieldValue.serverTimestamp()});
+      loadMockHistory();
+    }catch(e){}
+  }
+}
+
+function retakeTest() {
+  document.getElementById('mock-result-screen').classList.remove('active');
+  mockCurrent=0;mockCorrect=0;mockWrong=0;mockSkipped=0;mockHistory=[];
+  if(mockMode==='mock'){mockSecsLeft=mockTotal*90;startMockTimer();}
+  document.getElementById('mock-q-screen').classList.add('active');
+  loadQuestion();
+}
+
+function quitTest() {
+  if(mockTimerInterval)clearInterval(mockTimerInterval);
+  document.getElementById('mock-q-screen').classList.remove('active');
+  document.getElementById('mock-result-screen').classList.remove('active');
+  document.getElementById('mock-setup-screen').style.display='block';
+  loadMockHistory();
+}
+
+async function loadMockHistory() {
+  if(!currentUser)return;
+  const el=document.getElementById('mock-hist-list');
+  try{
+    const snap=await userDoc().collection('mockTests').orderBy('timestamp','desc').limit(8).get();
+    if(snap.empty){el.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0;">No tests taken yet.</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const d=doc.data();
+      const div=document.createElement('div');div.className='mock-hist-item';
+      div.innerHTML=`<span class="mock-hist-subj">${d.subject}</span><span class="mock-hist-score">${d.pct}%</span><span class="mock-hist-meta">${d.correct}/${d.total} correct · ${d.date}</span>`;
+      el.appendChild(div);
+    });
+  }catch(e){el.innerHTML='<div style="font-size:12px;color:var(--text3);">Could not load history.</div>';}
+}
+
+// ── TABS ──────────────────────────────────────────────────────
+function switchTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  el.classList.add('active');
+  if(id==='analytics'){buildCalendar();buildHistory();}
+  if(id==='mock'){loadMockHistory();}
+}
+
+// ── TIMER TICK ────────────────────────────────────────────────
+function tick() {
+  const prev = activeIdx;
+  activeIdx = getActiveIdx();
+  if (activeIdx >= 0) {
+    remainSecs = getRemainSecs(activeIdx);
+    const cdEl = document.getElementById('cd-'+activeIdx);
+    if (cdEl) cdEl.textContent = fmtSecs(remainSecs);
+    if (focusMode) updateFocusBanner();
+    if (activeIdx !== prev) { if (prev >= 0) playChime(); render(); }
+  } else {
+    if (prev !== activeIdx) render();
+  }
+}
+setInterval(tick, 1000);
+
+// ── DAILY QUOTE ───────────────────────────────────────────────
 const CA_QUOTES = [
   {q:"Success is not final, failure is not fatal — it is the courage to continue that counts.", a:"Winston Churchill"},
   {q:"The CA exam doesn't test how smart you are. It tests how well you prepared.", a:"CA Wisdom"},
@@ -1678,26 +1364,17 @@ function showQuote(idx) {
   const q = CA_QUOTES[idx];
   const textEl = document.getElementById('quote-text');
   const authorEl = document.getElementById('quote-author');
-  textEl.style.opacity = '0';
-  authorEl.style.opacity = '0';
-  setTimeout(() => {
-    textEl.textContent = '"' + q.q + '"';
-    authorEl.textContent = '— ' + q.a;
-    textEl.style.transition = 'opacity 0.4s';
-    authorEl.style.transition = 'opacity 0.4s';
-    textEl.style.opacity = '1';
-    authorEl.style.opacity = '1';
-  }, 200);
+  textEl.style.opacity='0'; authorEl.style.opacity='0';
+  setTimeout(()=>{
+    textEl.textContent='"'+q.q+'"';
+    authorEl.textContent='— '+q.a;
+    textEl.style.transition='opacity 0.4s'; authorEl.style.transition='opacity 0.4s';
+    textEl.style.opacity='1'; authorEl.style.opacity='1';
+  },200);
 }
 
-function loadDailyQuote() {
-  showQuote(currentQuoteIdx);
-}
-
-function refreshQuote() {
-  currentQuoteIdx = (currentQuoteIdx + 1) % CA_QUOTES.length;
-  showQuote(currentQuoteIdx);
-}
+function loadDailyQuote() { showQuote(currentQuoteIdx); }
+function refreshQuote() { currentQuoteIdx=(currentQuoteIdx+1)%CA_QUOTES.length; showQuote(currentQuoteIdx); }
 
 loadDailyQuote();
 </script>
